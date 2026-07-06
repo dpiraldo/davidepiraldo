@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Properties — Davide Piraldo</title>
+
+<!--
+  This page lists every property in content/properties/*.json.
+  It's built by hand-listing the cards below (add one <a class="card"> per
+  property whenever you add a listing via the CMS) — there's no live folder
+  scan on static hosting, so this index needs one line added per property.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--ink: oklch(0.14 0.015 50); --gold: oklch(0.72 0.13 85); --ivory: oklch(0.95 0.006 90);
+    --stone: oklch(0.55 0.015 70); --line: oklch(0.28 0.02 60); --body: oklch(0.80 0.008 70);}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--ink);color:var(--ivory);font-family:'Jost',sans-serif;}
+  a{color:inherit;text-decoration:none;}
+  .nav{display:flex;justify-content:space-between;align-items:center;padding:22px 6%;border-bottom:1px solid var(--line);}
+  .wordmark{font-family:'Cormorant Garamond',serif;font-size:20px;letter-spacing:.04em;text-transform:uppercase;}
+  .navlinks{display:flex;gap:32px;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--stone);}
+  .navlinks a:hover{color:var(--gold);}
+  .header{padding:96px 6% 48px;max-width:780px;}
+  .eyebrow{font-size:11px;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:52px;line-height:1.1;margin:20px 0 0;}
+  .lead{font-size:15px;color:var(--body);max-width:560px;margin-top:22px;line-height:1.8;}
+  .grid{padding:20px 6% 140px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);max-width:1400px;margin:0 auto;}
+  .card{background:var(--ink);display:flex;flex-direction:column;}
+  .card .thumb{height:280px;background:repeating-linear-gradient(135deg,oklch(0.24 0.015 55),oklch(0.24 0.015 55) 14px,oklch(0.20 0.015 55) 14px,oklch(0.20 0.015 55) 28px);background-size:cover;background-position:center;}
+  .card .body{padding:28px 30px 32px;flex:1;display:flex;flex-direction:column;}
+  .card .status{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);}
+  .card h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:24px;line-height:1.3;margin:12px 0 8px;}
+  .card .loc{font-size:12px;color:var(--stone);margin-bottom:16px;}
+  .card .specs{font-size:12px;color:var(--body);display:flex;gap:14px;flex-wrap:wrap;margin-top:auto;padding-top:16px;border-top:1px solid var(--line);}
+  @media (max-width:900px){.grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+  <div class="nav">
+    <a class="wordmark" href="index.html">Davide Piraldo</a>
+    <div class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="properties-index.html">Properties</a>
+      <a href="blog-index.html">Journal</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </div>
+
+  <section class="header">
+    <div class="eyebrow">Current Listings</div>
+    <h1>Properties</h1>
+    <p class="lead">Every listing below opens using the same page — only the details, photos and market data change.</p>
+  </section>
+
+  <section class="grid">
+
+    <a class="card" href="property-template.html?slug=eden-tower">
+      <div class="thumb" style="background-image:url('assets/eden-tower.png');"></div>
+      <div class="body">
+        <div class="status">For Sale · Sole Agent</div>
+        <h2>Eden Tower</h2>
+        <div class="loc">25 Boulevard de Belgique · Jardin Exotique / La Condamine</div>
+        <div class="specs"><span>4 Rooms</span><span>3 Bed</span><span>2 Bath</span><span>Sea &amp; Mountain View</span></div>
+      </div>
+    </a>
+
+    <!--
+      ADMIN — adding a new property:
+      1. In /admin, create the new entry under "Properties" — this generates
+         content/properties/<slug>.json
+      2. Copy the <a class="card">...</a> block above, change the href to
+         property-template.html?slug=<slug>, and update the text/thumbnail.
+      This step isn't automatic yet — it takes one manual copy-paste per
+      new listing. Say the word if you want this made fully automatic later.
+    -->
+
+  </section>
+
+</body>
+</html>

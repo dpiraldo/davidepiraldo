@@ -1,0 +1,128 @@
+# Online (Netlify): git-gateway saves via GitHub.
+# Local: set local_backend + run `npx decap-server` — no login needed.
+local_backend: true
+
+backend:
+  name: git-gateway
+  branch: main
+
+# After setup, editors log in at yoursite.com/admin using Netlify Identity.
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+
+  # ---- PROPERTIES (the master template — one file per listing) ----
+  # Each property is a separate JSON file. The public page is always
+  # property-template.html?slug=<the-slug> — same design, different data.
+  - name: "properties"
+    label: "Properties"
+    folder: "content/properties"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "building_name"
+    fields:
+      - { label: "Slug (used in the URL, e.g. eden-tower)", name: "slug", widget: "string" }
+      - { label: "Featured on homepage?", name: "featured", widget: "boolean", default: false }
+      - { label: "Reference", name: "reference", widget: "string" }
+      - { label: "Building Name", name: "building_name", widget: "string" }
+      - { label: "Address Line", name: "address_line", widget: "string" }
+      - { label: "Status (e.g. For Sale · Sole Agent)", name: "status_label", widget: "string" }
+      - { label: "Rooms", name: "rooms", widget: "number" }
+      - { label: "Bedrooms", name: "bedrooms", widget: "number" }
+      - { label: "Bathrooms", name: "bathrooms", widget: "number" }
+      - { label: "Type Line (e.g. Apartment · 4 Rooms)", name: "type_line", widget: "string" }
+      - { label: "Condition", name: "condition", widget: "string", default: "Renovated" }
+      - { label: "Views Label", name: "views_label", widget: "string" }
+      - { label: "Availability", name: "availability", widget: "string", default: "Immediately" }
+      - { label: "Mandate", name: "mandate", widget: "string", default: "Sole Agent" }
+      - { label: "District Name(s) shown on Details sheet", name: "district_names", widget: "string" }
+      - { label: "Contact Email", name: "contact_email", widget: "string" }
+
+      - label: "Amenities (toggles which highlights appear)"
+        name: "amenities"
+        widget: "object"
+        fields:
+          - { label: "Concierge", name: "concierge", widget: "boolean", default: false }
+          - { label: "Chambre de Bonne", name: "chambre_bonne", widget: "boolean", default: false }
+          - { label: "Mixed Use Allowed", name: "mixed_use", widget: "boolean", default: false }
+          - { label: "Pool", name: "pool", widget: "boolean", default: false }
+          - { label: "Gym", name: "gym", widget: "boolean", default: false }
+
+      - label: "Media"
+        name: "media"
+        widget: "object"
+        fields:
+          - { label: "Hero Fallback Photo (shown until a video plays)", name: "hero_fallback_image", widget: "image" }
+          - { label: "Hero Video — Clip 1 (optional, .mp4)", name: "hero_video_1", widget: "file", required: false }
+          - { label: "Hero Video — Clip 2 (optional, .mp4)", name: "hero_video_2", widget: "file", required: false }
+          - { label: "Hero Side Photo (building exterior)", name: "hero_side_image", widget: "image" }
+          - { label: "Intro Photo (living room)", name: "intro_photo", widget: "image" }
+          - { label: "Gallery — Featured Photos (2 large previews)", name: "gallery_featured", widget: "list", field: { label: "Photo", name: "image", widget: "image" } }
+          - { label: "Gallery — Locked Grid (blurred teaser photos)", name: "gallery_locked", widget: "list", field: { label: "Photo", name: "image", widget: "image" } }
+
+      - { label: "Gallery Locked Caption", name: "gallery_locked_text", widget: "string", default: "+12 additional photographs, floor plans and a private viewing await you." }
+
+      - label: "Districts (1 = single district, 2 = comparison like Eden Tower)"
+        name: "districts"
+        widget: "list"
+        max: 2
+        fields:
+          - label: "District"
+            name: "key"
+            widget: "select"
+            options: ["monte-carlo", "jardin-exotique", "la-condamine", "larvotto", "la-rousse", "fontvieille", "moneghetti", "monaco-ville"]
+
+      - label: "Feature Cards 1–4 (always shown, e.g. Living Space, Bedrooms, Bathrooms, Views)"
+        name: "features"
+        widget: "list"
+        max: 4
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Description", name: "desc", widget: "text" }
+
+      - label: "Bilingual Content"
+        name: "i18n"
+        widget: "object"
+        fields:
+          - label: "English"
+            name: "en"
+            widget: "object"
+            fields:
+              - { label: "Hero Title (HTML, use <em> for italics)", name: "hero_title", widget: "string" }
+              - { label: "Description Paragraph 1", name: "p1", widget: "text" }
+              - { label: "Description Paragraph 2", name: "p2", widget: "text" }
+              - { label: "Description Paragraph 3", name: "p3", widget: "text" }
+              - { label: "Quote", name: "quote_text", widget: "text" }
+              - { label: "Quote Attribution", name: "quote_cite", widget: "string" }
+              - { label: "Market Section Title (HTML)", name: "market_title", widget: "string" }
+              - { label: "Market Insight Title", name: "market_insight_title", widget: "string" }
+              - { label: "Market Insight Text", name: "market_insight", widget: "text" }
+          - label: "Français"
+            name: "fr"
+            widget: "object"
+            fields:
+              - { label: "Titre Hero (HTML)", name: "hero_title", widget: "string" }
+              - { label: "Paragraphe 1", name: "p1", widget: "text" }
+              - { label: "Paragraphe 2", name: "p2", widget: "text" }
+              - { label: "Paragraphe 3", name: "p3", widget: "text" }
+              - { label: "Citation", name: "quote_text", widget: "text" }
+              - { label: "Attribution Citation", name: "quote_cite", widget: "string" }
+              - { label: "Titre Section Marché (HTML)", name: "market_title", widget: "string" }
+              - { label: "Titre Analyse Marché", name: "market_insight_title", widget: "string" }
+              - { label: "Texte Analyse Marché", name: "market_insight", widget: "text" }
+
+  # ---- JOURNAL ARTICLES: IMAGES ONLY ----
+  - name: "article_images"
+    label: "Journal Article Photos"
+    files:
+      - file: "content/article-images.json"
+        label: "Article Photos"
+        name: "article_images"
+        fields:
+          - label: "Articles"
+            name: "articles"
+            widget: "list"
+            fields:
+              - { label: "Article Title (reference only)", name: "title", widget: "string" }
+              - { label: "Hero Photo", name: "hero_image", widget: "image", required: false }

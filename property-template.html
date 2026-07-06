@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-cms-title>Property — Davide Piraldo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #111111;
+      --white: #ffffff;
+      --off-white: #f7f6f3;
+      --warm-gray: #8a8780;
+      --light-gray: #e8e6e1;
+      --accent: #1a1a1a;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Inter', -apple-system, sans-serif;
+      --nav-h: 72px;
+      --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--white);
+      color: var(--black);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+    .container { max-width: 1320px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: var(--nav-h);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1.25rem, 4vw, 3rem);
+      transition: background 0.4s var(--ease), border-color 0.4s;
+    }
+    .nav.light { color: var(--white); }
+    .nav.dark { background: rgba(255,255,255,0.96); backdrop-filter: blur(16px); border-bottom: 1px solid var(--light-gray); color: var(--black); }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+    .nav-center { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-center a {
+      font-size: 0.68rem; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      opacity: 0.75; transition: opacity 0.3s;
+    }
+    .nav-center a:hover { opacity: 1; }
+    .nav-right { display: flex; align-items: center; gap: 1.25rem; }
+    .lang-switch {
+      display: flex; border: 1px solid currentColor; opacity: 0.6;
+    }
+    .lang-switch button {
+      padding: 0.35rem 0.65rem;
+      font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: inherit; transition: background 0.3s, color 0.3s;
+    }
+    .lang-switch button.active { background: currentColor; color: var(--black); }
+    .nav.dark .lang-switch button.active { background: var(--black); color: var(--white); }
+    .nav-cta {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 0.75rem 1.5rem;
+      background: var(--white); color: var(--black);
+      transition: opacity 0.3s;
+    }
+    .nav.dark .nav-cta { background: var(--black); color: var(--white); }
+    .nav-cta:hover { opacity: 0.85; }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px; height: 36px;
+      padding: 6px;
+    }
+    .nav-toggle span {
+      display: block; height: 1px;
+      background: currentColor;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    .nav-mobile {
+      display: none;
+      position: fixed; top: var(--nav-h); left: 0; right: 0;
+      background: var(--white);
+      border-bottom: 1px solid var(--light-gray);
+      padding: 1.25rem clamp(1.25rem, 4vw, 3rem) 1.5rem;
+      z-index: 199;
+      flex-direction: column; gap: 1rem;
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a {
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--black);
+      padding: 0.35rem 0;
+    }
+
+    /* ── HERO ── */
+    .hero-split {
+      margin-top: var(--nav-h);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: clamp(420px, 55vh, 620px);
+    }
+    .hero-video-col {
+      position: relative;
+      overflow: hidden;
+      background: #111;
+      min-height: clamp(260px, 45vw, 620px);
+      aspect-ratio: 16 / 10;
+    }
+    .hero-video-fallback {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      display: block;
+    }
+    .hero-video-col video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.8s var(--ease);
+      z-index: 1;
+    }
+    .hero-video-col video.is-playing {
+      opacity: 1;
+      z-index: 2;
+    }
+    .hero-play-hint {
+      position: absolute; inset: 0; z-index: 3;
+      display: none;
+      align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.2);
+      border: none; cursor: pointer;
+      color: #fff;
+      flex-direction: column; gap: 0.5rem;
+    }
+    .hero-play-hint.show { display: flex; }
+    .hero-play-hint span:first-child {
+      width: 56px; height: 56px;
+      border: 1px solid rgba(255,255,255,0.7);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .hero-play-hint span:last-child {
+      font-size: 0.58rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+    }
+    .hero-image-col {
+      overflow: hidden;
+      background: var(--off-white);
+      min-height: clamp(260px, 45vw, 620px);
+      aspect-ratio: 16 / 10;
+    }
+    .hero-image-col img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Mobile / iPhone: static images only, no video */
+    .hero-mobile-only {
+      display: none;
+      margin-top: var(--nav-h);
+    }
+
+    /* Intro block — text under living photo */
+    .hero-intro { background: var(--white); }
+    .hero-intro-photo {
+      width: 100%;
+      max-height: 520px;
+      overflow: hidden;
+    }
+    .hero-intro-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      aspect-ratio: 21/9;
+      max-height: 520px;
+    }
+    .hero-intro-content {
+      padding: clamp(3rem, 6vw, 5rem) clamp(1.25rem, 4vw, 3rem);
+      max-width: 900px;
+    }
+    .hero-status {
+      display: inline-block;
+      font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      padding: 0.45rem 1rem;
+      border: 1px solid var(--black);
+      margin-bottom: 1.5rem;
+    }
+    .hero-intro-content h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 5vw, 4.25rem);
+      font-weight: 300; line-height: 1.08;
+      color: var(--black);
+      margin-bottom: 1rem;
+    }
+    .hero-intro-content h1 em { font-style: italic; }
+    .hero-address {
+      font-size: 0.85rem; font-weight: 400;
+      color: var(--warm-gray);
+      letter-spacing: 0.04em;
+      margin-bottom: 2rem;
+    }
+    .hero-stats {
+      display: flex; flex-wrap: wrap; gap: 0;
+      border-top: 1px solid var(--light-gray);
+      border-bottom: 1px solid var(--light-gray);
+      padding: 1.5rem 0;
+      margin-bottom: 2.5rem;
+    }
+    .hero-stat {
+      padding-right: 2.5rem; margin-right: 2.5rem;
+      border-right: 1px solid var(--light-gray);
+    }
+    .hero-stat:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+    .hero-stat .num {
+      font-family: var(--serif);
+      font-size: 1.75rem; font-weight: 400;
+      color: var(--black); display: block;
+    }
+    .hero-stat .lbl {
+      font-size: 0.62rem; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--warm-gray);
+    }
+    .hero-desc p {
+      font-size: 0.95rem; font-weight: 300;
+      color: #555; line-height: 1.9;
+      margin-bottom: 1.15rem;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: clamp(4rem, 8vw, 7rem) 0; }
+    .section-eyebrow {
+      font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--warm-gray); margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      font-weight: 300; line-height: 1.12;
+      margin-bottom: 1.5rem;
+    }
+    .section-title em { font-style: italic; }
+    .section-lead {
+      font-size: 1rem; font-weight: 300;
+      color: var(--warm-gray); max-width: 640px;
+      line-height: 1.85;
+    }
+
+    /* ── OVERVIEW ── */
+    .overview { background: var(--off-white); }
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 5vw, 5rem);
+      align-items: center;
+    }
+    .overview-text p {
+      font-size: 0.95rem; font-weight: 300;
+      color: #555; line-height: 1.9;
+      margin-bottom: 1.25rem;
+    }
+    .overview-img {
+      position: relative; overflow: hidden;
+      aspect-ratio: 4/5;
+    }
+    .overview-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.8s var(--ease);
+    }
+    .overview-img:hover img { transform: scale(1.03); }
+
+    /* ── HIGHLIGHTS BAR ── */
+    .highlights {
+      border-top: 1px solid var(--light-gray);
+      border-bottom: 1px solid var(--light-gray);
+      padding: 0;
+    }
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+    }
+    .highlight-item {
+      padding: 2rem 1.5rem;
+      text-align: center;
+      border-right: 1px solid var(--light-gray);
+    }
+    .highlight-item:last-child { border-right: none; }
+    .highlight-item .h-val {
+      font-family: var(--serif);
+      font-size: 1.5rem; font-weight: 400;
+      display: block; margin-bottom: 0.3rem;
+    }
+    .highlight-item .h-lbl {
+      font-size: 0.6rem; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--warm-gray);
+    }
+
+    /* ── GALLERY ── */
+    .gallery-section {
+      background: var(--black);
+      color: var(--white);
+      padding: clamp(5rem, 8vw, 7rem) 0;
+    }
+    .gallery-section .section-eyebrow { color: rgba(255,255,255,0.4); }
+    .gallery-section .section-title { color: var(--white); }
+    .gallery-section .section-lead { color: rgba(255,255,255,0.55); max-width: 520px; }
+    .gallery-header {
+      display: flex; justify-content: space-between;
+      align-items: flex-end; margin-bottom: 3rem;
+      gap: 2rem;
+    }
+    .gallery-preview {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 0.5rem;
+      position: relative;
+    }
+    .gallery-featured {
+      overflow: hidden;
+      aspect-ratio: 16/10;
+    }
+    .gallery-featured img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .gallery-locked {
+      position: relative;
+      margin-top: 0.5rem;
+      overflow: hidden;
+      min-height: 280px;
+    }
+    .gallery-locked-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+      filter: blur(12px) brightness(0.35);
+      transform: scale(1.02);
+      pointer-events: none;
+      user-select: none;
+    }
+    .gallery-locked-grid img {
+      width: 100%; aspect-ratio: 4/3; object-fit: cover;
+    }
+    .gallery-locked-overlay {
+      position: absolute; inset: 0;
+      z-index: 2;
+      background: linear-gradient(to bottom, rgba(17,17,17,0.3), rgba(17,17,17,0.92));
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      gap: 1.25rem;
+    }
+    .gallery-locked-overlay p {
+      font-size: 0.88rem; font-weight: 300;
+      color: rgba(255,255,255,0.6);
+      max-width: 420px; line-height: 1.7;
+    }
+    .btn-discover {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 1rem 2.5rem;
+      background: var(--white); color: var(--black);
+      border: 1px solid var(--white);
+      transition: all 0.3s var(--ease);
+    }
+    .btn-discover:hover {
+      background: transparent; color: var(--white);
+    }
+
+    /* ── ACCESS MODAL ── */
+    .modal {
+      position: fixed; inset: 0; z-index: 600;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(8px);
+      display: none; align-items: center; justify-content: center;
+      padding: 1.5rem;
+    }
+    .modal.open { display: flex; }
+    .modal-box {
+      background: var(--white);
+      color: var(--black);
+      max-width: 480px; width: 100%;
+      padding: clamp(2rem, 5vw, 3rem);
+      position: relative;
+    }
+    .modal-close {
+      position: absolute; top: 1rem; right: 1rem;
+      font-size: 1.25rem; color: var(--warm-gray);
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .modal-box .section-eyebrow { color: var(--warm-gray); margin-bottom: 0.75rem; }
+    .modal-box .section-title {
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      margin-bottom: 0.75rem;
+    }
+    .modal-box .modal-lead {
+      font-size: 0.88rem; font-weight: 300;
+      color: #666; line-height: 1.75;
+      margin-bottom: 2rem;
+    }
+    .modal-form { display: flex; flex-direction: column; gap: 0.75rem; }
+    .modal-form input, .modal-form textarea {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border: 1px solid var(--light-gray);
+      font-family: var(--sans);
+      font-size: 0.88rem; font-weight: 300;
+      background: var(--off-white);
+      transition: border-color 0.3s;
+    }
+    .modal-form input:focus, .modal-form textarea:focus {
+      outline: none; border-color: var(--black);
+    }
+    .modal-form textarea { resize: vertical; min-height: 80px; }
+    .modal-form button[type="submit"] {
+      margin-top: 0.5rem;
+      padding: 1rem;
+      background: var(--black); color: var(--white);
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      transition: opacity 0.3s;
+    }
+    .modal-form button[type="submit"]:hover { opacity: 0.85; }
+    .modal-divider {
+      display: flex; align-items: center; gap: 1rem;
+      margin: 1.25rem 0;
+      font-size: 0.65rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--warm-gray);
+    }
+    .modal-divider::before, .modal-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--light-gray);
+    }
+    .modal-dm {
+      display: block; text-align: center;
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 0.9rem;
+      border: 1px solid var(--black);
+      transition: all 0.3s;
+    }
+    .modal-dm:hover { background: var(--black); color: var(--white); }
+    .modal-success {
+      display: none; text-align: center; padding: 2rem 0;
+    }
+    .modal-success.show { display: block; }
+    .modal-success p {
+      font-family: var(--serif);
+      font-size: 1.5rem; margin-bottom: 0.5rem;
+    }
+    .modal-form.hidden { display: none; }
+
+    /* ── DETAILS ── */
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--light-gray);
+      margin-top: 3rem;
+    }
+    .detail-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.15rem 1.75rem;
+      border-bottom: 1px solid var(--light-gray);
+    }
+    .detail-row:nth-child(odd) { background: var(--off-white); }
+    .detail-row .dk {
+      font-size: 0.68rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--warm-gray);
+    }
+    .detail-row .dv {
+      font-family: var(--serif);
+      font-size: 1.05rem; font-weight: 500;
+    }
+
+    /* ── FEATURES ── */
+    .features { background: var(--off-white); }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--light-gray);
+      margin-top: 3rem;
+    }
+    .feature-card {
+      background: var(--off-white);
+      padding: 2.5rem 2rem;
+    }
+    .feature-num {
+      font-family: var(--serif);
+      font-size: 2rem; font-weight: 300;
+      color: var(--warm-gray); margin-bottom: 1rem;
+    }
+    .feature-card h3 {
+      font-family: var(--serif);
+      font-size: 1.35rem; font-weight: 500;
+      margin-bottom: 0.75rem;
+    }
+    .feature-card p {
+      font-size: 0.88rem; font-weight: 300;
+      color: #666; line-height: 1.8;
+    }
+
+    /* ── MARKET ── */
+    .market { background: var(--black); color: var(--white); }
+    .market .section-eyebrow { color: rgba(255,255,255,0.45); }
+    .market .section-lead { color: rgba(255,255,255,0.55); }
+    .market-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(255,255,255,0.12);
+      margin: 3rem 0;
+    }
+    .market-card {
+      background: var(--black);
+      padding: 2.5rem;
+    }
+    .market-card.featured { background: #1a1a1a; }
+    .market-card .mc-tag {
+      font-size: 0.6rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 0.75rem;
+    }
+    .market-card .mc-name {
+      font-family: var(--serif);
+      font-size: 1.75rem; font-weight: 400;
+      margin-bottom: 1.5rem;
+    }
+    .market-card .mc-price {
+      font-family: var(--serif);
+      font-size: 2.75rem; font-weight: 300;
+      line-height: 1;
+    }
+    .market-card .mc-unit {
+      font-size: 0.72rem; color: rgba(255,255,255,0.45);
+      margin: 0.4rem 0 1.75rem;
+    }
+    .mc-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .mc-stat .ms-l { font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+    .mc-stat .ms-v { font-family: var(--serif); font-size: 1.2rem; margin-top: 0.15rem; }
+    .mc-stat .ms-c { font-size: 0.72rem; margin-top: 0.1rem; }
+    .ms-c.up { color: #7dcea0; }
+    .ms-c.down { color: #e5989b; }
+
+    .market-table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin-top: 2rem;
+    }
+    .market-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 0.82rem; margin-top: 2rem;
+    }
+    .market-table th {
+      font-size: 0.6rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      padding: 0.85rem 1rem; text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+    .market-table td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.65); font-weight: 300;
+    }
+    .market-table tr.hl td { color: var(--white); font-weight: 400; }
+    .market-insight {
+      margin-top: 2.5rem; padding: 2rem;
+      border-left: 2px solid rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.04);
+    }
+    .market-insight h4 {
+      font-family: var(--serif);
+      font-size: 1.25rem; font-weight: 500;
+      margin-bottom: 0.75rem;
+    }
+    .market-insight p {
+      font-size: 0.88rem; font-weight: 300;
+      color: rgba(255,255,255,0.55); line-height: 1.85;
+    }
+    .market-source {
+      font-size: 0.65rem; letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.35);
+      margin-top: 1.5rem;
+    }
+
+    /* ── QUOTE ── */
+    .quote {
+      position: relative; padding: clamp(5rem, 10vw, 8rem) 0;
+      text-align: center; overflow: hidden;
+    }
+    .quote-bg {
+      position: absolute; inset: 0;
+      background: url('assets/monaco-panorama.png') center/cover;
+      filter: brightness(0.35);
+    }
+    .quote blockquote {
+      position: relative; z-index: 1;
+      font-family: var(--serif);
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 300; font-style: italic;
+      color: var(--white); max-width: 780px;
+      margin: 0 auto 1.5rem; line-height: 1.5;
+    }
+    .quote cite {
+      position: relative; z-index: 1;
+      font-size: 0.65rem; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.5); font-style: normal;
+    }
+
+    /* ── CONTACT ── */
+    .contact { background: var(--off-white); text-align: center; }
+    .contact-grid {
+      display: flex; justify-content: center;
+      flex-wrap: wrap; gap: 3rem;
+      margin: 2.5rem 0;
+    }
+    .contact-item .ci-l {
+      font-size: 0.6rem; font-weight: 600;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--warm-gray); margin-bottom: 0.4rem;
+    }
+    .contact-item .ci-v {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+    }
+    .btn-primary {
+      display: inline-block;
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      padding: 1rem 2.75rem;
+      background: var(--black); color: var(--white);
+      transition: opacity 0.3s;
+    }
+    .btn-primary:hover { opacity: 0.8; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem clamp(1.25rem, 4vw, 3rem);
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid var(--light-gray);
+      font-size: 0.68rem; color: var(--warm-gray);
+    }
+    footer .ref {
+      font-family: var(--serif);
+      font-size: 0.85rem; letter-spacing: 0.15em;
+      color: var(--black);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .nav-center { display: none; }
+      .nav-toggle { display: flex; }
+      .hero-desktop { display: none !important; }
+      .hero-mobile-only { display: block; }
+      .hero-mobile-only img {
+        width: 100%;
+        display: block;
+        object-fit: cover;
+        aspect-ratio: 16 / 10;
+      }
+      .highlights-grid { grid-template-columns: repeat(3, 1fr); }
+      .highlight-item:nth-child(3) { border-right: none; }
+      .features-grid { grid-template-columns: 1fr; }
+      .details-grid, .market-cards { grid-template-columns: 1fr; }
+      .gallery-header { flex-direction: column; align-items: flex-start; }
+      .gallery-preview { grid-template-columns: 1fr; }
+      .gallery-locked-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-locked { min-height: 220px; }
+      .contact-grid { gap: 2rem; }
+    }
+    @media (max-width: 640px) {
+      .nav { padding: 0 1rem; }
+      .nav-logo { font-size: 1.1rem; letter-spacing: 0.16em; }
+      .nav-cta { padding: 0.6rem 1rem; font-size: 0.58rem; }
+      .hero-intro-content { padding: 2.5rem 1.25rem; }
+      .hero-intro-content h1 { font-size: 2.1rem; }
+      .hero-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem 1rem;
+        padding: 1.25rem 0;
+      }
+      .hero-stat {
+        border-right: none; margin-right: 0; padding-right: 0;
+        border-bottom: 1px solid var(--light-gray);
+        padding-bottom: 1rem;
+      }
+      .hero-stat:nth-child(3),
+      .hero-stat:nth-child(4) { border-bottom: none; padding-bottom: 0; }
+      .highlights-grid { grid-template-columns: repeat(2, 1fr); }
+      .highlight-item { border-right: none; border-bottom: 1px solid var(--light-gray); }
+      .detail-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.35rem;
+        padding: 1rem 1.25rem;
+      }
+      .detail-row .dv { font-size: 0.95rem; word-break: break-word; }
+      .gallery-locked-overlay { padding: 1.5rem 1rem; }
+      .btn-discover { padding: 0.9rem 1.75rem; }
+      .modal-box { padding: 1.75rem 1.25rem; }
+      footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+      .mc-stats { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav dark" id="nav">
+    <a href="/index.html" class="nav-logo">Davide Piraldo</a>
+    <ul class="nav-center">
+      <li><a href="#residence" data-i18n="nav.residence">Residence</a></li>
+      <li><a href="#gallery" data-i18n="nav.gallery">Gallery</a></li>
+      <li><a href="#details" data-i18n="nav.details">Details</a></li>
+      <li><a href="#market" data-i18n="nav.market">Market</a></li>
+      <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button class="active" data-lang="en">EN</button>
+        <button data-lang="fr">FR</button>
+      </div>
+      <a href="#contact" class="nav-cta" data-i18n="nav.cta">Inquire</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="nav-mobile" id="navMobile">
+    <a href="#residence" data-i18n="nav.residence">Residence</a>
+    <a href="#gallery" data-i18n="nav.gallery">Gallery</a>
+    <a href="#details" data-i18n="nav.details">Details</a>
+    <a href="#market" data-i18n="nav.market">Market</a>
+    <a href="#contact" data-i18n="nav.contact">Contact</a>
+  </div>
+
+  <!-- HERO: desktop = video + building | mobile = 2 static photos -->
+  <section class="hero-split hero-desktop" id="top">
+    <div class="hero-video-col">
+      <img class="hero-video-fallback" id="heroFallback" data-cms-bg="hero_fallback_image" src="assets/monaco-panorama.png" alt="Monaco">
+      <video id="heroVid1" data-cms-poster="hero_fallback_image"
+        muted playsinline webkit-playsinline
+        preload="metadata"
+        poster="assets/monaco-panorama.png"></video>
+      <video id="heroVid2" data-cms-poster="hero_fallback_image"
+        muted playsinline webkit-playsinline
+        preload="none"
+        poster="assets/monaco-panorama.png"></video>
+      <button class="hero-play-hint" id="heroPlayHint" type="button" aria-label="Play video">
+        <span>▶</span>
+        <span data-i18n="hero.tapPlay">Tap to play</span>
+      </button>
+    </div>
+    <div class="hero-image-col">
+      <img data-cms-bg="hero_side_image" data-cms-alt="building_name" src="assets/eden-tower.png" alt="Eden Tower, Monaco">
+    </div>
+  </section>
+
+  <section class="hero-mobile-only" id="top-mobile">
+    <img data-cms-bg="hero_fallback_image" src="assets/monaco-panorama.png" alt="Panorama Monaco">
+    <img data-cms-bg="hero_side_image" src="assets/eden-tower.png" alt="Building">
+  </section>
+
+  <!-- INTRO: living photo + title + description -->
+  <section class="hero-intro" id="residence">
+    <div class="hero-intro-photo">
+      <img data-cms-bg="intro_photo" src="assets/gallery/living.png" alt="Living room">
+    </div>
+    <div class="hero-intro-content">
+      <span class="hero-status" data-cms="status_label">For Sale · Sole Agent</span>
+      <h1 data-i18n-html="hero.title" data-cms-i18n="hero_title">A Living <em>Masterpiece</em><br>in the Heart of Monaco</h1>
+      <p class="hero-address" data-cms="address_line">25 Boulevard de Belgique · 98000 Monte-Carlo · Eden Tower</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="num" data-cms="rooms">4</span><span class="lbl" data-i18n="hero.rooms">Rooms</span></div>
+        <div class="hero-stat"><span class="num" data-cms="bedrooms">3</span><span class="lbl" data-i18n="hero.beds">Bedrooms</span></div>
+        <div class="hero-stat"><span class="num" data-cms="bathrooms">2</span><span class="lbl" data-i18n="hero.baths">Bathrooms</span></div>
+        <div class="hero-stat"><span class="num">✦</span><span class="lbl" data-cms="views_label" data-i18n="hero.views">Sea &amp; Mountain Views</span></div>
+      </div>
+      <div class="hero-desc">
+        <p data-i18n="ov.p1" data-cms-i18n="p1">Designed for both elegant entertaining and everyday living, this renovated 4-room apartment offers three beautifully appointed bedrooms and two luxurious bathrooms within the prestigious Eden Tower.</p>
+        <p data-i18n="ov.p2" data-cms-i18n="p2">Generous living spaces, bespoke storage and refined finishes create an interior of impeccable functionality. Panoramic views over the Mediterranean and the mountains define the unmistakable prestige of Monaco.</p>
+        <p data-i18n="ov.p3" data-cms-i18n="p3">Residents benefit from concierge services, ensuring comfort, discretion and peace of mind every day. More than an apartment, this is a residence curated with the precision of an art collection.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIGHLIGHTS -->
+  <div class="highlights">
+    <div class="container">
+      <div class="highlights-grid">
+        <div class="highlight-item"><span class="h-val">4P</span><span class="h-lbl" data-i18n="hl.rooms">Rooms</span></div>
+        <div class="highlight-item"><span class="h-val">3</span><span class="h-lbl" data-i18n="hl.beds">Bedrooms</span></div>
+        <div class="highlight-item"><span class="h-val">2</span><span class="h-lbl" data-i18n="hl.baths">Bathrooms</span></div>
+        <div class="highlight-item"><span class="h-val">✦</span><span class="h-lbl" data-i18n="hl.renovated">Renovated</span></div>
+        <div class="highlight-item"><span class="h-val">Ref.</span><span class="h-lbl" data-cms="reference">EDEN TOWER</span></div>
+        <div class="highlight-item"><span class="h-val">→</span><span class="h-lbl" data-i18n="hl.available">Available Now</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HIGHLIGHTS -->
+  <section class="gallery-section" id="gallery">
+    <div class="container">
+      <div class="gallery-header">
+        <div>
+          <div class="section-eyebrow" data-i18n="gal.eyebrow">Exclusive Preview</div>
+          <h2 class="section-title" data-i18n-html="gal.title">A Glimpse <em>Within</em></h2>
+        </div>
+        <p class="section-lead" data-i18n="gal.lead">A curated selection. The full gallery is available upon private request.</p>
+      </div>
+
+      <div class="gallery-preview" id="galleryFeatured">
+        <!-- populated by property-loader.js from media.gallery_featured -->
+      </div>
+
+      <div class="gallery-locked">
+        <div class="gallery-locked-grid" aria-hidden="true" id="galleryLocked">
+          <!-- populated by property-loader.js from media.gallery_locked -->
+        </div>
+        <div class="gallery-locked-overlay">
+          <p data-i18n="gal.locked" data-cms="gallery_locked_text">+12 additional photographs, floor plans and a private viewing await you.</p>
+          <button class="btn-discover" id="openModal" data-i18n="gal.cta">Discover More</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESS MODAL -->
+  <div class="modal" id="accessModal">
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div class="section-eyebrow" data-i18n="modal.eyebrow">Private Access</div>
+      <h2 class="section-title" data-i18n="modal.title">Request Full Gallery</h2>
+      <p class="modal-lead" data-i18n="modal.lead">Enter your email or send us a message to receive the complete photo gallery, floor plans and arrange a private viewing.</p>
+      <form class="modal-form" id="accessForm">
+        <input type="email" name="email" required placeholder="your@email.com" data-i18n-placeholder="modal.email">
+        <textarea name="message" placeholder="Your message (optional)" data-i18n-placeholder="modal.message"></textarea>
+        <button type="submit" data-i18n="modal.submit">Send Request</button>
+      </form>
+      <div class="modal-divider" data-i18n="modal.or">or</div>
+      <a href="https://instagram.com/direct/t/" target="_blank" rel="noopener" class="modal-dm" data-i18n="modal.dm">Send a DM on Instagram</a>
+      <div class="modal-success" id="modalSuccess">
+        <p data-i18n="modal.thanks">Thank you.</p>
+        <span style="font-size:0.88rem;color:#666;font-weight:300" data-i18n="modal.confirm">We will contact you shortly with full access.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DETAILS -->
+  <section id="details">
+    <div class="container">
+      <div class="section-eyebrow" data-i18n="det.eyebrow">Property Sheet</div>
+      <h2 class="section-title" data-i18n="det.title">Listing Details</h2>
+      <div class="details-grid" id="detailsGrid">
+        <div class="detail-row"><span class="dk" data-i18n="det.ref">Reference</span><span class="dv" data-cms="reference">EDEN TOWER</span></div>
+        <div class="detail-row"><span class="dk" data-i18n="det.address">Address</span><span class="dv" data-cms="address_line">25 Bd de Belgique, 98000 Monte-Carlo</span></div>
+        <div class="detail-row"><span class="dk" data-i18n="det.building">Building</span><span class="dv" data-cms="building_name">Eden Tower</span></div>
+        <div class="detail-row"><span class="dk" data-i18n="det.district">District</span><span class="dv" data-cms="district_names">Jardin Exotique</span></div>
+        <div class="detail-row"><span class="dk" data-i18n="det.type">Type</span><span class="dv" data-cms="type_line" data-i18n="det.typeVal">Apartment · 4 Rooms</span></div>
+        <div class="detail-row"><span class="dk" data-i18n="det.beds">Bedrooms</span><span class="dv" data-cms="bedrooms">3</span></div>
+        <div class="detail-row"><span class="dk" data-i18n="det.baths">Bathrooms</span><span class="dv" data-cms="bathrooms">2</span></div>
+        <div class="detail-row"><span class="dk" data-i18n="det.condition">Condition</span><span class="dv" data-cms="condition" data-i18n="det.renovated">Renovated</span></div>
+        <div class="detail-row" data-amenity="mixed_use"><span class="dk" data-i18n="det.mixed">Mixed Use</span><span class="dv" data-i18n="det.yes">Yes</span></div>
+        <div class="detail-row"><span class="dk" data-i18n="det.views">Views</span><span class="dv" data-cms="views_label" data-i18n="det.viewsVal">Sea · Mountain</span></div>
+        <div class="detail-row" data-amenity="chambre_bonne"><span class="dk" data-i18n="det.bonne">Chambre de Bonne</span><span class="dv" data-i18n="det.bonneVal">Available in building (optional)</span></div>
+        <div class="detail-row" data-amenity="concierge"><span class="dk" data-i18n="det.concierge">Concierge</span><span class="dv" data-i18n="det.yes">Yes</span></div>
+        <div class="detail-row" data-amenity="pool"><span class="dk">Pool</span><span class="dv" data-i18n="det.yes">Yes</span></div>
+        <div class="detail-row" data-amenity="gym"><span class="dk">Gym</span><span class="dv" data-i18n="det.yes">Yes</span></div>
+        <div class="detail-row"><span class="dk" data-i18n="det.availability">Availability</span><span class="dv" data-cms="availability" data-i18n="det.now">Immediately</span></div>
+        <div class="detail-row"><span class="dk" data-i18n="det.mandate">Mandate</span><span class="dv" data-cms="mandate" data-i18n="det.sole">Sole Agent</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="container">
+      <div class="section-eyebrow" data-i18n="feat.eyebrow">Highlights</div>
+      <h2 class="section-title" data-i18n="feat.title">The Art of Living</h2>
+      <div class="features-grid" id="featuresGrid">
+        <div class="feature-card" data-feature-slot="1">
+          <div class="feature-num">01</div>
+          <h3 data-i18n="feat.f1t" data-cms-i18n="feature_1_title">Living &amp; Entertaining</h3>
+          <p data-i18n="feat.f1d" data-cms-i18n="feature_1_desc">Generous reception spaces designed for elegant hosting, with premium finishes and natural light throughout.</p>
+        </div>
+        <div class="feature-card" data-feature-slot="2">
+          <div class="feature-num">02</div>
+          <h3 data-i18n="feat.f2t" data-cms-i18n="feature_2_title">Three Bedrooms</h3>
+          <p data-i18n="feat.f2d" data-cms-i18n="feature_2_desc">Three beautifully appointed bedrooms with bespoke storage and refined detailing in every private quarter.</p>
+        </div>
+        <div class="feature-card" data-feature-slot="3">
+          <div class="feature-num">03</div>
+          <h3 data-i18n="feat.f3t" data-cms-i18n="feature_3_title">Two Bathrooms</h3>
+          <p data-i18n="feat.f3d" data-cms-i18n="feature_3_desc">Two luxurious bathrooms with impeccable finishes, completing the interior with flawless functionality.</p>
+        </div>
+        <div class="feature-card" data-feature-slot="4">
+          <div class="feature-num">04</div>
+          <h3 data-i18n="feat.f4t" data-cms-i18n="feature_4_title">Sea &amp; Mountain Views</h3>
+          <p data-i18n="feat.f4d" data-cms-i18n="feature_4_desc">Panoramic views over the Mediterranean and the mountains — the iconic panorama that defines Monaco.</p>
+        </div>
+        <div class="feature-card" data-amenity="concierge">
+          <div class="feature-num">05</div>
+          <h3 data-i18n="feat.f5t">Concierge Services</h3>
+          <p data-i18n="feat.f5d">Dedicated concierge for residents — comfort, discretion and peace of mind, every day.</p>
+        </div>
+        <div class="feature-card" data-amenity="chambre_bonne">
+          <div class="feature-num">06</div>
+          <h3 data-i18n="feat.f6t">Chambre de Bonne</h3>
+          <p data-i18n="feat.f6d">Optional service room available in the same building — staff, guests, home office or additional storage.</p>
+        </div>
+        <div class="feature-card" data-amenity="pool">
+          <div class="feature-num">07</div>
+          <h3>Swimming Pool</h3>
+          <p>A private or shared pool — a rare and sought-after amenity in central Monaco.</p>
+        </div>
+        <div class="feature-card" data-amenity="gym">
+          <div class="feature-num">08</div>
+          <h3>Fitness Centre</h3>
+          <p>A dedicated fitness centre on site, available to residents.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARKET -->
+  <section class="market" id="market">
+    <div class="container">
+      <div class="section-eyebrow" data-i18n="mkt.eyebrow">Market Intelligence</div>
+      <h2 class="section-title" style="color:#fff" id="marketTitle" data-cms-i18n="market_title">Jardin Exotique <em>vs</em> La Condamine</h2>
+      <p class="section-lead" data-i18n="mkt.lead" id="marketLead">Official data from the Observatoire de l'Immobilier 2025 — IMSEE, Principality of Monaco.</p>
+
+      <div class="market-cards" id="marketCards">
+        <!-- populated by property-loader.js: 1 or 2 cards depending on property.districts -->
+      </div>
+
+      <div class="market-table-wrap">
+      <table class="market-table" id="marketTable">
+        <!-- populated by property-loader.js -->
+      </table>
+      </div>
+
+      <div class="market-insight">
+        <h4 id="marketInsightTitle" data-cms-i18n="market_insight_title">Why this property represents a strategic opportunity</h4>
+        <p id="marketInsightText" data-cms-i18n="market_insight">Market analysis goes here.</p>
+        <p class="market-source" data-i18n="mkt.source">Source: IMSEE — Observatoire de l'Immobilier, February 2026 · 2025 Data</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section class="quote">
+    <div class="quote-bg"></div>
+    <blockquote data-i18n="quote.text" data-cms-i18n="quote_text">« More than an apartment, this is a residence curated with the precision of an art collection where every detail reflects elegance, craftsmanship and the unmistakable prestige of Monaco. »</blockquote>
+    <cite data-i18n="quote.cite" data-cms-i18n="quote_cite">Eden Tower · Ref. EDEN TOWER · Sole Agent</cite>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="section-eyebrow" data-i18n="con.eyebrow">Contact</div>
+      <h2 class="section-title" data-i18n-html="con.title">Schedule a <em>Private Viewing</em></h2>
+      <div class="contact-grid">
+        <div class="contact-item"><div class="ci-l" data-i18n="con.address">Address</div><div class="ci-v" data-cms="address_line">25 Bd de Belgique, 98000</div></div>
+        <div class="contact-item"><div class="ci-l" data-i18n="con.building">Building</div><div class="ci-v" data-cms="building_name">Eden Tower</div></div>
+        <div class="contact-item"><div class="ci-l" data-i18n="con.ref">Reference</div><div class="ci-v" data-cms="reference">EDEN TOWER</div></div>
+        <div class="contact-item"><div class="ci-l" data-i18n="con.avail">Availability</div><div class="ci-v" data-cms="availability" data-i18n="con.now">Immediately</div></div>
+      </div>
+      <a href="mailto:hello@example.com" class="btn-primary" data-i18n="con.cta" id="contactCta">Request Information</a>
+    </div>
+  </section>
+
+  <footer>
+    <p data-i18n="foot.copy" id="footerCopy">© 2026 · Monaco · Market data: IMSEE Observatoire de l'Immobilier 2025</p>
+    <span class="ref" data-cms="reference">REF. EDEN TOWER</span>
+  </footer>
+
+  <script>
+    const i18n = {
+      en: {
+        'nav.residence': 'Residence', 'nav.gallery': 'Gallery', 'nav.details': 'Details',
+        'nav.market': 'Market', 'nav.contact': 'Contact', 'nav.cta': 'Inquire',
+        'hero.status': 'For Sale · Sole Agent',
+        'hero.title': 'A Living <em>Masterpiece</em><br>in the Heart of Monaco',
+        'hero.rooms': 'Rooms', 'hero.beds': 'Bedrooms', 'hero.baths': 'Bathrooms', 'hero.views': 'Sea & Mountain Views',
+        'hero.tapPlay': 'Tap to play',
+        'hl.rooms': 'Rooms', 'hl.beds': 'Bedrooms', 'hl.baths': 'Bathrooms', 'hl.renovated': 'Renovated', 'hl.available': 'Available Now',
+        'ov.eyebrow': 'The Residence',
+        'ov.title': 'Eden Tower,<br><em>25 Boulevard de Belgique</em>',
+        'ov.p1': 'Designed for both elegant entertaining and everyday living, this renovated 4-room apartment offers three beautifully appointed bedrooms and two luxurious bathrooms within the prestigious Eden Tower.',
+        'ov.p2': 'Generous living spaces, bespoke storage and refined finishes create an interior of impeccable functionality. Panoramic views over the Mediterranean and the mountains define the unmistakable prestige of Monaco.',
+        'ov.p3': 'Residents benefit from concierge services, ensuring comfort, discretion and peace of mind every day. More than an apartment, this is a residence curated with the precision of an art collection.',
+        'gal.eyebrow': 'Exclusive Preview',
+        'gal.title': 'A Glimpse <em>Within</em>',
+        'gal.lead': 'A curated selection. The full gallery is available upon private request.',
+        'gal.locked': '+12 additional photographs, floor plans and a private viewing await you.',
+        'gal.cta': 'Discover More',
+        'modal.eyebrow': 'Private Access', 'modal.title': 'Request Full Gallery',
+        'modal.lead': 'Enter your email or send us a message to receive the complete photo gallery, floor plans and arrange a private viewing.',
+        'modal.email': 'your@email.com', 'modal.message': 'Your message (optional)',
+        'modal.submit': 'Send Request', 'modal.or': 'or',
+        'modal.dm': 'Send a DM on Instagram',
+        'modal.thanks': 'Thank you.', 'modal.confirm': 'We will contact you shortly with full access.',
+        'vid.eyebrow': 'Video Tour', 'vid.title': 'Experience Eden Tower',
+        'vid.lead': 'A cinematic walkthrough of this exceptional residence in the heart of Monaco.',
+        'bonne.badge': 'Optional · Same Building',
+        'bonne.title': 'Chambre de <em>Bonne</em>',
+        'bonne.lead': 'An additional service room may be available within the same building — offering exceptional flexibility for staff, guests, a private office or supplementary storage.',
+        'bonne.note': 'Subject to availability and separate negotiation. Contact us for further details on this unique opportunity within Eden Tower.',
+        'det.eyebrow': 'Property Sheet', 'det.title': 'Listing Details',
+        'det.ref': 'Reference', 'det.address': 'Address', 'det.building': 'Building', 'det.district': 'District',
+        'det.type': 'Type', 'det.typeVal': 'Apartment · 4 Rooms', 'det.beds': 'Bedrooms', 'det.baths': 'Bathrooms',
+        'det.condition': 'Condition', 'det.renovated': 'Renovated', 'det.mixed': 'Mixed Use', 'det.yes': 'Yes',
+        'det.views': 'Views', 'det.viewsVal': 'Sea · Mountain',
+        'det.bonne': 'Chambre de Bonne', 'det.bonneVal': 'Available in building (optional)',
+        'det.concierge': 'Concierge', 'det.availability': 'Availability', 'det.now': 'Immediately',
+        'det.mandate': 'Mandate', 'det.sole': 'Sole Agent',
+        'feat.eyebrow': 'Highlights', 'feat.title': 'The Art of Living',
+        'feat.f1t': 'Living & Entertaining', 'feat.f1d': 'Generous reception spaces designed for elegant hosting, with premium finishes and natural light throughout.',
+        'feat.f2t': 'Three Bedrooms', 'feat.f2d': 'Three beautifully appointed bedrooms with bespoke storage and refined detailing in every private quarter.',
+        'feat.f3t': 'Two Bathrooms', 'feat.f3d': 'Two luxurious bathrooms with impeccable finishes, completing the interior with flawless functionality.',
+        'feat.f4t': 'Sea & Mountain Views', 'feat.f4d': 'Panoramic views over the Mediterranean and the mountains — the iconic panorama that defines Monaco.',
+        'feat.f5t': 'Concierge Services', 'feat.f5d': 'Dedicated concierge for residents — comfort, discretion and peace of mind, every day.',
+        'feat.f6t': 'Chambre de Bonne', 'feat.f6d': 'Optional service room available in the same building — staff, guests, home office or additional storage.',
+        'mkt.eyebrow': 'Market Intelligence', 'mkt.title': 'Jardin Exotique <em>vs</em> La Condamine',
+        'mkt.lead': 'Official data from the Observatoire de l\'Immobilier 2025 — IMSEE, Principality of Monaco. Comparative analysis of the two districts framing Eden Tower.',
+        'mkt.tag1': 'Property District', 'mkt.tag2': 'Neighbouring District', 'mkt.perSqm': 'per sqm · 2025',
+        'mkt.change': 'Change 24/25', 'mkt.correction': 'Slight correction', 'mkt.stable': 'Stable',
+        'mkt.resales': 'Resales 2025', 'mkt.volume': 'Resale Volume', 'mkt.record': '+88.5% · Historic record',
+        'mkt.newBuild': 'New Build 2020–29',
+        'mkt.col1': 'Indicator', 'mkt.col4': 'Principality',
+        'mkt.r1': 'Price per sqm (2025)', 'mkt.r2': 'New build 2020–2029', 'mkt.r3': 'Number of resales',
+        'mkt.r4': 'Resale volume', 'mkt.r5': 'Market share', 'mkt.r6': 'Residential surface (k m²)', 'mkt.r7': 'Buildings',
+        'mkt.insightTitle': 'Why Eden Tower represents a strategic opportunity',
+        'mkt.insight': 'The 2025 Observatory ranks Jardin Exotique in the Principality\'s third price tier (€45,168/m²), with a historic record of €246.7M in resales (+88.5%) — a strong signal of demand and liquidity. La Condamine, minutes away, sits in the intermediate tier at €52,104/m². Eden Tower at 25 Boulevard de Belgique occupies a privileged position between both districts: immediate access to the port and Condamine, with the residential exclusivity of Jardin Exotique and panoramic sea and mountain views.',
+        'mkt.source': 'Source: IMSEE — Observatoire de l\'Immobilier, February 2026 · 2025 Data',
+        'quote.text': '« More than an apartment, this is a residence curated with the precision of an art collection where every detail reflects elegance, craftsmanship and the unmistakable prestige of Monaco. »',
+        'quote.cite': 'Eden Tower · Ref. EDEN TOWER · Sole Agent',
+        'con.eyebrow': 'Contact', 'con.title': 'Schedule a <em>Private Viewing</em>',
+        'con.address': 'Address', 'con.building': 'Building', 'con.ref': 'Reference', 'con.avail': 'Availability',
+        'con.now': 'Immediately', 'con.cta': 'Request Information',
+        'foot.copy': '© 2026 Eden Tower · Monaco · Market data: IMSEE Observatoire de l\'Immobilier 2025'
+      },
+      fr: {
+        'nav.residence': 'Résidence', 'nav.gallery': 'Galerie', 'nav.details': 'Détails',
+        'nav.market': 'Marché', 'nav.contact': 'Contact', 'nav.cta': 'Demander',
+        'hero.status': 'À Vendre · Agent Exclusif',
+        'hero.title': 'Un Chef-d\'Œuvre<br><em>Habitable</em> au Cœur de Monaco',
+        'hero.rooms': 'Pièces', 'hero.beds': 'Chambres', 'hero.baths': 'Salles de bain', 'hero.views': 'Vue Mer & Montagne',
+        'hero.tapPlay': 'Toucher pour lire',
+        'hl.rooms': 'Pièces', 'hl.beds': 'Chambres', 'hl.baths': 'Salles de bain', 'hl.renovated': 'Rénové', 'hl.available': 'Disponible',
+        'ov.eyebrow': 'La Résidence',
+        'ov.title': 'Eden Tower,<br><em>25 Boulevard de Belgique</em>',
+        'ov.p1': 'Conçu pour recevoir avec élégance autant que pour le quotidien, cet appartement rénové de 4 pièces offre trois chambres superbement aménagées et deux salles de bain luxueuses au sein du prestigieux Eden Tower.',
+        'ov.p2': 'Des espaces de vie généreux, des rangements sur mesure et des finitions raffinées composent un intérieur d\'une fonctionnalité impeccable. Les vues panoramiques sur la Méditerranée et les montagnes incarnent le prestige incomparable de Monaco.',
+        'ov.p3': 'Les résidents bénéficient des services de conciergerie, garantissant confort, discrétion et sérénité au quotidien. Plus qu\'un appartement, une résidence pensée avec la précision d\'une collection d\'art.',
+        'gal.eyebrow': 'Aperçu Exclusif',
+        'gal.title': 'Un Aperçu <em>Privé</em>',
+        'gal.lead': 'Une sélection soignée. La galerie complète est disponible sur demande privée.',
+        'gal.locked': '+12 photographies supplémentaires, plans et visite privée vous attendent.',
+        'gal.cta': 'Découvrir Plus',
+        'modal.eyebrow': 'Accès Privé', 'modal.title': 'Demander la Galerie Complète',
+        'modal.lead': 'Entrez votre email ou envoyez-nous un message pour recevoir la galerie complète, les plans et organiser une visite privée.',
+        'modal.email': 'votre@email.com', 'modal.message': 'Votre message (optionnel)',
+        'modal.submit': 'Envoyer la Demande', 'modal.or': 'ou',
+        'modal.dm': 'Envoyer un DM sur Instagram',
+        'modal.thanks': 'Merci.', 'modal.confirm': 'Nous vous contacterons sous peu avec l\'accès complet.',
+        'vid.eyebrow': 'Visite Vidéo', 'vid.title': 'Découvrir Eden Tower',
+        'vid.lead': 'Une visite cinématographique de cette résidence exceptionnelle au cœur de Monaco.',
+        'bonne.badge': 'Optionnel · Même Immeuble',
+        'bonne.title': 'Chambre de <em>Bonne</em>',
+        'bonne.lead': 'Une chambre de service supplémentaire peut être disponible dans le même immeuble — offrant une flexibilité exceptionnelle pour le personnel, les invités, un bureau privé ou un espace de stockage.',
+        'bonne.note': 'Sous réserve de disponibilité et de négociation séparée. Contactez-nous pour plus de détails sur cette opportunité unique au sein de l\'Eden Tower.',
+        'det.eyebrow': 'Fiche du Bien', 'det.title': 'Détails de l\'Annonce',
+        'det.ref': 'Référence', 'det.address': 'Adresse', 'det.building': 'Immeuble', 'det.district': 'Quartier',
+        'det.type': 'Type', 'det.typeVal': 'Appartement · 4 Pièces', 'det.beds': 'Chambres', 'det.baths': 'Salles de bain',
+        'det.condition': 'État', 'det.renovated': 'Rénové', 'det.mixed': 'Usage Mixte', 'det.yes': 'Oui',
+        'det.views': 'Vues', 'det.viewsVal': 'Mer · Montagne',
+        'det.bonne': 'Chambre de Bonne', 'det.bonneVal': 'Disponible dans l\'immeuble (optionnel)',
+        'det.concierge': 'Conciergerie', 'det.availability': 'Disponibilité', 'det.now': 'Immédiate',
+        'det.mandate': 'Mandat', 'det.sole': 'Agent Exclusif',
+        'feat.eyebrow': 'Points Forts', 'feat.title': 'L\'Art de Vivre',
+        'feat.f1t': 'Réception & Vie Quotidienne', 'feat.f1d': 'Des espaces de réception généreux pour recevoir avec élégance, finitions premium et lumière naturelle.',
+        'feat.f2t': 'Trois Chambres', 'feat.f2d': 'Trois chambres superbement aménagées avec rangements sur mesure et finitions raffinées.',
+        'feat.f3t': 'Deux Salles de Bain', 'feat.f3d': 'Deux salles de bain luxueuses aux finitions impeccables, pour une fonctionnalité sans compromis.',
+        'feat.f4t': 'Vue Mer & Montagne', 'feat.f4d': 'Vues panoramiques sur la Méditerranée et les montagnes — le panorama emblématique de Monaco.',
+        'feat.f5t': 'Conciergerie', 'feat.f5d': 'Service de conciergerie dédié aux résidents — confort, discrétion et tranquillité au quotidien.',
+        'feat.f6t': 'Chambre de Bonne', 'feat.f6d': 'Chambre de service optionnelle dans le même immeuble — personnel, invités, bureau ou stockage.',
+        'mkt.eyebrow': 'Intelligence Marché', 'mkt.title': 'Jardin Exotique <em>vs</em> La Condamine',
+        'mkt.lead': 'Données officielles de l\'Observatoire de l\'Immobilier 2025 — IMSEE, Principauté de Monaco. Analyse comparative des deux quartiers encadrant l\'Eden Tower.',
+        'mkt.tag1': 'Quartier du Bien', 'mkt.tag2': 'Quartier Voisin', 'mkt.perSqm': 'prix au m² · 2025',
+        'mkt.change': 'Variation 24/25', 'mkt.correction': 'Légère correction', 'mkt.stable': 'Stable',
+        'mkt.resales': 'Reventes 2025', 'mkt.volume': 'Montant Reventes', 'mkt.record': '+88,5% · Record historique',
+        'mkt.newBuild': 'Neuf 2020–2029',
+        'mkt.col1': 'Indicateur', 'mkt.col4': 'Principauté',
+        'mkt.r1': 'Prix au m² (2025)', 'mkt.r2': 'Neuf 2020–2029', 'mkt.r3': 'Nombre de reventes',
+        'mkt.r4': 'Montant des reventes', 'mkt.r5': 'Part de marché', 'mkt.r6': 'Surface logements (k m²)', 'mkt.r7': 'Immeubles',
+        'mkt.insightTitle': 'Pourquoi Eden Tower représente une opportunité stratégique',
+        'mkt.insight': 'L\'Observatoire 2025 classe le Jardin Exotique au troisième niveau de prix de la Principauté (45 168 €/m²), avec un record historique de 246,7 M€ de reventes (+88,5%) — signal fort de demande et de liquidité. La Condamine, à quelques minutes, se situe au niveau intermédiaire à 52 104 €/m². L\'Eden Tower, au 25 Boulevard de Belgique, occupe une position privilégiée entre les deux quartiers : accès immédiat au port et à la Condamine, avec l\'exclusivité résidentielle du Jardin Exotique et des vues panoramiques mer et montagne.',
+        'mkt.source': 'Source : IMSEE — Observatoire de l\'Immobilier, Février 2026 · Données 2025',
+        'quote.text': '« Plus qu\'un appartement, une résidence pensée avec la précision d\'une collection d\'art, où chaque détail reflète l\'élégance, le savoir-faire et le prestige incomparable de Monaco. »',
+        'quote.cite': 'Eden Tower · Réf. EDEN TOWER · Agent Exclusif',
+        'con.eyebrow': 'Contact', 'con.title': 'Planifier une <em>Visite Privée</em>',
+        'con.address': 'Adresse', 'con.building': 'Immeuble', 'con.ref': 'Référence', 'con.avail': 'Disponibilité',
+        'con.now': 'Immédiate', 'con.cta': 'Demander des Informations',
+        'foot.copy': '© 2026 Eden Tower · Monaco · Données marché : IMSEE Observatoire de l\'Immobilier 2025'
+      }
+    };
+
+    let lang = 'en';
+
+    function setLang(l) {
+      lang = l;
+      document.documentElement.lang = l;
+      document.querySelectorAll('.lang-switch button').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (i18n[l][key]) el.textContent = i18n[l][key];
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.dataset.i18nHtml;
+        if (i18n[l][key]) el.innerHTML = i18n[l][key];
+      });
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.dataset.i18nPlaceholder;
+        if (i18n[l][key]) el.placeholder = i18n[l][key];
+      });
+      document.title = l === 'fr' ? 'Eden Tower | Chef-d\'Œuvre Habitable — Monaco' : 'Eden Tower | A Living Masterpiece — Monaco';
+    }
+
+    document.querySelectorAll('.lang-switch button').forEach(b => {
+      b.addEventListener('click', () => setLang(b.dataset.lang));
+    });
+
+    // Nav scroll — stays dark
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.add('dark');
+    });
+
+    // Mobile menu
+    const navToggle = document.getElementById('navToggle');
+    const navMobile = document.getElementById('navMobile');
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('open');
+      navMobile.classList.toggle('open');
+    });
+    function closeMobileNav() {
+      navToggle.classList.remove('open');
+      navMobile.classList.remove('open');
+    }
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        closeMobileNav();
+        document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // Access modal
+    const modal = document.getElementById('accessModal');
+    const accessForm = document.getElementById('accessForm');
+    const modalSuccess = document.getElementById('modalSuccess');
+
+    function openModal() {
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('openModal').addEventListener('click', openModal);
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+
+    accessForm.addEventListener('submit', e => {
+      e.preventDefault();
+      accessForm.classList.add('hidden');
+      modal.querySelector('.modal-divider').style.display = 'none';
+      modal.querySelector('.modal-dm').style.display = 'none';
+      modal.querySelector('.modal-lead').style.display = 'none';
+      modalSuccess.classList.add('show');
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+    });
+
+    // Hero videos — desktop only
+    window.initHeroVideos = function initHeroVideos() {
+      if (window.matchMedia('(max-width: 1024px)').matches) return;
+      // Video sources come from content/properties/<slug>.json (media.hero_video_1/2).
+      // If a property has no video yet, this function simply isn't called —
+      // the static fallback photo (hero_fallback_image) stays visible, exactly
+      // like before a video is uploaded.
+      const v1 = window.__PROPERTY_VIDEO_1__;
+      const v2 = window.__PROPERTY_VIDEO_2__;
+      if (!v1) return;
+      const CLIP = 5;
+      const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent)
+        || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      const isMobile = isIOS || window.matchMedia('(max-width: 768px)').matches;
+      const sources = isMobile
+        ? [v2 || v1, v2 || v1]
+        : [v1, v2 || v1];
+
+      const vids = [document.getElementById('heroVid1'), document.getElementById('heroVid2')];
+      const fallback = document.getElementById('heroFallback');
+      const playHint = document.getElementById('heroPlayHint');
+      let idx = 0, timer, running = false;
+
+      vids.forEach(v => {
+        v.muted = true;
+        v.defaultMuted = true;
+        v.playsInline = true;
+        v.setAttribute('playsinline', '');
+        v.setAttribute('webkit-playsinline', '');
+        v.addEventListener('playing', () => {
+          v.classList.add('is-playing');
+          playHint.classList.remove('show');
+        });
+        v.addEventListener('timeupdate', () => {
+          if (v.currentTime >= CLIP) v.pause();
+        });
+      });
+
+      function tryPlay(v) {
+        v.muted = true;
+        return v.play().catch(() => false);
+      }
+
+      function switchTo(i) {
+        clearTimeout(timer);
+        const active = vids[i];
+        const next = vids[1 - i];
+        next.classList.remove('is-playing');
+        next.pause();
+
+        active.src = sources[i];
+        active.load();
+        active.currentTime = 0;
+
+        const go = () => {
+          tryPlay(active).then(ok => {
+            if (ok) {
+              timer = setTimeout(() => {
+                idx = (i + 1) % 2;
+                switchTo(idx);
+              }, CLIP * 1000);
+            } else if (isIOS) {
+              playHint.classList.add('show');
+            }
+          });
+        };
+        if (active.readyState >= 2) go();
+        else active.addEventListener('canplay', go, { once: true });
+      }
+
+      function startVideos() {
+        if (running) return;
+        running = true;
+        playHint.classList.remove('show');
+        switchTo(0);
+      }
+
+      // iOS: show tap hint, poster always visible until play
+      if (isIOS) {
+        playHint.classList.add('show');
+        playHint.addEventListener('click', startVideos);
+        fallback.style.display = 'block';
+        return;
+      }
+
+      // Desktop / Android: try autoplay, fallback to tap hint
+      startVideos();
+      tryPlay(vids[0]).catch(() => playHint.classList.add('show'));
+      playHint.addEventListener('click', startVideos);
+      document.addEventListener('touchstart', () => { if (!running) startVideos(); }, { once: true, passive: true });
+    };
+  </script>
+  <script src="property-loader.js"></script>
+</body>
+</html>

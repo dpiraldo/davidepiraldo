@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Content Admin — Davide Piraldo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- This page loads Decap CMS (formerly Netlify CMS). It needs no editing. -->
+</head>
+<body>
+  <!-- Netlify Identity widget: handles login -->
+  <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+  <!-- Decap CMS core -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+  <script>
+    // Redirect back here after email confirmation / login links
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
+</body>
+</html>

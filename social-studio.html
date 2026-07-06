@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Social Studio — Davide Piraldo (Private Tool)</title>
+
+<!--
+  PRIVATE TOOL — not linked from the public site, not in the nav.
+  Generates on-brand Instagram posts (1080x1080) and Reel/Story frames
+  (1080x1920), fillable and downloadable as PNG. Keep this file off the
+  public nav; access it directly by its filename.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+  :root{
+    --ink:#17130f; --ink2:#141110; --charcoal:#211c17; --gold:#c9a86a;
+    --ivory:#f1efe9; --stone:#8c8579; --line:#362f29; --body:#c9c2b8;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:#0d0b09;color:var(--ivory);font-family:'Jost',sans-serif;}
+  a{color:inherit;}
+
+  .app{display:grid;grid-template-columns:400px 1fr;min-height:100vh;}
+  .panel{padding:32px;border-right:1px solid var(--line);overflow-y:auto;max-height:100vh;}
+  .panel h1{font-family:'Cormorant Garamond',serif;font-size:26px;margin:0 0 4px;}
+  .panel .sub{font-size:12px;color:var(--stone);margin-bottom:32px;}
+
+  label{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);margin:20px 0 8px;}
+  label:first-of-type{margin-top:0;}
+  select, input[type=text], textarea{
+    width:100%;background:var(--charcoal);border:1px solid var(--line);color:var(--ivory);
+    padding:11px 12px;font-family:'Jost',sans-serif;font-size:14px;border-radius:2px;
+  }
+  textarea{resize:vertical;min-height:70px;}
+  input[type=file]{width:100%;font-size:12px;color:var(--stone);}
+
+  .format-group{display:flex;flex-direction:column;gap:6px;}
+  .format-group button{
+    text-align:left;background:var(--charcoal);border:1px solid var(--line);color:var(--body);
+    padding:11px 14px;font-size:13px;cursor:pointer;border-radius:2px;font-family:'Jost',sans-serif;
+  }
+  .format-group button.active{border-color:var(--gold);color:var(--gold);}
+
+  .download-btn{
+    margin-top:32px;width:100%;padding:16px;background:var(--gold);color:var(--ink);border:none;
+    font-size:12px;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;font-weight:500;border-radius:2px;
+  }
+  .download-btn:hover{opacity:.9;}
+
+  .stage{display:flex;align-items:center;justify-content:center;padding:40px;background:#0a0908;}
+  .canvas-wrap{box-shadow:0 30px 80px rgba(0,0,0,.6);}
+
+  /* ---- exported canvas base ---- */
+  .frame{background:var(--ink);color:var(--ivory);font-family:'Jost',sans-serif;position:relative;overflow:hidden;}
+  .frame .ph{background:linear-gradient(135deg,#2a2420,#2a2420 14px,#221d19 14px,#221d19 28px);
+    display:flex;align-items:center;justify-content:center;color:var(--stone);font-size:12px;text-align:center;
+    background-size:cover;background-position:center;}
+  .eyebrow{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);}
+  .serif{font-family:'Cormorant Garamond',serif;}
+
+  /* square post, 1080x1080 scaled to 440 */
+  .post{width:440px;height:440px;padding:23px;display:flex;flex-direction:column;}
+  .post.light{background:var(--ivory);color:var(--ink);}
+
+  /* reel/story, 1080x1920 scaled to 248x440 */
+  .reel{width:248px;height:440px;}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <div class="panel">
+    <h1>Social Studio</h1>
+    <div class="sub">Private tool — fill in a format, download the PNG, post it yourself.</div>
+
+    <label>Format</label>
+    <div class="format-group" id="formatButtons"></div>
+
+    <div id="fields"></div>
+
+    <button class="download-btn" id="downloadBtn">Download PNG</button>
+  </div>
+
+  <div class="stage">
+    <div class="canvas-wrap" id="canvasWrap"></div>
+  </div>
+</div>
+
+<script>
+const FORMATS = [
+  {id:'stat', label:'Market Stat', size:'post'},
+  {id:'reveal', label:'Property Reveal', size:'post'},
+  {id:'quote', label:'Quote / Insight', size:'post'},
+  {id:'listing', label:'Listing Highlight', size:'post'},
+  {id:'sold', label:'Sold Announcement', size:'post'},
+  {id:'cover', label:'Reel — Cover Frame', size:'reel'},
+  {id:'midroll', label:'Reel — Mid-roll Caption', size:'reel'},
+  {id:'cta', label:'Reel — Closing CTA', size:'reel'},
+];
+
+const FIELD_DEFS = {
+  stat: [
+    {k:'eyebrow', label:'Eyebrow', type:'text', v:'Monaco Real Estate Market — 2026'},
+    {k:'number', label:'Big Number', type:'text', v:'+17.5%'},
+    {k:'desc', label:'Description', type:'textarea', v:'growth in resale transactions, year over year'},
+    {k:'source', label:'Source', type:'text', v:'Source: IMSEE Observatory'},
+  ],
+  reveal: [
+    {k:'photo', label:'Photo', type:'file'},
+    {k:'name', label:'Property Name', type:'text', v:'Villa Bellevue'},
+    {k:'location', label:'Location', type:'text', v:'Larvotto, Monaco'},
+    {k:'price', label:'Price', type:'text', v:'€24.5M'},
+  ],
+  quote: [
+    {k:'quote', label:'Quote', type:'textarea', v:'In Monaco, resale volume tells the real story — not the headline sale price.'},
+    {k:'attribution', label:'Attribution', type:'text', v:'Davide Piraldo — Luxury Advisor'},
+  ],
+  listing: [
+    {k:'tag', label:'Tag', type:'text', v:'New Listing'},
+    {k:'name', label:'Property Name', type:'text', v:'Penthouse — Monte-Carlo'},
+    {k:'photo', label:'Photo', type:'file'},
+    {k:'beds', label:'Bedrooms', type:'text', v:'4'},
+    {k:'surface', label:'Surface', type:'text', v:'320m²'},
+    {k:'price', label:'Price', type:'text', v:'€18.9M'},
+  ],
+  sold: [
+    {k:'name', label:'Property Name', type:'text', v:'Résidence Les Cyclades'},
+    {k:'location', label:'Location', type:'text', v:'Fontvieille, Monaco'},
+    {k:'detail', label:'Closing Detail', type:'textarea', v:'Represented on behalf of the seller. Closed in 6 weeks.'},
+  ],
+  cover: [
+    {k:'photo', label:'Background Photo', type:'file'},
+    {k:'category', label:'Category', type:'text', v:'Monaco Market Update'},
+    {k:'headline', label:'Headline', type:'textarea', v:'Where resales are happening in 2026'},
+  ],
+  midroll: [
+    {k:'photo', label:'Background Photo', type:'file'},
+    {k:'handle', label:'Handle', type:'text', v:'@davidepiraldo.pr'},
+    {k:'caption', label:'Caption', type:'textarea', v:'Monte-Carlo alone saw €1.1Bn in resale volume this year.'},
+  ],
+  cta: [
+    {k:'message', label:'CTA Message', type:'textarea', v:'DM to discuss the Monaco market or book a private consultation'},
+  ],
+};
+
+let current = 'stat';
+let photoData = {};
+
+function renderFormatButtons(){
+  const el = document.getElementById('formatButtons');
+  el.innerHTML = FORMATS.map(f =>
+    `<button data-id="${f.id}" class="${f.id===current?'active':''}">${f.label}</button>`
+  ).join('');
+  el.querySelectorAll('button').forEach(btn => {
+    btn.onclick = () => { current = btn.dataset.id; renderAll(); };
+  });
+}
+
+function renderFields(){
+  const defs = FIELD_DEFS[current];
+  const el = document.getElementById('fields');
+  el.innerHTML = defs.map(d => {
+    if (d.type === 'file') {
+      return `<label>${d.label}</label><input type="file" accept="image/*" data-k="${d.k}">`;
+    }
+    if (d.type === 'textarea') {
+      return `<label>${d.label}</label><textarea data-k="${d.k}">${d.v||''}</textarea>`;
+    }
+    return `<label>${d.label}</label><input type="text" data-k="${d.k}" value="${d.v||''}">`;
+  }).join('');
+
+  el.querySelectorAll('input[type=text], textarea').forEach(inp => {
+    inp.addEventListener('input', renderCanvas);
+  });
+  el.querySelectorAll('input[type=file]').forEach(inp => {
+    inp.addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = ev => { photoData[inp.dataset.k] = ev.target.result; renderCanvas(); };
+      reader.readAsDataURL(file);
+    });
+  });
+}
+
+function getVal(k){
+  const el = document.querySelector(`#fields [data-k="${k}"]`);
+  if (!el) return '';
+  return el.value !== undefined ? el.value : '';
+}
+
+function bgOrPlaceholder(key, label){
+  const data = photoData[key];
+  if (data) return `style="background-image:url('${data}');background-size:cover;background-position:center;"`;
+  return '';
+}
+function bgText(key, label){
+  return photoData[key] ? '' : label;
+}
+
+function templateHTML(){
+  const g = getVal;
+  switch(current){
+
+    case 'stat': return `
+      <div class="frame post" style="display:flex;flex-direction:column;">
+        <div class="eyebrow">${g('eyebrow')}</div>
+        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
+          <div class="serif" style="font-size:64px;color:var(--ivory);line-height:1;">${g('number')}</div>
+          <div class="serif" style="font-size:17px;color:var(--ivory);margin-top:14px;max-width:280px;line-height:1.3;">${g('desc')}</div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;font-size:9px;letter-spacing:.12em;color:var(--stone);text-transform:uppercase;">
+          <span>${g('source')}</span><span style="color:var(--gold);">@davidepiraldo.pr</span>
+        </div>
+      </div>`;
+
+    case 'reveal': return `
+      <div class="frame post" style="padding:0;display:flex;flex-direction:column;">
+        <div class="ph" style="flex:1;" ${bgOrPlaceholder('photo')}>${bgText('photo','property photograph')}</div>
+        <div style="padding:20px 22px;display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <div class="serif" style="font-size:20px;color:var(--ivory);">${g('name')}</div>
+            <div style="font-size:10px;letter-spacing:.12em;color:var(--stone);text-transform:uppercase;margin-top:3px;">${g('location')}</div>
+          </div>
+          <div class="serif" style="font-size:18px;color:var(--gold);">${g('price')}</div>
+        </div>
+      </div>`;
+
+    case 'quote': return `
+      <div class="frame post light" style="padding:36px;display:flex;flex-direction:column;">
+        <div class="serif" style="font-size:70px;color:#a9853f;line-height:.5;">&ldquo;</div>
+        <div style="flex:1;display:flex;align-items:center;">
+          <div class="serif" style="font-size:27px;line-height:1.35;">${g('quote')}</div>
+        </div>
+        <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6459;">${g('attribution')}</div>
+      </div>`;
+
+    case 'listing': return `
+      <div class="frame post" style="padding:22px;display:flex;flex-direction:column;">
+        <div class="eyebrow">${g('tag')}</div>
+        <div class="serif" style="font-size:25px;color:var(--ivory);margin-top:10px;">${g('name')}</div>
+        <div class="ph" style="flex:1;margin-top:14px;" ${bgOrPlaceholder('photo')}>${bgText('photo','property photograph')}</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);margin-top:14px;">
+          <div style="background:var(--ink);padding:8px 6px;text-align:center;">
+            <div class="serif" style="font-size:16px;">${g('beds')}</div>
+            <div style="font-size:8px;letter-spacing:.08em;color:var(--stone);text-transform:uppercase;margin-top:2px;">Bedrooms</div>
+          </div>
+          <div style="background:var(--ink);padding:8px 6px;text-align:center;">
+            <div class="serif" style="font-size:16px;">${g('surface')}</div>
+            <div style="font-size:8px;letter-spacing:.08em;color:var(--stone);text-transform:uppercase;margin-top:2px;">Surface</div>
+          </div>
+          <div style="background:var(--ink);padding:8px 6px;text-align:center;">
+            <div class="serif" style="font-size:16px;color:var(--gold);">${g('price')}</div>
+            <div style="font-size:8px;letter-spacing:.08em;color:var(--stone);text-transform:uppercase;margin-top:2px;">Price</div>
+          </div>
+        </div>
+      </div>`;
+
+    case 'sold': return `
+      <div class="frame post" style="padding:30px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid var(--gold);">
+        <div class="eyebrow">Sold</div>
+        <div class="serif" style="font-size:32px;color:var(--ivory);margin-top:14px;">${g('name')}</div>
+        <div style="font-size:11px;color:var(--stone);margin-top:8px;letter-spacing:.05em;">${g('location')}</div>
+        <div style="width:30px;height:1px;background:var(--gold);margin:18px 0;"></div>
+        <div class="serif" style="font-size:15px;color:var(--ivory);line-height:1.5;max-width:280px;">${g('detail')}</div>
+        <div style="font-size:9px;letter-spacing:.1em;color:var(--stone);text-transform:uppercase;margin-top:22px;">Davide Piraldo · Pastor &amp; Reiss</div>
+      </div>`;
+
+    case 'cover': return `
+      <div class="frame reel ph" style="position:relative;" ${bgOrPlaceholder('photo')}>
+        ${photoData['photo']?'':`<span>${'background photograph'}</span>`}
+        <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(23,19,15,.1) 0%, rgba(23,19,15,.88) 82%);"></div>
+        <div style="position:absolute;bottom:22px;left:18px;right:18px;text-align:center;">
+          <div style="font-size:8px;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;">${g('category')}</div>
+          <div class="serif" style="font-size:19px;color:var(--ivory);margin-top:8px;line-height:1.25;">${g('headline')}</div>
+        </div>
+      </div>`;
+
+    case 'midroll': return `
+      <div class="frame reel ph" style="position:relative;" ${bgOrPlaceholder('photo')}>
+        ${photoData['photo']?'':`<span>${'background photograph'}</span>`}
+        <div style="position:absolute;top:16px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:center;">
+          <div style="width:20px;height:20px;border-radius:999px;background:rgba(241,239,233,.15);border:1px solid rgba(241,239,233,.4);"></div>
+          <div style="font-size:8px;letter-spacing:.1em;color:var(--ivory);text-transform:uppercase;">${g('handle')}</div>
+        </div>
+        <div style="position:absolute;left:16px;right:16px;top:42%;background:rgba(23,19,15,.82);padding:14px;border-left:2px solid var(--gold);">
+          <div class="serif" style="font-size:15px;color:var(--ivory);line-height:1.35;">${g('caption')}</div>
+        </div>
+      </div>`;
+
+    case 'cta': return `
+      <div class="frame reel" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;border:1px solid var(--line);">
+        <div class="serif" style="font-size:19px;color:var(--ivory);text-transform:uppercase;letter-spacing:.04em;">Davide Piraldo</div>
+        <div style="font-size:8px;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;margin-top:6px;">Luxury Advisor</div>
+        <div style="width:24px;height:1px;background:var(--gold);margin:16px 0;"></div>
+        <div style="font-size:10px;color:var(--body);line-height:1.5;">${g('message')}</div>
+        <div style="margin-top:16px;font-size:8px;letter-spacing:.1em;color:var(--stone);text-transform:uppercase;">Pastor &amp; Reiss Monte-Carlo</div>
+      </div>`;
+  }
+}
+
+function renderCanvas(){
+  document.getElementById('canvasWrap').innerHTML = templateHTML();
+}
+
+function renderAll(){
+  renderFormatButtons();
+  photoData = {};
+  renderFields();
+  renderCanvas();
+}
+
+document.getElementById('downloadBtn').onclick = () => {
+  const node = document.getElementById('canvasWrap').firstElementChild;
+  const scale = FORMATS.find(f=>f.id===current).size === 'post' ? (1080/440) : (1080/248);
+  html2canvas(node, {scale: scale, backgroundColor: null}).then(canvas => {
+    const link = document.createElement('a');
+    link.download = `davidepiraldo-${current}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+};
+
+renderAll();
+</script>
+
+</body>
+</html>

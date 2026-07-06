@@ -1,0 +1,119 @@
+{
+  "_note": "Dati IMSEE Observatoire de l'Immobilier 2025 (pubblicato febbraio 2026). Jardin Exotique, La Condamine e Principality sono verificati e completi. Gli altri distretti hanno solo i campi confermati nella mia ricerca precedente — il resto è null in attesa del PDF ufficiale che invierai. Aggiorna questo file, non i singoli property JSON: tutte le proprietà in quel distretto erediteranno automaticamente i numeri corretti.",
+
+  "jardin-exotique": {
+    "name_en": "Jardin Exotique", "name_fr": "Jardin Exotique",
+    "price_sqm_2025": 45168,
+    "change_24_25_pct": -3.7,
+    "change_label_en": "Slight correction", "change_label_fr": "Légère correction",
+    "resales_2025": 41, "resales_change_pct": 86.4,
+    "resale_volume_2025": "€246.7M", "resale_volume_change_pct": 88.5,
+    "resale_volume_note_en": "Historic record", "resale_volume_note_fr": "Record historique",
+    "new_build_2020_29": "€47,800/m²", "new_build_change_pct": 3.4,
+    "market_share_pct": 9.6,
+    "residential_surface_k_sqm": 253.3,
+    "buildings": 177
+  },
+
+  "la-condamine": {
+    "name_en": "La Condamine", "name_fr": "La Condamine",
+    "price_sqm_2025": 52104,
+    "change_24_25_pct": -0.7,
+    "change_label_en": "Stable", "change_label_fr": "Stable",
+    "resales_2025": 44, "resales_change_pct": 29.4,
+    "resale_volume_2025": "€244.1M", "resale_volume_change_pct": 75.2,
+    "resale_volume_note_en": "", "resale_volume_note_fr": "",
+    "new_build_2020_29": "€59,523/m²", "new_build_change_pct": 2.7,
+    "market_share_pct": 10.3,
+    "residential_surface_k_sqm": 242.2,
+    "buildings": 275
+  },
+
+  "monte-carlo": {
+    "name_en": "Monte-Carlo", "name_fr": "Monte-Carlo",
+    "price_sqm_2025": null,
+    "change_24_25_pct": null,
+    "change_label_en": null, "change_label_fr": null,
+    "resales_2025": 164, "resales_change_pct": 24.2,
+    "resale_volume_2025": "€1.1B", "resale_volume_change_pct": 40,
+    "resale_volume_note_en": "First time above €1B", "resale_volume_note_fr": "Première fois au-dessus d'1 Md€",
+    "new_build_2020_29": null, "new_build_change_pct": null,
+    "market_share_pct": 35,
+    "residential_surface_k_sqm": 453.5,
+    "buildings": 314
+  },
+
+  "larvotto": {
+    "name_en": "Larvotto", "name_fr": "Larvotto",
+    "price_sqm_2025": null,
+    "change_24_25_pct": null,
+    "change_label_en": null, "change_label_fr": null,
+    "resales_2025": 13, "resales_change_pct": null,
+    "resale_volume_2025": "€851.9M", "resale_volume_change_pct": 400,
+    "resale_volume_note_en": "5x year over year", "resale_volume_note_fr": "x5 sur un an",
+    "new_build_2020_29": "€71,241/m²", "new_build_change_pct": null,
+    "market_share_pct": null,
+    "residential_surface_k_sqm": null,
+    "buildings": null
+  },
+
+  "la-rousse": {
+    "name_en": "La Rousse", "name_fr": "La Rousse",
+    "price_sqm_2025": null,
+    "change_24_25_pct": null,
+    "change_label_en": null, "change_label_fr": null,
+    "resales_2025": 100, "resales_change_pct": null,
+    "resale_volume_2025": null, "resale_volume_change_pct": null,
+    "resale_volume_note_en": "", "resale_volume_note_fr": "",
+    "new_build_2020_29": null, "new_build_change_pct": null,
+    "market_share_pct": null,
+    "residential_surface_k_sqm": 389.3,
+    "buildings": null
+  },
+
+  "fontvieille": {
+    "name_en": "Fontvieille", "name_fr": "Fontvieille",
+    "price_sqm_2025": null, "change_24_25_pct": null,
+    "change_label_en": null, "change_label_fr": null,
+    "resales_2025": null, "resales_change_pct": null,
+    "resale_volume_2025": null, "resale_volume_change_pct": null,
+    "resale_volume_note_en": "Declined vs 2024", "resale_volume_note_fr": "En recul vs 2024",
+    "new_build_2020_29": null, "new_build_change_pct": null,
+    "market_share_pct": null, "residential_surface_k_sqm": null, "buildings": null
+  },
+
+  "moneghetti": {
+    "name_en": "Moneghetti", "name_fr": "Moneghetti",
+    "price_sqm_2025": null, "change_24_25_pct": null,
+    "change_label_en": null, "change_label_fr": null,
+    "resales_2025": null, "resales_change_pct": null,
+    "resale_volume_2025": null, "resale_volume_change_pct": null,
+    "resale_volume_note_en": "Declined vs 2024", "resale_volume_note_fr": "En recul vs 2024",
+    "new_build_2020_29": null, "new_build_change_pct": null,
+    "market_share_pct": null, "residential_surface_k_sqm": null, "buildings": null
+  },
+
+  "monaco-ville": {
+    "name_en": "Monaco-Ville", "name_fr": "Monaco-Ville",
+    "price_sqm_2025": null, "change_24_25_pct": null,
+    "change_label_en": null, "change_label_fr": null,
+    "resales_2025": null, "resales_change_pct": null,
+    "resale_volume_2025": null, "resale_volume_change_pct": null,
+    "resale_volume_note_en": "Declined vs 2024", "resale_volume_note_fr": "En recul vs 2024",
+    "new_build_2020_29": null, "new_build_change_pct": null,
+    "market_share_pct": null, "residential_surface_k_sqm": null, "buildings": null
+  },
+
+  "principality": {
+    "name_en": "Principality", "name_fr": "Principauté",
+    "price_sqm_2025": 57569,
+    "change_24_25_pct": -1.4,
+    "resales_2025": 429, "resales_change_pct": 17.5,
+    "resale_volume_2025": "€3.2B", "resale_volume_change_pct": 49.1,
+    "resale_volume_note_en": "Record since Observatory began", "resale_volume_note_fr": "Record depuis la création de l'Observatoire",
+    "new_build_2020_29": "€65,602/m²", "new_build_change_pct": null,
+    "market_share_pct": 100,
+    "residential_surface_k_sqm": 2028.6,
+    "buildings": 1473
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "slug": "eden-tower",
+  "featured": true,
+  "reference": "EDEN TOWER",
+  "building_name": "Eden Tower",
+  "address_line": "25 Boulevard de Belgique · 98000 Monte-Carlo · Eden Tower",
+  "status_label": "For Sale · Sole Agent",
+  "rooms": 4,
+  "bedrooms": 3,
+  "bathrooms": 2,
+  "type_line": "Apartment · 4 Rooms",
+  "condition": "Renovated",
+  "views_label": "Sea & Mountain Views",
+  "availability": "Immediately",
+  "mandate": "Sole Agent",
+  "district_names": "Jardin Exotique",
+  "contact_email": "hello@example.com",
+
+  "amenities": {
+    "concierge": true,
+    "chambre_bonne": true,
+    "mixed_use": true,
+    "pool": false,
+    "gym": false
+  },
+
+  "media": {
+    "hero_fallback_image": "assets/monaco-panorama.png",
+    "hero_video_1": "",
+    "hero_video_2": "",
+    "hero_side_image": "assets/eden-tower.png",
+    "intro_photo": "assets/gallery/living.png",
+    "gallery_featured": [
+      "assets/aec82d30-de23-4ac0-bbe1-b838c72f5a58.png",
+      "assets/gallery/terrace.png"
+    ],
+    "gallery_locked": [
+      "assets/gallery/bedroom-2.png",
+      "assets/gallery/bedroom-3.png",
+      "assets/gallery/interior-4.png",
+      "assets/gallery/interior-1.png",
+      "assets/gallery/interior-5.png",
+      "assets/gallery/interior-6.png",
+      "assets/monaco-panorama.png",
+      "assets/eden-tower.png"
+    ]
+  },
+
+  "gallery_locked_text": "+12 additional photographs, floor plans and a private viewing await you.",
+
+  "districts": [
+    { "key": "jardin-exotique" },
+    { "key": "la-condamine" }
+  ],
+
+  "features": [],
+
+  "i18n": {
+    "en": {
+      "hero_title": "A Living <em>Masterpiece</em><br>in the Heart of Monaco",
+      "p1": "Designed for both elegant entertaining and everyday living, this renovated 4-room apartment offers three beautifully appointed bedrooms and two luxurious bathrooms within the prestigious Eden Tower.",
+      "p2": "Generous living spaces, bespoke storage and refined finishes create an interior of impeccable functionality. Panoramic views over the Mediterranean and the mountains define the unmistakable prestige of Monaco.",
+      "p3": "Residents benefit from concierge services, ensuring comfort, discretion and peace of mind every day. More than an apartment, this is a residence curated with the precision of an art collection.",
+      "quote_text": "\u00ab More than an apartment, this is a residence curated with the precision of an art collection where every detail reflects elegance, craftsmanship and the unmistakable prestige of Monaco. \u00bb",
+      "quote_cite": "Eden Tower \u00b7 Ref. EDEN TOWER \u00b7 Sole Agent",
+      "market_title": "Jardin Exotique <em>vs</em> La Condamine",
+      "market_insight_title": "Why Eden Tower represents a strategic opportunity",
+      "market_insight": "The 2025 Observatory ranks Jardin Exotique in the Principality's third price tier (\u20ac45,168/m\u00b2), with a historic record of \u20ac246.7M in resales (+88.5%) \u2014 a strong signal of demand and liquidity. La Condamine, minutes away, sits in the intermediate tier at \u20ac52,104/m\u00b2. Eden Tower at 25 Boulevard de Belgique occupies a privileged position between both districts: immediate access to the port and Condamine, with the residential exclusivity of Jardin Exotique and panoramic sea and mountain views."
+    },
+    "fr": {
+      "hero_title": "Un Chef-d'\u0152uvre<br><em>Habitable</em> au C\u0153ur de Monaco",
+      "p1": "Con\u00e7u pour recevoir avec \u00e9l\u00e9gance autant que pour le quotidien, cet appartement r\u00e9nov\u00e9 de 4 pi\u00e8ces offre trois chambres superbement am\u00e9nag\u00e9es et deux salles de bain luxueuses au sein du prestigieux Eden Tower.",
+      "p2": "Des espaces de vie g\u00e9n\u00e9reux, des rangements sur mesure et des finitions raffin\u00e9es composent un int\u00e9rieur d'une fonctionnalit\u00e9 impeccable. Les vues panoramiques sur la M\u00e9diterran\u00e9e et les montagnes incarnent le prestige incomparable de Monaco.",
+      "p3": "Les r\u00e9sidents b\u00e9n\u00e9ficient des services de conciergerie, garantissant confort, discr\u00e9tion et s\u00e9r\u00e9nit\u00e9 au quotidien. Plus qu'un appartement, une r\u00e9sidence pens\u00e9e avec la pr\u00e9cision d'une collection d'art.",
+      "quote_text": "\u00ab Plus qu'un appartement, une r\u00e9sidence pens\u00e9e avec la pr\u00e9cision d'une collection d'art, o\u00f9 chaque d\u00e9tail refl\u00e8te l'\u00e9l\u00e9gance, le savoir-faire et le prestige incomparable de Monaco. \u00bb",
+      "quote_cite": "Eden Tower \u00b7 R\u00e9f. EDEN TOWER \u00b7 Agent Exclusif",
+      "market_title": "Jardin Exotique <em>vs</em> La Condamine",
+      "market_insight_title": "Pourquoi Eden Tower repr\u00e9sente une opportunit\u00e9 strat\u00e9gique",
+      "market_insight": "L'Observatoire 2025 classe le Jardin Exotique au troisi\u00e8me niveau de prix de la Principaut\u00e9 (45\u00a0168\u00a0\u20ac/m\u00b2), avec un record historique de 246,7\u00a0M\u20ac de reventes (+88,5%) \u2014 signal fort de demande et de liquidit\u00e9. La Condamine, \u00e0 quelques minutes, se situe au niveau interm\u00e9diaire \u00e0 52\u00a0104\u00a0\u20ac/m\u00b2. L'Eden Tower, au 25 Boulevard de Belgique, occupe une position privil\u00e9gi\u00e9e entre les deux quartiers."
+    }
+  }
+}
