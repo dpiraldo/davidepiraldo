@@ -5,6 +5,17 @@
 
 cd "$(dirname "$0")"
 
+if ! command -v npx >/dev/null 2>&1; then
+  echo "Node.js non è installato — serve per l'admin locale."
+  echo ""
+  echo "Installalo da https://nodejs.org (versione LTS), poi rilancia:"
+  echo "  ./start-local.sh"
+  echo ""
+  echo "Avvio solo il sito (senza admin) su http://localhost:8000"
+  python3 -m http.server 8000
+  exit 0
+fi
+
 if ! git rev-parse --git-dir > /dev/null 2>&1; then
   git init -b main
   git add -A

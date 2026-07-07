@@ -118,45 +118,45 @@
 
   <!-- HERO -->
   <section class="hero" style="padding:0;">
-    <div class="bg img-placeholder" data-img-id="home-hero" style="position:absolute;inset:0;">editorial photograph — Monaco coastline at dusk</div>
+    <div class="bg img-placeholder" data-home-bg="hero.hero_image" style="position:absolute;inset:0;">editorial photograph — Monaco coastline at dusk</div>
     <div class="veil"></div>
     <div class="content">
-      <div class="eyebrow">Monaco Real Estate</div>
-      <h1>Davide Piraldo</h1>
-      <div class="role">Luxury Advisor</div>
-      <div class="affil">Pastor &amp; Reiss Monte-Carlo</div>
+      <div class="eyebrow" data-home="hero.eyebrow">Monaco Real Estate</div>
+      <h1 data-home="hero.title">Davide Piraldo</h1>
+      <div class="role" data-home="hero.role">Luxury Advisor</div>
+      <div class="affil" data-home="hero.affiliation">Pastor &amp; Reiss Monte-Carlo</div>
     </div>
-    <div class="scrolldown">Scroll</div>
+    <div class="scrolldown" data-home="hero.scroll_label">Scroll</div>
   </section>
 
   <!-- POSITIONING -->
   <section>
-    <div class="label">Positioning</div>
-    <div class="positioning-statement" style="margin-top:24px;">A quiet authority on the Monaco real estate market — data-led, discreet, built for a global clientele of ultra-high-net-worth buyers.</div>
+    <div class="label" data-home="positioning.label">Positioning</div>
+    <div class="positioning-statement" style="margin-top:24px;" data-home="positioning.statement">A quiet authority on the Monaco real estate market — data-led, discreet, built for a global clientele of ultra-high-net-worth buyers.</div>
     <div class="pillars">
-      <div><h3>Discreet</h3><p>No noise, no hype. Every claim is backed by IMSEE data or verified transaction history.</p></div>
-      <div><h3>Data-led</h3><p>Market intelligence is the core of every conversation — figures, not adjectives, do the persuading.</p></div>
-      <div><h3>International</h3><p>A clear, precise voice for a cross-border clientele, built for buyers from anywhere in the world.</p></div>
+      <div><h3 data-home="positioning.pillars.0.title">Discreet</h3><p data-home="positioning.pillars.0.text">No noise, no hype. Every claim is backed by IMSEE data or verified transaction history.</p></div>
+      <div><h3 data-home="positioning.pillars.1.title">Data-led</h3><p data-home="positioning.pillars.1.text">Market intelligence is the core of every conversation — figures, not adjectives, do the persuading.</p></div>
+      <div><h3 data-home="positioning.pillars.2.title">International</h3><p data-home="positioning.pillars.2.text">A clear, precise voice for a cross-border clientele, built for buyers from anywhere in the world.</p></div>
     </div>
   </section>
 
   <!-- MARKET STRIP -->
   <section class="market" style="padding-left:6%;padding-right:6%;">
-    <div class="label" style="text-align:center;display:block;">Monaco Real Estate Market — 2025</div>
+    <div class="label" style="text-align:center;display:block;" data-home="market.label">Monaco Real Estate Market — 2025</div>
     <div class="market-grid" style="margin-top:36px;">
-      <div class="cell"><div class="num" style="color:var(--gold);">€3.2Bn</div><div class="lbl">Total resale volume</div></div>
-      <div class="cell"><div class="num">429</div><div class="lbl">Resales, 2025</div></div>
-      <div class="cell"><div class="num">+17.5%</div><div class="lbl">Transactions, YoY</div></div>
-      <div class="cell"><div class="num">€7.6M</div><div class="lbl">Average resale price</div></div>
+      <div class="cell"><div class="num" data-home="market.stats.0.value" style="color:var(--gold);">€3.2Bn</div><div class="lbl" data-home="market.stats.0.label">Total resale volume</div></div>
+      <div class="cell"><div class="num" data-home="market.stats.1.value">429</div><div class="lbl" data-home="market.stats.1.label">Resales, 2025</div></div>
+      <div class="cell"><div class="num" data-home="market.stats.2.value">+17.5%</div><div class="lbl" data-home="market.stats.2.label">Transactions, YoY</div></div>
+      <div class="cell"><div class="num" data-home="market.stats.3.value">€7.6M</div><div class="lbl" data-home="market.stats.3.label">Average resale price</div></div>
     </div>
-    <div class="source">Source: IMSEE — Monaco Real Estate Observatory, 2025</div>
+    <div class="source" data-home="market.source">Source: IMSEE — Monaco Real Estate Observatory, 2025</div>
   </section>
 
   <!-- FEATURED PROPERTY -->
   <section>
     <div class="label">Featured Property</div>
     <div class="property-teaser" style="margin-top:36px;">
-      <div class="img-placeholder" data-img-id="home-property-teaser" data-cms-bg="hero_side_image">photograph — Eden Tower</div>
+      <div class="img-placeholder" data-cms-bg="hero_side_image">photograph — Eden Tower</div>
       <div class="info">
         <div class="label" data-cms="district_names">Jardin Exotique, Monaco</div>
         <h2 data-cms="building_name">Eden Tower</h2>
@@ -165,87 +165,73 @@
           <span><span data-cms="rooms">4</span> Rooms</span>
           <span data-cms="views_label">Sea &amp; Mountain View</span>
         </div>
-        <a class="btn" href="property-template.html?slug=eden-tower">View the Property</a>
+        <a class="btn" href="property-template.html?slug=eden-tower" id="featured-property-btn">View the Property</a>
       </div>
-      <div style="margin-top:14px;"><a href="properties-index.html" style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);">See all properties →</a></div>
     </div>
+    <div style="margin-top:14px;"><a href="properties-index.html" style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);">See all properties →</a></div>
   </section>
 
   <script>
-  // Loads the featured property's data (content/properties/<slug>.json) and
-  // fills in the card above. If unreachable, the static text already in the
-  // HTML is shown instead — nothing breaks. Change the slug below whenever
-  // you want a different property featured on the homepage.
-  const FEATURED_SLUG = 'eden-tower';
-  fetch(`content/properties/${FEATURED_SLUG}.json`).then(r => r.json()).then(data => {
-    document.querySelectorAll('.property-teaser [data-cms]').forEach(el => {
-      const key = el.getAttribute('data-cms');
-      if (data[key] !== undefined && data[key] !== "") el.textContent = data[key];
-    });
-    const bgEl = document.querySelector('[data-cms-bg="hero_side_image"]');
-    if (bgEl && data.media && data.media.hero_side_image) {
-      bgEl.style.backgroundImage = `url('${data.media.hero_side_image}')`;
-      bgEl.style.backgroundSize = 'cover';
-      bgEl.style.backgroundPosition = 'center';
-      bgEl.textContent = '';
-    }
-  }).catch(() => { /* static fallback content stays as-is */ });
+  window.FEATURED_SLUG = 'eden-tower';
+  window.loadFeaturedProperty = function() {
+    const slug = window.FEATURED_SLUG || 'eden-tower';
+    const btn = document.getElementById('featured-property-btn');
+    if (btn) btn.href = 'property-template.html?slug=' + slug;
+    fetch(`content/properties/${slug}.json`).then(r => r.json()).then(data => {
+      document.querySelectorAll('.property-teaser [data-cms]').forEach(el => {
+        const key = el.getAttribute('data-cms');
+        if (data[key] !== undefined && data[key] !== "") el.textContent = data[key];
+      });
+      const bgEl = document.querySelector('[data-cms-bg="hero_side_image"]');
+      if (bgEl && data.media && data.media.hero_side_image) {
+        bgEl.style.backgroundImage = `url('${data.media.hero_side_image}')`;
+        bgEl.style.backgroundSize = 'cover';
+        bgEl.style.backgroundPosition = 'center';
+        bgEl.textContent = '';
+      }
+    }).catch(() => {});
+  };
+  window.loadFeaturedProperty();
   </script>
 
   <!-- JOURNAL TEASER -->
   <section>
     <div class="journal-head">
       <div>
-        <div class="label">The Monaco Journal</div>
-        <h2>Market intelligence, guides &amp; insight</h2>
+        <div class="label" data-home="journal.label">The Monaco Journal</div>
+        <h2 data-home="journal.heading">Market intelligence, guides &amp; insight</h2>
       </div>
       <a class="viewall" href="blog-index.html">View all 10 articles →</a>
     </div>
-    <div class="journal-grid">
-      <a class="jcard" href="04-why-invest-monaco-real-estate.html">
-        <div class="cat">Market Analysis</div>
-        <h3>Why Monaco Real Estate Holds Its Value</h3>
-        <p>Two square kilometres, no land to build on, and a resale market that moved €3.2 billion in 2025.</p>
-        <div class="readmore">Read the analysis →</div>
-      </a>
-      <a class="jcard" href="01-how-to-buy-property-in-monaco.html">
-        <div class="cat">Buying Guide</div>
-        <h3>How to Buy Property in Monaco</h3>
-        <p>The complete process — from written offer to notary signing — including real costs and timelines.</p>
-        <div class="readmore">Read the guide →</div>
-      </a>
-      <a class="jcard" href="03-monaco-residency-guide.html">
-        <div class="cat">Residency</div>
-        <h3>Monaco Residency: Requirements in 2026</h3>
-        <p>Accommodation, the bank deposit convention, and why owning property isn't the same as residency.</p>
-        <div class="readmore">Read the guide →</div>
-      </a>
-    </div>
+    <div class="journal-grid" id="journal-grid"></div>
   </section>
 
   <!-- CONTACT -->
   <section id="contact" class="contact">
-    <div class="label" style="display:block;">Get in Touch</div>
-    <h2 style="margin-top:24px;">Discuss the Monaco market, in confidence</h2>
-    <p>Whether you're exploring a first acquisition or searching for something that isn't listed publicly, every conversation starts privately — by message or email.</p>
+    <div class="label" style="display:block;" data-home="contact.label">Get in Touch</div>
+    <h2 style="margin-top:24px;" data-home="contact.heading">Discuss the Monaco market, in confidence</h2>
+    <p data-home="contact.text">Whether you're exploring a first acquisition or searching for something that isn't listed publicly, every conversation starts privately — by message or email.</p>
     <div class="contact-actions">
-      <a class="btn" href="mailto:hello@example.com">Send an Email</a>
-      <a class="btn-secondary" href="https://instagram.com/davidepiraldo.pr" target="_blank" rel="noopener">DM on Instagram</a>
+      <a class="btn" data-home="contact.email" href="mailto:hello@example.com">Send an Email</a>
+      <a class="btn-secondary" data-home="contact.instagram" href="https://instagram.com/davidepiraldo.pr" target="_blank" rel="noopener">DM on Instagram</a>
     </div>
   </section>
 
   <footer>
     <div>
-      <div class="fname">Davide Piraldo</div>
-      <div class="frole">Luxury Advisor · Pastor &amp; Reiss Monte-Carlo</div>
+      <div class="fname" data-home="footer.name">Davide Piraldo</div>
+      <div class="frole" data-home="footer.role">Luxury Advisor · Pastor &amp; Reiss Monte-Carlo</div>
     </div>
     <div class="flinks">
       <a href="index.html">Home</a>
       <a href="properties-index.html">Property</a>
       <a href="blog-index.html">Journal</a>
-      <a href="https://instagram.com/davidepiraldo.pr" target="_blank" rel="noopener">Instagram</a>
+      <a data-home="contact.instagram" href="https://instagram.com/davidepiraldo.pr" target="_blank" rel="noopener">Instagram</a>
     </div>
   </footer>
+
+  <script src="journal-loader.js"></script>
+  <script src="home-loader.js"></script>
 
 </body>
 </html>

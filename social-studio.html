@@ -7,9 +7,8 @@
 
 <!--
   PRIVATE TOOL — not linked from the public site, not in the nav.
-  Generates on-brand Instagram posts (1080x1080) and Reel/Story frames
-  (1080x1920), fillable and downloadable as PNG. Keep this file off the
-  public nav; access it directly by its filename.
+  Generates on-brand Instagram posts (1080×1080) and Reel/Story frames
+  (1080×1920), fillable and downloadable as PNG.
 -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,6 +18,7 @@
   :root{
     --ink:#17130f; --ink2:#141110; --charcoal:#211c17; --gold:#c9a86a;
     --ivory:#f1efe9; --stone:#8c8579; --line:#362f29; --body:#c9c2b8;
+    --photo-text:#ffffff;
   }
   *{box-sizing:border-box;}
   body{margin:0;background:#0d0b09;color:var(--ivory);font-family:'Jost',sans-serif;}
@@ -37,6 +37,21 @@
   }
   textarea{resize:vertical;min-height:70px;}
   input[type=file]{width:100%;font-size:12px;color:var(--stone);}
+  input[type=color]{
+    width:100%;height:36px;padding:2px 4px;background:var(--charcoal);border:1px solid var(--line);
+    border-radius:2px;cursor:pointer;
+  }
+
+  .brand-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;margin-bottom:8px;}
+  .brand-grid label{margin:0 0 4px;font-size:10px;}
+  .brand-actions{display:flex;gap:8px;margin-top:12px;}
+  .brand-actions button{
+    flex:1;background:var(--charcoal);border:1px solid var(--line);color:var(--body);
+    padding:9px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+    cursor:pointer;border-radius:2px;font-family:'Jost',sans-serif;
+  }
+  .brand-actions button:hover{border-color:var(--gold);color:var(--gold);}
+  .panel-divider{border:none;border-top:1px solid var(--line);margin:28px 0;}
 
   .format-group{display:flex;flex-direction:column;gap:6px;}
   .format-group button{
@@ -56,18 +71,54 @@
 
   /* ---- exported canvas base ---- */
   .frame{background:var(--ink);color:var(--ivory);font-family:'Jost',sans-serif;position:relative;overflow:hidden;}
-  .frame .ph{background:linear-gradient(135deg,#2a2420,#2a2420 14px,#221d19 14px,#221d19 28px);
+  .frame .ph{background:linear-gradient(135deg,var(--ph-a),var(--ph-a) 14px,var(--ph-b) 14px,var(--ph-b) 28px);
     display:flex;align-items:center;justify-content:center;color:var(--stone);font-size:12px;text-align:center;
-    background-size:cover;background-position:center;}
+    background-size:cover;background-position:center;overflow:hidden;}
+  .frame .ph img{width:100%;height:100%;object-fit:cover;display:block;}
   .eyebrow{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);}
   .serif{font-family:'Cormorant Garamond',serif;}
 
-  /* square post, 1080x1080 scaled to 440 */
-  .post{width:440px;height:440px;padding:23px;display:flex;flex-direction:column;}
-  .post.light{background:var(--ivory);color:var(--ink);}
+  /* Instagram export sizes — preview maps 1:3 (post) and 1:4 (reel) exactly */
+  .post{width:360px;height:360px;padding:18px;display:flex;flex-direction:column;}
+  .post.light{background:var(--light-bg);color:var(--ink);}
 
-  /* reel/story, 1080x1920 scaled to 248x440 */
-  .reel{width:248px;height:440px;}
+  .reel{width:270px;height:480px;}
+
+  /* Reel — Monaco Brand (gold frame + top/bottom text) */
+  .reel-monaco{position:relative;overflow:hidden;}
+  .reel-monaco .monaco-bg{position:absolute;inset:0;}
+  .reel-monaco .monaco-bg img{width:100%;height:100%;object-fit:cover;display:block;}
+  .reel-monaco .monaco-frame{
+    position:absolute;inset:11px;border:1px solid var(--gold);pointer-events:none;z-index:2;
+  }
+  .reel-monaco .monaco-frame .corner{
+    position:absolute;width:14px;height:14px;border-color:var(--gold);border-style:solid;
+  }
+  .reel-monaco .monaco-frame .corner.tl{top:-1px;left:-1px;border-width:2px 0 0 2px;}
+  .reel-monaco .monaco-frame .corner.tr{top:-1px;right:-1px;border-width:2px 2px 0 0;}
+  .reel-monaco .monaco-top{
+    position:absolute;top:28px;left:0;right:0;text-align:center;z-index:3;
+    color:var(--photo-text);text-shadow:0 1px 12px rgba(0,0,0,.45);
+  }
+  .reel-monaco .monaco-top .title{
+    font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:500;
+    letter-spacing:.22em;text-transform:uppercase;line-height:1.1;
+  }
+  .reel-monaco .monaco-top .subtitle{
+    font-size:7px;letter-spacing:.32em;text-transform:uppercase;margin-top:6px;opacity:.95;
+  }
+  .reel-monaco .monaco-foot{
+    position:absolute;bottom:20px;left:22px;z-index:3;
+    font-family:'Cormorant Garamond',serif;font-size:8px;letter-spacing:.06em;color:var(--photo-text);
+    text-shadow:0 1px 10px rgba(0,0,0,.5);
+  }
+  /* same frame, square post 1080×1080 — safe zone for IG grid crop */
+  .post.reel-monaco{padding:0;}
+  .post.reel-monaco .monaco-frame{inset:18px;}
+  .post.reel-monaco .monaco-top{top:26px;padding:0 14px;}
+  .post.reel-monaco .monaco-top .title{font-size:21px;letter-spacing:.16em;line-height:1.15;}
+  .post.reel-monaco .monaco-top .subtitle{font-size:6px;letter-spacing:.26em;margin-top:5px;}
+  .post.reel-monaco .monaco-foot{bottom:22px;left:24px;right:24px;font-size:7px;}
 </style>
 </head>
 <body>
@@ -76,6 +127,15 @@
   <div class="panel">
     <h1>Social Studio</h1>
     <div class="sub">Private tool — fill in a format, download the PNG, post it yourself.</div>
+
+    <label>Brand Colors</label>
+    <div class="brand-grid" id="brandColors"></div>
+    <div class="brand-actions">
+      <button type="button" id="brandReset">Reset defaults</button>
+      <button type="button" id="brandSite">Site palette</button>
+    </div>
+
+    <hr class="panel-divider">
 
     <label>Format</label>
     <div class="format-group" id="formatButtons"></div>
@@ -91,12 +151,19 @@
 </div>
 
 <script>
+const EXPORT = {
+  post: { previewW: 360, previewH: 360, outW: 1080, outH: 1080 },
+  reel: { previewW: 270, previewH: 480, outW: 1080, outH: 1920 },
+};
+
 const FORMATS = [
   {id:'stat', label:'Market Stat', size:'post'},
   {id:'reveal', label:'Property Reveal', size:'post'},
   {id:'quote', label:'Quote / Insight', size:'post'},
   {id:'listing', label:'Listing Highlight', size:'post'},
   {id:'sold', label:'Sold Announcement', size:'post'},
+  {id:'monaco-brand-post', label:'Post — Monaco Brand Frame', size:'post'},
+  {id:'monaco-brand', label:'Reel — Monaco Brand Frame', size:'reel'},
   {id:'cover', label:'Reel — Cover Frame', size:'reel'},
   {id:'midroll', label:'Reel — Mid-roll Caption', size:'reel'},
   {id:'cta', label:'Reel — Closing CTA', size:'reel'},
@@ -132,6 +199,18 @@ const FIELD_DEFS = {
     {k:'location', label:'Location', type:'text', v:'Fontvieille, Monaco'},
     {k:'detail', label:'Closing Detail', type:'textarea', v:'Represented on behalf of the seller. Closed in 6 weeks.'},
   ],
+  'monaco-brand-post': [
+    {k:'photo', label:'Background Photo', type:'file'},
+    {k:'title', label:'Title (top)', type:'text', v:'MONACO'},
+    {k:'subtitle', label:'Subtitle (top)', type:'text', v:'LUXURY REAL ESTATE'},
+    {k:'footer', label:'Footer (bottom left)', type:'text', v:'Davide Piraldo · Pastor & Reiss'},
+  ],
+  'monaco-brand': [
+    {k:'photo', label:'Background Photo', type:'file'},
+    {k:'title', label:'Title (top)', type:'text', v:'MONACO'},
+    {k:'subtitle', label:'Subtitle (top)', type:'text', v:'LUXURY REAL ESTATE'},
+    {k:'footer', label:'Footer (bottom left)', type:'text', v:'Davide Piraldo · Pastor & Reiss'},
+  ],
   cover: [
     {k:'photo', label:'Background Photo', type:'file'},
     {k:'category', label:'Category', type:'text', v:'Monaco Market Update'},
@@ -150,13 +229,124 @@ const FIELD_DEFS = {
 let current = 'stat';
 let photoData = {};
 
+const DEFAULT_BRAND = {
+  ink: '#17130f',
+  gold: '#c9a86a',
+  ivory: '#f1efe9',
+  stone: '#8c8579',
+  line: '#362f29',
+  body: '#c9c2b8',
+  photoText: '#ffffff',
+  lightBg: '#f1efe9',
+};
+
+const BRAND_FIELDS = [
+  { key: 'ink', label: 'Background' },
+  { key: 'gold', label: 'Accent / Gold' },
+  { key: 'ivory', label: 'Primary Text' },
+  { key: 'stone', label: 'Muted Text' },
+  { key: 'line', label: 'Borders' },
+  { key: 'body', label: 'Body Text' },
+  { key: 'photoText', label: 'Text on Photos' },
+  { key: 'lightBg', label: 'Light Post BG' },
+];
+
+let brand = loadBrand();
+
+function loadBrand() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('dp-social-brand') || 'null');
+    if (saved && typeof saved === 'object') return { ...DEFAULT_BRAND, ...saved };
+  } catch (_) {}
+  return { ...DEFAULT_BRAND };
+}
+
+function saveBrand() {
+  localStorage.setItem('dp-social-brand', JSON.stringify(brand));
+}
+
+function hexToRgb(hex) {
+  const h = hex.replace('#', '');
+  const n = parseInt(h.length === 3 ? h.split('').map(c => c + c).join('') : h, 16);
+  return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
+}
+
+function rgbaHex(hex, a) {
+  const { r, g, b } = hexToRgb(hex);
+  return `rgba(${r},${g},${b},${a})`;
+}
+
+function shadeHex(hex, pct) {
+  const { r, g, b } = hexToRgb(hex);
+  const blend = c => pct >= 0
+    ? Math.round(c + (255 - c) * (pct / 100))
+    : Math.round(c * (1 + pct / 100));
+  return '#' + [blend(r), blend(g), blend(b)].map(v =>
+    Math.min(255, Math.max(0, v)).toString(16).padStart(2, '0')
+  ).join('');
+}
+
+function applyBrandColors() {
+  const wrap = document.querySelector('.canvas-wrap');
+  if (!wrap) return;
+  const phA = shadeHex(brand.ink, 8);
+  const phB = shadeHex(brand.ink, -6);
+  wrap.style.setProperty('--ink', brand.ink);
+  wrap.style.setProperty('--gold', brand.gold);
+  wrap.style.setProperty('--ivory', brand.ivory);
+  wrap.style.setProperty('--stone', brand.stone);
+  wrap.style.setProperty('--line', brand.line);
+  wrap.style.setProperty('--body', brand.body);
+  wrap.style.setProperty('--photo-text', brand.photoText);
+  wrap.style.setProperty('--light-bg', brand.lightBg);
+  wrap.style.setProperty('--ph-a', phA);
+  wrap.style.setProperty('--ph-b', phB);
+  wrap.style.setProperty('--overlay-10', rgbaHex(brand.ink, 0.1));
+  wrap.style.setProperty('--overlay-82', rgbaHex(brand.ink, 0.82));
+  wrap.style.setProperty('--overlay-88', rgbaHex(brand.ink, 0.88));
+}
+
+function renderBrandPanel() {
+  const el = document.getElementById('brandColors');
+  el.innerHTML = BRAND_FIELDS.map(f => `
+    <div>
+      <label for="brand-${f.key}">${f.label}</label>
+      <input type="color" id="brand-${f.key}" data-brand="${f.key}" value="${brand[f.key]}">
+    </div>
+  `).join('');
+  el.querySelectorAll('input[type=color]').forEach(inp => {
+    inp.addEventListener('input', e => {
+      brand[e.target.dataset.brand] = e.target.value;
+      saveBrand();
+      applyBrandColors();
+      renderCanvas();
+    });
+  });
+}
+
+document.getElementById('brandReset').onclick = () => {
+  brand = { ...DEFAULT_BRAND };
+  saveBrand();
+  renderBrandPanel();
+  applyBrandColors();
+  renderCanvas();
+};
+
+document.getElementById('brandSite').onclick = () => {
+  brand = { ...DEFAULT_BRAND };
+  saveBrand();
+  renderBrandPanel();
+  applyBrandColors();
+  renderCanvas();
+};
+
 function renderFormatButtons(){
   const el = document.getElementById('formatButtons');
   el.innerHTML = FORMATS.map(f =>
     `<button data-id="${f.id}" class="${f.id===current?'active':''}">${f.label}</button>`
   ).join('');
   el.querySelectorAll('button').forEach(btn => {
-    btn.onclick = () => { current = btn.dataset.id; renderAll(); };
+    btn.onclick = () => switchFormat(btn.dataset.id);
   });
 }
 
@@ -180,8 +370,20 @@ function renderFields(){
     inp.addEventListener('change', e => {
       const file = e.target.files[0];
       if (!file) return;
+      if (!file.type.startsWith('image/')) {
+        alert('Seleziona un file immagine (JPG, PNG, WebP). I file HEIC potrebbero non funzionare — convertili in JPG.');
+        return;
+      }
       const reader = new FileReader();
-      reader.onload = ev => { photoData[inp.dataset.k] = ev.target.result; renderCanvas(); };
+      reader.onload = ev => {
+        const img = new Image();
+        img.onload = () => {
+          photoData[inp.dataset.k] = ev.target.result;
+          renderCanvas();
+        };
+        img.onerror = () => alert('Impossibile caricare questa immagine. Prova con JPG o PNG.');
+        img.src = ev.target.result;
+      };
       reader.readAsDataURL(file);
     });
   });
@@ -193,13 +395,26 @@ function getVal(k){
   return el.value !== undefined ? el.value : '';
 }
 
-function bgOrPlaceholder(key, label){
+function photoSlot(key, label, extraStyle = '') {
   const data = photoData[key];
-  if (data) return `style="background-image:url('${data}');background-size:cover;background-position:center;"`;
-  return '';
+  if (data) {
+    return `<div class="ph" style="${extraStyle}padding:0;"><img src="${data}" alt=""></div>`;
+  }
+  return `<div class="ph" style="${extraStyle}">${label}</div>`;
 }
-function bgText(key, label){
-  return photoData[key] ? '' : label;
+
+function monacoBrandHTML(frameClass) {
+  const g = getVal;
+  return `
+    <div class="frame ${frameClass} reel-monaco">
+      <div class="monaco-bg">${photoSlot('photo', 'background photograph', 'width:100%;height:100%;')}</div>
+      <div class="monaco-frame"><span class="corner tl"></span><span class="corner tr"></span></div>
+      <div class="monaco-top">
+        <div class="title">${g('title')}</div>
+        <div class="subtitle">${g('subtitle')}</div>
+      </div>
+      <div class="monaco-foot">${g('footer')}</div>
+    </div>`;
 }
 
 function templateHTML(){
@@ -208,86 +423,90 @@ function templateHTML(){
 
     case 'stat': return `
       <div class="frame post" style="display:flex;flex-direction:column;">
-        <div class="eyebrow">${g('eyebrow')}</div>
-        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
-          <div class="serif" style="font-size:64px;color:var(--ivory);line-height:1;">${g('number')}</div>
-          <div class="serif" style="font-size:17px;color:var(--ivory);margin-top:14px;max-width:280px;line-height:1.3;">${g('desc')}</div>
+        <div class="eyebrow" style="font-size:9px;">${g('eyebrow')}</div>
+        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 8px;">
+          <div class="serif" style="font-size:50px;color:var(--ivory);line-height:1;">${g('number')}</div>
+          <div class="serif" style="font-size:14px;color:var(--ivory);margin-top:10px;max-width:240px;line-height:1.3;">${g('desc')}</div>
         </div>
-        <div style="display:flex;justify-content:space-between;align-items:flex-end;font-size:9px;letter-spacing:.12em;color:var(--stone);text-transform:uppercase;">
-          <span>${g('source')}</span><span style="color:var(--gold);">@davidepiraldo.pr</span>
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;font-size:8px;letter-spacing:.1em;color:var(--stone);text-transform:uppercase;gap:8px;">
+          <span style="overflow:hidden;text-overflow:ellipsis;">${g('source')}</span><span style="color:var(--gold);flex-shrink:0;">@davidepiraldo.pr</span>
         </div>
       </div>`;
 
     case 'reveal': return `
       <div class="frame post" style="padding:0;display:flex;flex-direction:column;">
-        <div class="ph" style="flex:1;" ${bgOrPlaceholder('photo')}>${bgText('photo','property photograph')}</div>
-        <div style="padding:20px 22px;display:flex;justify-content:space-between;align-items:center;">
-          <div>
-            <div class="serif" style="font-size:20px;color:var(--ivory);">${g('name')}</div>
-            <div style="font-size:10px;letter-spacing:.12em;color:var(--stone);text-transform:uppercase;margin-top:3px;">${g('location')}</div>
+        ${photoSlot('photo', 'property photograph', 'flex:1;min-height:0;')}
+        <div style="padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;">
+          <div style="min-width:0;">
+            <div class="serif" style="font-size:16px;color:var(--ivory);line-height:1.2;">${g('name')}</div>
+            <div style="font-size:8px;letter-spacing:.1em;color:var(--stone);text-transform:uppercase;margin-top:2px;">${g('location')}</div>
           </div>
-          <div class="serif" style="font-size:18px;color:var(--gold);">${g('price')}</div>
+          <div class="serif" style="font-size:15px;color:var(--gold);flex-shrink:0;">${g('price')}</div>
         </div>
       </div>`;
 
     case 'quote': return `
-      <div class="frame post light" style="padding:36px;display:flex;flex-direction:column;">
-        <div class="serif" style="font-size:70px;color:#a9853f;line-height:.5;">&ldquo;</div>
-        <div style="flex:1;display:flex;align-items:center;">
-          <div class="serif" style="font-size:27px;line-height:1.35;">${g('quote')}</div>
+      <div class="frame post light" style="padding:28px;display:flex;flex-direction:column;">
+        <div class="serif" style="font-size:54px;color:var(--gold);line-height:.5;">&ldquo;</div>
+        <div style="flex:1;display:flex;align-items:center;padding:0 4px;">
+          <div class="serif" style="font-size:21px;line-height:1.35;color:var(--ink);">${g('quote')}</div>
         </div>
-        <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6459;">${g('attribution')}</div>
+        <div style="font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);">${g('attribution')}</div>
       </div>`;
 
     case 'listing': return `
-      <div class="frame post" style="padding:22px;display:flex;flex-direction:column;">
-        <div class="eyebrow">${g('tag')}</div>
-        <div class="serif" style="font-size:25px;color:var(--ivory);margin-top:10px;">${g('name')}</div>
-        <div class="ph" style="flex:1;margin-top:14px;" ${bgOrPlaceholder('photo')}>${bgText('photo','property photograph')}</div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);margin-top:14px;">
-          <div style="background:var(--ink);padding:8px 6px;text-align:center;">
-            <div class="serif" style="font-size:16px;">${g('beds')}</div>
-            <div style="font-size:8px;letter-spacing:.08em;color:var(--stone);text-transform:uppercase;margin-top:2px;">Bedrooms</div>
+      <div class="frame post" style="padding:18px;display:flex;flex-direction:column;">
+        <div class="eyebrow" style="font-size:9px;">${g('tag')}</div>
+        <div class="serif" style="font-size:20px;color:var(--ivory);margin-top:8px;line-height:1.2;">${g('name')}</div>
+        ${photoSlot('photo', 'property photograph', 'flex:1;margin-top:10px;min-height:0;')}
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);margin-top:10px;">
+          <div style="background:var(--ink);padding:6px 4px;text-align:center;">
+            <div class="serif" style="font-size:13px;">${g('beds')}</div>
+            <div style="font-size:7px;letter-spacing:.06em;color:var(--stone);text-transform:uppercase;margin-top:2px;">Bedrooms</div>
           </div>
-          <div style="background:var(--ink);padding:8px 6px;text-align:center;">
-            <div class="serif" style="font-size:16px;">${g('surface')}</div>
-            <div style="font-size:8px;letter-spacing:.08em;color:var(--stone);text-transform:uppercase;margin-top:2px;">Surface</div>
+          <div style="background:var(--ink);padding:6px 4px;text-align:center;">
+            <div class="serif" style="font-size:13px;">${g('surface')}</div>
+            <div style="font-size:7px;letter-spacing:.06em;color:var(--stone);text-transform:uppercase;margin-top:2px;">Surface</div>
           </div>
-          <div style="background:var(--ink);padding:8px 6px;text-align:center;">
-            <div class="serif" style="font-size:16px;color:var(--gold);">${g('price')}</div>
-            <div style="font-size:8px;letter-spacing:.08em;color:var(--stone);text-transform:uppercase;margin-top:2px;">Price</div>
+          <div style="background:var(--ink);padding:6px 4px;text-align:center;">
+            <div class="serif" style="font-size:13px;color:var(--gold);">${g('price')}</div>
+            <div style="font-size:7px;letter-spacing:.06em;color:var(--stone);text-transform:uppercase;margin-top:2px;">Price</div>
           </div>
         </div>
       </div>`;
 
     case 'sold': return `
-      <div class="frame post" style="padding:30px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid var(--gold);">
-        <div class="eyebrow">Sold</div>
-        <div class="serif" style="font-size:32px;color:var(--ivory);margin-top:14px;">${g('name')}</div>
-        <div style="font-size:11px;color:var(--stone);margin-top:8px;letter-spacing:.05em;">${g('location')}</div>
-        <div style="width:30px;height:1px;background:var(--gold);margin:18px 0;"></div>
-        <div class="serif" style="font-size:15px;color:var(--ivory);line-height:1.5;max-width:280px;">${g('detail')}</div>
-        <div style="font-size:9px;letter-spacing:.1em;color:var(--stone);text-transform:uppercase;margin-top:22px;">Davide Piraldo · Pastor &amp; Reiss</div>
+      <div class="frame post" style="padding:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid var(--gold);">
+        <div class="eyebrow" style="font-size:9px;">Sold</div>
+        <div class="serif" style="font-size:26px;color:var(--ivory);margin-top:10px;line-height:1.15;">${g('name')}</div>
+        <div style="font-size:9px;color:var(--stone);margin-top:6px;letter-spacing:.05em;">${g('location')}</div>
+        <div style="width:24px;height:1px;background:var(--gold);margin:14px 0;"></div>
+        <div class="serif" style="font-size:13px;color:var(--ivory);line-height:1.45;max-width:240px;">${g('detail')}</div>
+        <div style="font-size:8px;letter-spacing:.08em;color:var(--stone);text-transform:uppercase;margin-top:16px;">Davide Piraldo · Pastor &amp; Reiss</div>
       </div>`;
 
+    case 'monaco-brand-post': return monacoBrandHTML('post');
+
+    case 'monaco-brand': return monacoBrandHTML('reel');
+
     case 'cover': return `
-      <div class="frame reel ph" style="position:relative;" ${bgOrPlaceholder('photo')}>
-        ${photoData['photo']?'':`<span>${'background photograph'}</span>`}
-        <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(23,19,15,.1) 0%, rgba(23,19,15,.88) 82%);"></div>
-        <div style="position:absolute;bottom:22px;left:18px;right:18px;text-align:center;">
+      <div class="frame reel" style="position:relative;overflow:hidden;">
+        ${photoSlot('photo', 'background photograph', 'width:100%;height:100%;position:absolute;inset:0;')}
+        <div style="position:absolute;inset:0;background:linear-gradient(to bottom, var(--overlay-10) 0%, var(--overlay-88) 82%);"></div>
+        <div style="position:absolute;bottom:22px;left:18px;right:18px;text-align:center;z-index:1;">
           <div style="font-size:8px;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;">${g('category')}</div>
           <div class="serif" style="font-size:19px;color:var(--ivory);margin-top:8px;line-height:1.25;">${g('headline')}</div>
         </div>
       </div>`;
 
     case 'midroll': return `
-      <div class="frame reel ph" style="position:relative;" ${bgOrPlaceholder('photo')}>
-        ${photoData['photo']?'':`<span>${'background photograph'}</span>`}
-        <div style="position:absolute;top:16px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:center;">
-          <div style="width:20px;height:20px;border-radius:999px;background:rgba(241,239,233,.15);border:1px solid rgba(241,239,233,.4);"></div>
+      <div class="frame reel" style="position:relative;overflow:hidden;">
+        ${photoSlot('photo', 'background photograph', 'width:100%;height:100%;position:absolute;inset:0;')}
+        <div style="position:absolute;top:16px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:center;z-index:1;">
+          <div style="width:20px;height:20px;border-radius:999px;background:var(--overlay-10);border:1px solid var(--ivory);opacity:.35;"></div>
           <div style="font-size:8px;letter-spacing:.1em;color:var(--ivory);text-transform:uppercase;">${g('handle')}</div>
         </div>
-        <div style="position:absolute;left:16px;right:16px;top:42%;background:rgba(23,19,15,.82);padding:14px;border-left:2px solid var(--gold);">
+        <div style="position:absolute;left:16px;right:16px;top:42%;background:var(--overlay-82);padding:14px;border-left:2px solid var(--gold);z-index:1;">
           <div class="serif" style="font-size:15px;color:var(--ivory);line-height:1.35;">${g('caption')}</div>
         </div>
       </div>`;
@@ -305,6 +524,14 @@ function templateHTML(){
 
 function renderCanvas(){
   document.getElementById('canvasWrap').innerHTML = templateHTML();
+  applyBrandColors();
+}
+
+function switchFormat(id) {
+  current = id;
+  renderFormatButtons();
+  renderFields();
+  renderCanvas();
 }
 
 function renderAll(){
@@ -316,16 +543,36 @@ function renderAll(){
 
 document.getElementById('downloadBtn').onclick = () => {
   const node = document.getElementById('canvasWrap').firstElementChild;
-  const scale = FORMATS.find(f=>f.id===current).size === 'post' ? (1080/440) : (1080/248);
-  html2canvas(node, {scale: scale, backgroundColor: null}).then(canvas => {
-    const link = document.createElement('a');
-    link.download = `davidepiraldo-${current}.png`;
-    link.href = canvas.toDataURL('image/png');
-    link.click();
-  });
+  const fmt = FORMATS.find(f => f.id === current);
+  const sz = EXPORT[fmt.size];
+  const scale = sz.outW / sz.previewW;
+  const imgs = node.querySelectorAll('img');
+  Promise.all([...imgs].map(img => img.complete ? Promise.resolve() : new Promise(r => { img.onload = r; img.onerror = r; })))
+    .then(() => html2canvas(node, {
+      scale,
+      width: sz.previewW,
+      height: sz.previewH,
+      backgroundColor: brand.ink,
+      useCORS: true,
+      allowTaint: true,
+    }))
+    .then(canvas => {
+      const out = document.createElement('canvas');
+      out.width = sz.outW;
+      out.height = sz.outH;
+      out.getContext('2d').drawImage(canvas, 0, 0, sz.outW, sz.outH);
+      const link = document.createElement('a');
+      link.download = `davidepiraldo-${current}-${sz.outW}x${sz.outH}.png`;
+      link.href = out.toDataURL('image/png');
+      link.click();
+    });
 };
 
-renderAll();
+renderBrandPanel();
+applyBrandColors();
+renderFormatButtons();
+renderFields();
+renderCanvas();
 </script>
 
 </body>

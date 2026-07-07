@@ -112,17 +112,109 @@ collections:
               - { label: "Titre Analyse Marché", name: "market_insight_title", widget: "string" }
               - { label: "Texte Analyse Marché", name: "market_insight", widget: "text" }
 
-  # ---- JOURNAL ARTICLES: IMAGES ONLY ----
-  - name: "article_images"
-    label: "Journal Article Photos"
+  # ---- HOMEPAGE ----
+  - name: "homepage"
+    label: "Homepage"
     files:
-      - file: "content/article-images.json"
-        label: "Article Photos"
-        name: "article_images"
+      - file: "content/homepage.json"
+        label: "Homepage Content"
+        name: "homepage"
         fields:
-          - label: "Articles"
-            name: "articles"
-            widget: "list"
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
             fields:
-              - { label: "Article Title (reference only)", name: "title", widget: "string" }
-              - { label: "Hero Photo", name: "hero_image", widget: "image", required: false }
+              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
+              - { label: "Title (your name)", name: "title", widget: "string" }
+              - { label: "Role", name: "role", widget: "string" }
+              - { label: "Affiliation", name: "affiliation", widget: "string" }
+              - { label: "Hero Background Photo", name: "hero_image", widget: "image", required: false }
+              - { label: "Scroll Label", name: "scroll_label", widget: "string", default: "Scroll" }
+          - label: "Positioning"
+            name: "positioning"
+            widget: "object"
+            fields:
+              - { label: "Section Label", name: "label", widget: "string" }
+              - { label: "Main Statement", name: "statement", widget: "text" }
+              - label: "Three Pillars"
+                name: "pillars"
+                widget: "list"
+                max: 3
+                fields:
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Text", name: "text", widget: "text" }
+          - label: "Market Statistics Strip"
+            name: "market"
+            widget: "object"
+            fields:
+              - { label: "Section Label", name: "label", widget: "string" }
+              - label: "Stats (4 boxes)"
+                name: "stats"
+                widget: "list"
+                max: 4
+                fields:
+                  - { label: "Value", name: "value", widget: "string" }
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "Highlight in gold?", name: "highlight", widget: "boolean", default: false }
+              - { label: "Source Line", name: "source", widget: "string" }
+          - { label: "Featured Property Slug (must match a property entry)", name: "featured_property_slug", widget: "string", default: "eden-tower" }
+          - label: "Journal Teaser (homepage)"
+            name: "journal"
+            widget: "object"
+            fields:
+              - { label: "Section Label", name: "label", widget: "string" }
+              - { label: "Heading", name: "heading", widget: "string" }
+              - label: "Featured Article Slugs (3 cards, in order)"
+                name: "featured_slugs"
+                widget: "list"
+                max: 3
+                field: { label: "Article slug", name: "slug", widget: "string" }
+          - label: "Contact Section"
+            name: "contact"
+            widget: "object"
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Text", name: "text", widget: "text" }
+              - { label: "Email", name: "email", widget: "string" }
+              - { label: "Instagram URL", name: "instagram_url", widget: "string" }
+              - { label: "Instagram Button Label", name: "instagram_label", widget: "string" }
+          - label: "Footer"
+            name: "footer"
+            widget: "object"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Role Line", name: "role", widget: "string" }
+
+  # ---- JOURNAL ARTICLES ----
+  - name: "articles"
+    label: "Journal Articles"
+    folder: "content/articles"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "title"
+    fields:
+      - { label: "Slug (URL id, e.g. 01-how-to-buy-property-in-monaco)", name: "slug", widget: "string" }
+      - { label: "Published?", name: "published", widget: "boolean", default: true }
+      - { label: "Category", name: "category", widget: "string" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date shown", name: "date", widget: "string" }
+      - { label: "Read time", name: "read_time", widget: "string", default: "5 min read" }
+      - { label: "Excerpt (card summary)", name: "excerpt", widget: "text" }
+      - { label: "Hero Photo", name: "hero_image", widget: "image", required: false }
+      - { label: "Article Body (HTML — keep classes like lead, quote, stats, steps)", name: "body_html", widget: "text" }
+      - { label: "Sources Line", name: "sources", widget: "string", required: false }
+      - { label: "Disclaimer", name: "disclaimer", widget: "text", required: false }
+      - { label: "Featured Property Teaser Text", name: "featured_property_text", widget: "string", required: false }
+
+  - name: "articles_order"
+    label: "Journal — Article Order"
+    files:
+      - file: "content/articles-order.json"
+        label: "Display Order on Journal Index"
+        name: "articles_order"
+        fields:
+          - label: "Article slugs in display order"
+            name: "order"
+            widget: "list"
+            field: { label: "Slug", name: "slug", widget: "string" }

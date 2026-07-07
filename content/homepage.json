@@ -1,0 +1,51 @@
+{
+  "hero": {
+    "eyebrow": "Monaco Real Estate",
+    "title": "Davide Piraldo",
+    "role": "Luxury Advisor",
+    "affiliation": "Pastor & Reiss Monte-Carlo",
+    "hero_image": "",
+    "scroll_label": "Scroll"
+  },
+  "positioning": {
+    "label": "Positioning",
+    "statement": "A quiet authority on the Monaco real estate market — data-led, discreet, built for a global clientele of ultra-high-net-worth buyers.",
+    "pillars": [
+      { "title": "Discreet", "text": "No noise, no hype. Every claim is backed by IMSEE data or verified transaction history." },
+      { "title": "Data-led", "text": "Market intelligence is the core of every conversation — figures, not adjectives, do the persuading." },
+      { "title": "International", "text": "A clear, precise voice for a cross-border clientele, built for buyers from anywhere in the world." }
+    ]
+  },
+  "market": {
+    "label": "Monaco Real Estate Market — 2025",
+    "stats": [
+      { "value": "€3.2Bn", "label": "Total resale volume", "highlight": true },
+      { "value": "429", "label": "Resales, 2025", "highlight": false },
+      { "value": "+17.5%", "label": "Transactions, YoY", "highlight": false },
+      { "value": "€7.6M", "label": "Average resale price", "highlight": false }
+    ],
+    "source": "Source: IMSEE — Monaco Real Estate Observatory, 2025"
+  },
+  "featured_property_slug": "eden-tower",
+  "journal": {
+    "label": "The Monaco Journal",
+    "heading": "Market intelligence, guides & insight",
+    "featured_slugs": [
+      "04-why-invest-monaco-real-estate",
+      "01-how-to-buy-property-in-monaco",
+      "03-monaco-residency-guide"
+    ]
+  },
+  "contact": {
+    "label": "Get in Touch",
+    "heading": "Discuss the Monaco market, in confidence",
+    "text": "Whether you're exploring a first acquisition or searching for something that isn't listed publicly, every conversation starts privately — by message or email.",
+    "email": "hello@example.com",
+    "instagram_url": "https://instagram.com/davidepiraldo.pr",
+    "instagram_label": "DM on Instagram"
+  },
+  "footer": {
+    "name": "Davide Piraldo",
+    "role": "Luxury Advisor · Pastor & Reiss Monte-Carlo"
+  }
+}
