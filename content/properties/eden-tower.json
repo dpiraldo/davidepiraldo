@@ -35,18 +35,18 @@
     "intro_photo": "assets/gallery/living.png",
     "intro_photo_focus": "Center",
     "gallery_featured": [
-      "assets/aec82d30-de23-4ac0-bbe1-b838c72f5a58.png",
-      "assets/gallery/terrace.png"
+      { "image": "assets/aec82d30-de23-4ac0-bbe1-b838c72f5a58.png" },
+      { "image": "assets/gallery/terrace.png" }
     ],
     "gallery_locked": [
-      "assets/gallery/bedroom-2.png",
-      "assets/gallery/bedroom-3.png",
-      "assets/gallery/interior-4.png",
-      "assets/gallery/interior-1.png",
-      "assets/gallery/interior-5.png",
-      "assets/gallery/interior-6.png",
-      "assets/monaco-panorama.png",
-      "assets/eden-tower.png"
+      { "image": "assets/gallery/bedroom-2.png" },
+      { "image": "assets/gallery/bedroom-3.png" },
+      { "image": "assets/gallery/interior-4.png" },
+      { "image": "assets/gallery/interior-1.png" },
+      { "image": "assets/gallery/interior-5.png" },
+      { "image": "assets/gallery/interior-6.png" },
+      { "image": "assets/monaco-panorama.png" },
+      { "image": "assets/eden-tower.png" }
     ]
   },
 

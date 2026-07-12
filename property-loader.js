@@ -111,16 +111,20 @@
     });
 
     // ---- gallery ----
+    function gallerySrc(item) {
+      if (!item) return '';
+      return typeof item === 'string' ? item : (item.image || item.photo || '');
+    }
     const featuredWrap = document.getElementById('galleryFeatured');
     if (featuredWrap && p.media && p.media.gallery_featured) {
       featuredWrap.innerHTML = p.media.gallery_featured.map(src =>
-        `<div class="gallery-featured"><img src="${src}" alt="${p.building_name || ''}"></div>`
+        `<div class="gallery-featured"><img src="${gallerySrc(src)}" alt="${p.building_name || ''}"></div>`
       ).join('');
     }
     const lockedWrap = document.getElementById('galleryLocked');
     if (lockedWrap && p.media && p.media.gallery_locked) {
       lockedWrap.innerHTML = p.media.gallery_locked.map(src =>
-        `<img src="${src}" alt="">`
+        `<img src="${gallerySrc(src)}" alt="">`
       ).join('');
     }
 

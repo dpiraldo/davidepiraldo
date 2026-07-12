@@ -22,7 +22,10 @@ collections:
     folder: "content/properties"
     create: true
     slug: "{{slug}}"
+    extension: "json"
+    format: "json"
     identifier_field: "building_name"
+    summary: "{{building_name}} · {{slug}}"
     fields:
       - { label: "Slug (used in the URL, e.g. eden-tower)", name: "slug", widget: "string" }
       - { label: "Featured on homepage?", name: "featured", widget: "boolean", default: false }
@@ -219,6 +222,8 @@ collections:
     folder: "content/articles"
     create: true
     slug: "{{slug}}"
+    extension: "json"
+    format: "json"
     identifier_field: "title"
     fields:
       - { label: "Slug (URL id, e.g. 01-how-to-buy-property-in-monaco)", name: "slug", widget: "string" }
