@@ -7,10 +7,21 @@ local_backend:
 backend:
   name: git-gateway
   branch: main
+  commit_messages:
+    create: 'Create {{collection}} "{{slug}}"'
+    update: 'Update {{collection}} "{{slug}}"'
+    delete: 'Delete {{collection}} "{{slug}}"'
+    uploadMedia: 'Upload "{{path}}"'
+    deleteMedia: 'Delete "{{path}}"'
 
 # After setup, editors log in at yoursite.com/admin using Netlify Identity.
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
+
+# Git Gateway rejects uploads over ~900 KB per file. Compress photos before upload.
+media_library:
+  config:
+    max_file_size: 900000
 
 collections:
 
