@@ -98,13 +98,13 @@ collections:
       - label: "📊 Quartieri per Market Intelligence"
         name: "districts"
         widget: "list"
-        max: 2
-        hint: "Scegli 1 quartiere (dati singoli) o 2 (confronto). Es. Eden Tower: Jardin Exotique + La Condamine · Le Mirabeau: Carré d'Or + Larvotto. I numeri si aggiornano da soli."
+        max: 3
+        hint: "Scegli 1 quartiere (dati singoli) o 2–3 (confronto). Es. Le Mirabeau: Carré d'Or + Larvotto + Mareterra. I numeri si aggiornano da soli."
         fields:
           - label: "Quartiere"
             name: "key"
             widget: "select"
-            options: ["monte-carlo", "carre-dor", "jardin-exotique", "la-condamine", "larvotto", "la-rousse", "fontvieille", "moneghetti", "monaco-ville"]
+            options: ["monte-carlo", "carre-dor", "jardin-exotique", "la-condamine", "larvotto", "mareterra", "la-rousse", "fontvieille", "moneghetti", "monaco-ville"]
 
       - label: "🗂️ Schede Caratteristiche (max 4, sempre visibili)"
         name: "features"

@@ -173,9 +173,11 @@
   const MARKET_LABELS = {
     en: {
       propertyDistrict: 'Property District', neighbourDistrict: 'Neighbouring District',
+      comparisonDistrict: 'Comparison District',
       perSqm: 'per sqm · 2025', change: 'Change 24/25', resales: 'Resales 2025',
       resaleVolume: 'Resale Volume', newBuild: 'New Build 2020–29',
       leadCompare: (name) => `Official data from the Observatoire de l'Immobilier 2025 — IMSEE, Principality of Monaco. Comparative analysis of the two districts framing ${name}.`,
+      leadMulti: (name, n) => `Official data from the Observatoire de l'Immobilier 2025 — IMSEE, Principality of Monaco. Comparative analysis of the ${n} districts framing ${name}.`,
       leadSingle: `Official data from the Observatoire de l'Immobilier 2025 — IMSEE, Principality of Monaco.`,
       rowPriceSqm: 'Price per sqm (2025)', rowNewBuild: 'New build 2020–2029', rowResalesNum: 'Number of resales',
       rowResaleVolume: 'Resale volume', rowMarketShare: 'Market share', rowSurface: 'Residential surface (k m²)',
@@ -183,9 +185,11 @@
     },
     fr: {
       propertyDistrict: 'Quartier du Bien', neighbourDistrict: 'Quartier Voisin',
+      comparisonDistrict: 'Quartier Comparatif',
       perSqm: 'prix au m² · 2025', change: 'Variation 24/25', resales: 'Reventes 2025',
       resaleVolume: 'Montant Reventes', newBuild: 'Neuf 2020–2029',
       leadCompare: (name) => `Données officielles de l'Observatoire de l'Immobilier 2025 — IMSEE, Principauté de Monaco. Analyse comparative des deux quartiers encadrant ${name}.`,
+      leadMulti: (name, n) => `Données officielles de l'Observatoire de l'Immobilier 2025 — IMSEE, Principauté de Monaco. Analyse comparative des ${n} quartiers encadrant ${name}.`,
       leadSingle: `Données officielles de l'Observatoire de l'Immobilier 2025 — IMSEE, Principauté de Monaco.`,
       rowPriceSqm: 'Prix au m² (2025)', rowNewBuild: 'Neuf 2020–2029', rowResalesNum: 'Nombre de reventes',
       rowResaleVolume: 'Montant des reventes', rowMarketShare: 'Part de marché', rowSurface: 'Surface logements (k m²)',
@@ -193,9 +197,11 @@
     },
     it: {
       propertyDistrict: 'Quartiere dell\'Immobile', neighbourDistrict: 'Quartiere Limitrofo',
+      comparisonDistrict: 'Quartiere di Confronto',
       perSqm: 'al m² · 2025', change: 'Variazione 24/25', resales: 'Rivendite 2025',
       resaleVolume: 'Volume Rivendite', newBuild: 'Nuove Costruzioni 2020–29',
       leadCompare: (name) => `Dati ufficiali dell'Observatoire de l'Immobilier 2025 — IMSEE, Principato di Monaco. Analisi comparativa dei due quartieri che circondano ${name}.`,
+      leadMulti: (name, n) => `Dati ufficiali dell'Observatoire de l'Immobilier 2025 — IMSEE, Principato di Monaco. Analisi comparativa dei ${n} quartieri che circondano ${name}.`,
       leadSingle: `Dati ufficiali dell'Observatoire de l'Immobilier 2025 — IMSEE, Principato di Monaco.`,
       rowPriceSqm: 'Prezzo al m² (2025)', rowNewBuild: 'Nuove costruzioni 2020–2029', rowResalesNum: 'Numero di rivendite',
       rowResaleVolume: 'Volume rivendite', rowMarketShare: 'Quota di mercato', rowSurface: 'Superficie residenziale (k m²)',
@@ -242,15 +248,23 @@
 
     if (!cardsWrap) return;
 
-    if (looked.length === 2) {
+    if (looked.length >= 2) {
       const names = looked.map(x => districtDisplayName(x.d, lang));
-      // dual-district comparison, e.g. Eden Tower
-      cardsWrap.innerHTML =
-        districtCard(looked[0].d, 'featured', L.propertyDistrict, lang) +
-        districtCard(looked[1].d, 'neighbour', L.neighbourDistrict, lang);
-      if (titleEl) titleEl.innerHTML = `${names[0]} <em>${L.vs}</em> ${names[1]}`;
-      if (leadEl) leadEl.textContent = L.leadCompare(p.building_name || 'this property');
-      if (tableEl) tableEl.innerHTML = marketTableHTML([looked[0].d, looked[1].d], principality, names, lang);
+      const tagLabels = [L.propertyDistrict, L.neighbourDistrict, L.comparisonDistrict];
+      cardsWrap.innerHTML = looked.map((x, i) =>
+        districtCard(x.d, i === 0 ? 'featured' : '', tagLabels[i] || L.comparisonDistrict, lang)
+      ).join('');
+      if (titleEl) {
+        titleEl.innerHTML = looked.length === 2
+          ? `${names[0]} <em>${L.vs}</em> ${names[1]}`
+          : names.join(' · ');
+      }
+      if (leadEl) {
+        leadEl.textContent = looked.length === 2
+          ? L.leadCompare(p.building_name || 'this property')
+          : L.leadMulti(p.building_name || 'this property', looked.length);
+      }
+      if (tableEl) tableEl.innerHTML = marketTableHTML(looked.map(x => x.d), principality, names, lang);
     } else if (looked.length === 1) {
       const name = districtDisplayName(looked[0].d, lang);
       // single district, the common case
