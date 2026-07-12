@@ -74,12 +74,7 @@
   "type_line": "Apartment · 4 Rooms",
   "condition": "Renovated",
   "availability": "Immediately",
-  "features": [
-    {
-      "title": "prova",
-      "desc": "prova"
-    }
-  ],
+  "features": [],
   "contact_email": "dpiraldo@pastor-reiss.com",
   "i18n": {
     "en": {
