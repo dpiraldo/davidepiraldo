@@ -4,18 +4,12 @@
     "hero_fallback_image": "/images/uploads/chatgpt-image-5-lug-2026-12_52_32.png",
     "hero_video_1": "/images/uploads/eden.mp4",
     "hero_mode": "video",
-    "hero_video_2": "",
+    "hero_video_2": "/images/uploads/chatgpt-image-29-giu-2026-15_30_00.png",
     "hero_side_image_focus": "Center",
     "gallery_locked": [
-      {
-        "image": "assets/gallery/bedroom-2.png"
-      },
-      {
-        "image": "assets/gallery/bedroom-3.png"
-      },
-      {
-        "image": "assets/gallery/interior-4.png"
-      },
+      "/images/uploads/camera-1.png",
+      "/images/uploads/img_3990.png",
+      "/images/uploads/bagno-master.png",
       {
         "image": "assets/gallery/interior-1.png"
       },
@@ -32,15 +26,11 @@
         "image": "assets/eden-tower.png"
       }
     ],
-    "hero_side_image": "assets/eden-tower.png",
+    "hero_side_image": "/images/uploads/chatgpt-image-5-lug-2026-12_52_32.png",
     "intro_photo_focus": "Center",
     "gallery_featured": [
-      {
-        "image": "assets/aec82d30-de23-4ac0-bbe1-b838c72f5a58.png"
-      },
-      {
-        "image": "assets/gallery/terrace.png"
-      }
+      "/images/uploads/soggiorno.png",
+      "/images/uploads/cucina.png"
     ],
     "hero_fallback_image_focus": "Center",
     "intro_photo": "/images/uploads/cucina.png"
@@ -74,7 +64,12 @@
   "type_line": "Apartment · 4 Rooms",
   "condition": "Renovated",
   "availability": "Immediately",
-  "features": [],
+  "features": [
+    {
+      "title": "prova",
+      "desc": "prova"
+    }
+  ],
   "contact_email": "dpiraldo@pastor-reiss.com",
   "i18n": {
     "en": {
