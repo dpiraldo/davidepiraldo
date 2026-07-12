@@ -103,6 +103,11 @@
       if (typeof setLang === 'function') setLang(window.lang || 'en');
     }
 
+    function gallerySrc(item) {
+      if (!item) return '';
+      return typeof item === 'string' ? item : (item.image || item.photo || '');
+    }
+
     // Feature slots 1-4 (always-on cards) — direct text if provided without
     // going through the EN/FR i18n system (used when no FR copy is supplied)
     (p.features || []).forEach((f, i) => {
@@ -111,13 +116,19 @@
       if (!card) return;
       if (f.title) card.querySelector('h3').textContent = f.title;
       if (f.desc) card.querySelector('p').textContent = f.desc;
+      const cover = card.querySelector('[data-feature-cover]');
+      const imageSrc = gallerySrc(f.image);
+      if (cover && imageSrc) {
+        cover.src = imageSrc;
+        cover.alt = f.title || p.building_name || '';
+        card.classList.add('has-cover');
+      } else if (cover) {
+        cover.removeAttribute('src');
+        card.classList.remove('has-cover');
+      }
     });
 
     // ---- gallery ----
-    function gallerySrc(item) {
-      if (!item) return '';
-      return typeof item === 'string' ? item : (item.image || item.photo || '');
-    }
     const featuredWrap = document.getElementById('galleryFeatured');
     if (featuredWrap) {
       const featured = (p.media && p.media.gallery_featured) || [];

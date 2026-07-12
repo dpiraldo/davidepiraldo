@@ -93,9 +93,11 @@
               'div',
               { style: { marginTop: '24px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: PALETTE.line } },
               features.map(function (f, i) {
+                var featureImg = f.image ? getAsset(f.image).toString() : '';
                 return h(
                   'div',
                   { key: i, style: { background: PALETTE.card, padding: '16px' } },
+                  featureImg && h('div', { style: { height: '100px', marginBottom: '10px', backgroundImage: 'url(' + featureImg + ')', backgroundSize: 'cover', backgroundPosition: 'center' } }),
                   h('div', { style: { fontWeight: 'bold', fontSize: '13px', color: PALETTE.ivory, marginBottom: '6px' } }, f.title || '(titolo scheda mancante)'),
                   h('div', { style: { fontSize: '12px', color: PALETTE.stone, lineHeight: 1.5 } }, f.desc || '')
                 );

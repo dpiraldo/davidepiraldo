@@ -1,0 +1,103 @@
+{
+  "slug": "le-mirabeau",
+  "building_name": "Le Mirabeau",
+  "address_line": "2 Avenue des Citronniers (also addressed as 1 Avenue Princesse Grace) · 98000 Monte-Carlo",
+  "status_label": "For Sale · Renovation Opportunity",
+  "reference": "LE MIRABEAU",
+  "rooms": 3,
+  "bedrooms": 2,
+  "bathrooms": 2,
+  "type_line": "Apartment · Convertible to 3 Bedrooms",
+  "condition": "To Renovate",
+  "views_label": "Monte-Carlo Views",
+  "availability": "Subject to Renovation",
+  "mandate": "Sole Agent",
+  "district_names": "Carré d'Or, Monte-Carlo",
+  "contact_email": "dpiraldo@pastor-reiss.com",
+  "amenities": {
+    "concierge": true,
+    "chambre_bonne": false,
+    "mixed_use": false,
+    "pool": true,
+    "gym": true
+  },
+  "media": {
+    "hero_mode": "video",
+    "hero_fallback_image": "assets/le-mirabeau/living-room.png",
+    "hero_fallback_image_focus": "Center",
+    "hero_video_1": "assets/le-mirabeau/hero-video-1.mp4",
+    "hero_video_2": "",
+    "hero_side_image": "assets/le-mirabeau/bedroom.png",
+    "hero_side_image_focus": "Center",
+    "intro_photo": "assets/le-mirabeau/living-room.png",
+    "intro_photo_focus": "Center",
+    "gallery_featured": [
+      "assets/le-mirabeau/living-room.png",
+      "assets/le-mirabeau/bathroom.png"
+    ],
+    "gallery_locked": [
+      "assets/le-mirabeau/bedroom.png",
+      "assets/le-mirabeau/bathroom.png"
+    ],
+    "floor_plan_image": "assets/le-mirabeau/floor-plan.png"
+  },
+  "gallery_locked_text": "+8 additional photographs, the full renovation floor plan and a private viewing await you.",
+  "districts": [
+    {
+      "key": "monte-carlo"
+    }
+  ],
+  "features": [
+    {
+      "title": "A Renovation Opportunity",
+      "desc": "A rare canvas in the Carré d'Or — the chance to shape a residence entirely to your own standards, in one of Monte-Carlo's most recognisable addresses."
+    },
+    {
+      "title": "Convertible to Three Bedrooms",
+      "desc": "The existing two-bedroom layout can be reconfigured into three, subject to permits — flexibility rarely available this close to Casino Square."
+    },
+    {
+      "title": "Hotel-Grade Amenities",
+      "desc": "A private pool, fitness centre, 24/7 concierge and the on-site Cipriani Monte-Carlo restaurant — the daily comforts of a five-star address."
+    },
+    {
+      "title": "A Compelling Investment Case",
+      "desc": "Comparable renovated apartments in the building let in the region of €30,000 per month, in a district appreciating 4.8% over the past year."
+    }
+  ],
+  "i18n": {
+    "en": {
+      "hero_title": "A Rare Canvas<br>in the Heart of the <em>Golden Square</em>",
+      "p1": "On the eighth floor of Le Mirabeau — one of the Carré d'Or's most recognisable towers, moments from Casino Square — this 164 sqm apartment (140 sqm habitable, plus a 24 sqm terrace) offers something increasingly scarce in Monte-Carlo: a genuine renovation opportunity in a building where residents already enjoy a private pool, fitness centre, 24-hour concierge and the on-site Cipriani Monte-Carlo restaurant.",
+      "p2": "The existing two-bedroom configuration can be reworked into three, subject to the necessary permits — a rare degree of flexibility this close to Place du Casino, where finished stock rarely allows for reinvention. A 24 sqm terrace, private cellar and parking space complete the residence.",
+      "p3": "For an owner willing to renovate, the case is compelling: comparable renovated apartments in the building let in the region of €30,000 per month, in a district where prices have risen 4.8% over the past year — and at a starting point still positioned below Mareterra, Monaco's newest and most central waterfront district, just minutes away.",
+      "quote_text": "« The best opportunities in Monaco rarely arrive finished. They arrive with room to become exactly what you need them to be. »",
+      "quote_cite": "Le Mirabeau · Carré d'Or · Renovation Opportunity",
+      "market_title": "",
+      "market_insight_title": "Why Le Mirabeau represents a strategic opportunity",
+      "market_insight": "The 2025 Observatory places Monte-Carlo among the Principality's fastest-moving districts, with prices rising 4.8% over the past year and resale volume crossing €1 billion for the first time. Le Mirabeau sits at the centre of this momentum, on Avenue des Citronniers — also addressed as Avenue Princesse Grace — a two-minute walk from Casino Square. For a comparable entry point to Mareterra, Monaco's newest waterfront district, this position trades slightly less proximity to the sea for significantly greater proximity to everything else: shopping, dining, the Casino, and the daily life of the Principality."
+    },
+    "fr": {
+      "hero_title": "Une Toile Rare<br>au Cœur du <em>Carré d'Or</em>",
+      "p1": "Au huitième étage du Mirabeau — l'une des tours les plus reconnaissables du Carré d'Or, à deux pas de la Place du Casino — cet appartement de 164 m² (140 m² habitables, plus une terrasse de 24 m²) offre ce qui devient rare à Monte-Carlo : une véritable opportunité de rénovation dans un immeuble où les résidents bénéficient déjà d'une piscine privée, d'une salle de sport, d'une conciergerie 24h/24 et du restaurant Cipriani Monte-Carlo sur place.",
+      "p2": "La configuration actuelle de deux chambres peut être transformée en trois, sous réserve des autorisations nécessaires — une flexibilité rare à si peu de distance de la Place du Casino, où les biens déjà rénovés laissent rarement place à la réinvention. Une terrasse de 24 m², une cave privée et une place de parking complètent la résidence.",
+      "p3": "Pour un propriétaire prêt à rénover, l'argument est convaincant : des appartements comparables déjà rénovés dans l'immeuble se louent aux alentours de 30 000 € par mois, dans un quartier où les prix ont progressé de 4,8 % sur la dernière année — et pour un point d'entrée encore inférieur à celui de Mareterra, le tout nouveau quartier en bord de mer de Monaco, à quelques minutes seulement.",
+      "quote_text": "« Les meilleures opportunités à Monaco arrivent rarement achevées. Elles arrivent avec la place de devenir exactement ce dont vous avez besoin. »",
+      "quote_cite": "Le Mirabeau · Carré d'Or · Opportunité de Rénovation",
+      "market_title": "",
+      "market_insight_title": "Pourquoi Le Mirabeau représente une opportunité stratégique",
+      "market_insight": "L'Observatoire 2025 place Monte-Carlo parmi les quartiers les plus dynamiques de la Principauté, avec une hausse des prix de 4,8 % sur la dernière année et un volume de reventes dépassant pour la première fois le milliard d'euros. Le Mirabeau se trouve au cœur de cette dynamique, avenue des Citronniers — également desservi par l'avenue Princesse Grace — à deux minutes de la Place du Casino. Pour un point d'entrée comparable à celui de Mareterra, le tout nouveau quartier en bord de mer de Monaco, cette position échange une proximité légèrement moindre à la mer contre une proximité bien plus grande à tout le reste : commerces, restaurants, le Casino, et la vie quotidienne de la Principauté."
+    },
+    "it": {
+      "hero_title": "Una Tela Rara<br>nel Cuore del <em>Carré d'Or</em>",
+      "p1": "All'ottavo piano di Le Mirabeau — una delle torri più riconoscibili del Carré d'Or, a pochi passi da Place du Casino — questo appartamento di 164 m² (140 m² abitabili, più un terrazzo di 24 m²) offre qualcosa che a Monte-Carlo sta diventando raro: una vera opportunità di ristrutturazione in un edificio dove i residenti godono già di piscina privata, palestra, concierge 24 ore su 24 e del ristorante Cipriani Monte-Carlo in loco.",
+      "p2": "L'attuale configurazione a due camere da letto può essere trasformata in tre, previe le necessarie autorizzazioni — una flessibilità rara a così poca distanza da Place du Casino, dove gli immobili già ristrutturati lasciano raramente spazio alla reinvenzione. Un terrazzo di 24 m², una cantina privata e un parcheggio completano la residenza.",
+      "p3": "Per un proprietario disposto a ristrutturare, il ragionamento è convincente: appartamenti comparabili già ristrutturati nello stesso edificio vengono affittati intorno ai 30.000 € al mese, in un quartiere dove i prezzi sono cresciuti del 4,8% nell'ultimo anno — e con un punto di partenza ancora inferiore rispetto a Mareterra, il nuovissimo quartiere sul mare di Monaco, a pochi minuti di distanza.",
+      "quote_text": "« Le migliori opportunità a Monaco raramente arrivano già compiute. Arrivano con lo spazio per diventare esattamente ciò di cui hai bisogno. »",
+      "quote_cite": "Le Mirabeau · Carré d'Or · Opportunità di Ristrutturazione",
+      "market_title": "",
+      "market_insight_title": "Perché Le Mirabeau rappresenta un'opportunità strategica",
+      "market_insight": "L'Osservatorio 2025 colloca Monte-Carlo tra i quartieri più dinamici del Principato, con una crescita dei prezzi del 4,8% nell'ultimo anno e un volume di rivendite che ha superato per la prima volta il miliardo di euro. Le Mirabeau si trova al centro di questo slancio, su Avenue des Citronniers — indirizzo raggiungibile anche da Avenue Princesse Grace — a due minuti da Place du Casino. Per un punto di ingresso comparabile a Mareterra, il nuovissimo quartiere sul mare di Monaco, questa posizione scambia una prossimità leggermente minore al mare con una prossimità molto maggiore a tutto il resto: negozi, ristoranti, il Casinò, e la vita quotidiana del Principato."
+    }
+  }
+}

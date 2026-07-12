@@ -518,6 +518,19 @@
       background: var(--off-white);
       padding: 2.5rem 2rem;
     }
+    .feature-cover {
+      display: none;
+      width: calc(100% + 4rem);
+      height: 200px;
+      margin: -2.5rem -2rem 1.25rem;
+      object-fit: cover;
+    }
+    .feature-card.has-cover {
+      padding-top: 0;
+    }
+    .feature-card.has-cover .feature-cover {
+      display: block;
+    }
     .feature-num {
       font-family: var(--serif);
       font-size: 2rem; font-weight: 300;
@@ -917,21 +930,25 @@
       <h2 class="section-title" data-i18n="feat.title">The Art of Living</h2>
       <div class="features-grid" id="featuresGrid">
         <div class="feature-card" data-feature-slot="1">
+          <img class="feature-cover" data-feature-cover alt="">
           <div class="feature-num">01</div>
           <h3 data-i18n="feat.f1t" data-cms-i18n="feature_1_title">Living &amp; Entertaining</h3>
           <p data-i18n="feat.f1d" data-cms-i18n="feature_1_desc">Generous reception spaces designed for elegant hosting, with premium finishes and natural light throughout.</p>
         </div>
         <div class="feature-card" data-feature-slot="2">
+          <img class="feature-cover" data-feature-cover alt="">
           <div class="feature-num">02</div>
           <h3 data-i18n="feat.f2t" data-cms-i18n="feature_2_title">Three Bedrooms</h3>
           <p data-i18n="feat.f2d" data-cms-i18n="feature_2_desc">Three beautifully appointed bedrooms with bespoke storage and refined detailing in every private quarter.</p>
         </div>
         <div class="feature-card" data-feature-slot="3">
+          <img class="feature-cover" data-feature-cover alt="">
           <div class="feature-num">03</div>
           <h3 data-i18n="feat.f3t" data-cms-i18n="feature_3_title">Two Bathrooms</h3>
           <p data-i18n="feat.f3d" data-cms-i18n="feature_3_desc">Two luxurious bathrooms with impeccable finishes, completing the interior with flawless functionality.</p>
         </div>
         <div class="feature-card" data-feature-slot="4">
+          <img class="feature-cover" data-feature-cover alt="">
           <div class="feature-num">04</div>
           <h3 data-i18n="feat.f4t" data-cms-i18n="feature_4_title">Sea &amp; Mountain Views</h3>
           <p data-i18n="feat.f4d" data-cms-i18n="feature_4_desc">Panoramic views over the Mediterranean and the mountains — the iconic panorama that defines Monaco.</p>

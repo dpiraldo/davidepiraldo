@@ -110,10 +110,11 @@ collections:
         name: "features"
         widget: "list"
         max: 4
-        hint: "Es. Superficie Abitabile, Camere, Bagni, Vista. ATTENZIONE: questi 4 testi sono solo in inglese per ora (non hanno ancora il bottone Traduci) — se li lasci vuoti restano quelli già scritti nella pagina."
+        hint: "Es. Superficie Abitabile, Camere, Bagni, Vista. Puoi aggiungere una foto di copertina per ogni scheda. Testi solo in inglese per ora — se li lasci vuoti restano quelli già nella pagina."
         fields:
           - { label: "Titolo", name: "title", widget: "string" }
           - { label: "Descrizione", name: "desc", widget: "text" }
+          - { label: "Foto di copertina (opzionale)", name: "image", widget: "image", required: false }
 
       - label: "✍️ Testi (Inglese, Francese, Italiano)"
         name: "i18n"
