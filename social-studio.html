@@ -164,7 +164,7 @@
     <hr class="panel-divider">
 
     <label>Genera Posts</label>
-    <p class="gen-hint">Scegli un tema, poi clicca un post — si compila il formato <strong style="color:var(--ivory);font-weight:500;">Market Stat</strong> con dati dal sito. Modifica liberamente prima di scaricare.</p>
+    <p class="gen-hint">Scegli un tema, poi clicca un post — si compila automaticamente il formato giusto (<strong style="color:var(--ivory);font-weight:500;">Market Stat</strong> o <strong style="color:var(--ivory);font-weight:500;">Quote / Insight</strong>). Modifica liberamente prima di scaricare.</p>
     <div class="gen-tabs" id="genTabs"></div>
     <div class="gen-list" id="genList"></div>
 
@@ -260,24 +260,133 @@ const FIELD_DEFS = {
 };
 
 const GENERATED_POSTS = {
+  citazioni: {
+    label: 'Citazioni',
+    format: 'quote',
+    posts: [
+      {
+        id: 'q-volume',
+        title: 'Volume vs prezzo headline',
+        preview: '«',
+        quote: 'In Monaco, resale volume tells the real story — not the headline sale price.',
+        attribution: 'Davide Piraldo — Luxury Advisor',
+      },
+      {
+        id: 'q-understand',
+        title: 'Capire il mercato',
+        preview: '«',
+        quote: 'The Principality does not need to sell itself. It needs to be understood.',
+        attribution: 'Davide Piraldo — Luxury Advisor',
+      },
+      {
+        id: 'q-liquidity',
+        title: 'Liquidità ultra-prime',
+        preview: '«',
+        quote: 'In ultra-prime markets, liquidity is the luxury — not the marble.',
+        attribution: 'Davide Piraldo — Luxury Advisor',
+      },
+      {
+        id: 'q-two-prices',
+        title: 'Due prezzi',
+        preview: '«',
+        quote: 'Every Monaco transaction has two prices: the one in the press release, and the one on the notarial deed.',
+        attribution: 'Davide Piraldo — Luxury Advisor',
+      },
+      {
+        id: 'q-data',
+        title: 'Dati prima degli aggettivi',
+        preview: '«',
+        quote: 'Data before adjectives. Always.',
+        attribution: 'Davide Piraldo — Luxury Advisor',
+      },
+      {
+        id: 'q-timing',
+        title: 'Timing dell\'acquirente',
+        preview: '«',
+        quote: 'The buyer who waits for permission to enter Monaco rarely enters at all.',
+        attribution: 'Davide Piraldo — Luxury Advisor',
+      },
+      {
+        id: 'q-montecarlo',
+        title: 'Monte-Carlo benchmark',
+        preview: '«',
+        quote: 'Monte-Carlo is not a district. It is a benchmark.',
+        attribution: 'Davide Piraldo — Luxury Advisor',
+      },
+      {
+        id: 'q-discretion',
+        title: 'Discrezione',
+        preview: '«',
+        quote: 'Discretion is not silence — it is precision.',
+        attribution: 'Davide Piraldo — Luxury Advisor',
+      },
+      {
+        id: 'q-fundamentals',
+        title: 'Stessa logica di mercato',
+        preview: '«',
+        quote: 'A €20M apartment and a €2M studio share the same market fundamentals. The figures differ. The logic does not.',
+        attribution: 'Davide Piraldo — Luxury Advisor',
+      },
+      {
+        id: 'q-newbuild',
+        title: 'Premium nuovo',
+        preview: '«',
+        quote: 'New-build premium in Monaco is not speculation — it is scarcity with a delivery date.',
+        attribution: 'Davide Piraldo — Luxury Advisor',
+      },
+      {
+        id: 'q-residency',
+        title: 'Residenza vs proprietà',
+        preview: '«',
+        quote: 'Residency and ownership are related. They are not the same conversation.',
+        attribution: 'Davide Piraldo — Luxury Advisor',
+      },
+      {
+        id: 'q-rare',
+        title: 'Rarità',
+        preview: '«',
+        quote: 'The right property in Monaco is rarely the one you saw first.',
+        attribution: 'Davide Piraldo — Luxury Advisor',
+      },
+      {
+        id: 'q-sqm',
+        title: 'Prezzo al m²',
+        preview: '«',
+        quote: 'Price per square metre is the only figure that travels honestly across districts.',
+        attribution: 'Davide Piraldo — Luxury Advisor',
+      },
+      {
+        id: 'q-mandate',
+        title: 'Mandato esclusivo',
+        preview: '«',
+        quote: 'An exclusive mandate is not a marketing choice — it is a signal of conviction.',
+        attribution: 'Davide Piraldo — Luxury Advisor',
+      },
+    ],
+  },
   statistiche: {
     label: 'Statistiche',
+    format: 'stat',
     posts: [],
   },
   prezzi_mq: {
     label: 'Prezzi/m²',
+    format: 'stat',
     posts: [],
   },
   quartieri: {
     label: 'Quartieri',
+    format: 'stat',
     posts: [],
   },
   nuovo: {
     label: 'Nuovo',
+    format: 'stat',
     posts: [],
   },
   tasse: {
     label: 'Tasse',
+    format: 'stat',
     posts: [
       {
         id: 'tax-income',
@@ -331,6 +440,7 @@ const GENERATED_POSTS = {
   },
   residenza: {
     label: 'Residenza',
+    format: 'stat',
     posts: [
       {
         id: 'res-bank',
@@ -1079,16 +1189,25 @@ function t(k) {
   return formatText(getVal(k));
 }
 
-function setStatFields(post) {
-  if (current !== 'stat') {
-    current = 'stat';
+function setGeneratedPost(post, categoryId) {
+  const cat = GENERATED_POSTS[categoryId];
+  const formatId = cat?.format || 'stat';
+  if (current !== formatId) {
+    current = formatId;
     renderFormatButtons();
     renderFields();
   }
-  ['eyebrow', 'number', 'desc', 'source'].forEach(k => {
-    const el = document.querySelector(`#fields [data-k="${k}"]`);
-    if (el) el.value = post[k] || '';
-  });
+  if (formatId === 'quote') {
+    ['quote', 'attribution'].forEach(k => {
+      const el = document.querySelector(`#fields [data-k="${k}"]`);
+      if (el) el.value = post[k] || '';
+    });
+  } else {
+    ['eyebrow', 'number', 'desc', 'source'].forEach(k => {
+      const el = document.querySelector(`#fields [data-k="${k}"]`);
+      if (el) el.value = post[k] || '';
+    });
+  }
   renderCanvas();
 }
 
@@ -1106,10 +1225,11 @@ function renderGeneratorPanel() {
   });
 
   const posts = GENERATED_POSTS[genCategory].posts;
+  const isQuote = GENERATED_POSTS[genCategory].format === 'quote';
   list.innerHTML = posts.map(p => `
     <button type="button" class="gen-post-btn ${p.id === activeGenPostId ? 'active' : ''}" data-id="${p.id}">
-      <div class="gen-num">${escapeHtml(p.number)}</div>
-      <div class="gen-title">${escapeHtml(p.title)}</div>
+      <div class="gen-num">${escapeHtml(p.preview || p.number || '«')}</div>
+      <div class="gen-title">${escapeHtml(isQuote ? (p.title || p.quote) : p.title)}</div>
     </button>
   `).join('');
   list.querySelectorAll('.gen-post-btn').forEach(btn => {
@@ -1117,7 +1237,7 @@ function renderGeneratorPanel() {
       const post = posts.find(p => p.id === btn.dataset.id);
       if (!post) return;
       activeGenPostId = post.id;
-      setStatFields(post);
+      setGeneratedPost(post, genCategory);
       renderGeneratorPanel();
     };
   });
