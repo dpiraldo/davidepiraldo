@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "Villa Bellevue",
+      "location": "Larvotto, Monaco",
+      "price": "€24.5M",
+      "date_sold": "2024",
+      "bedrooms": 5,
+      "surface": "480m²",
+      "photo": "",
+      "description": "Full-floor residence in Monaco's most sought-after quarter, facing the Mediterranean with uninterrupted sea views from every principal room."
+    }
+  ]
+}

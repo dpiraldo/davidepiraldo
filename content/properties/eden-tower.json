@@ -14,7 +14,7 @@
   "availability": "Immediately",
   "mandate": "Sole Agent",
   "district_names": "Jardin Exotique",
-  "contact_email": "hello@example.com",
+  "contact_email": "dpiraldo@pastor-reiss.com",
 
   "amenities": {
     "concierge": true,
@@ -25,11 +25,15 @@
   },
 
   "media": {
+    "hero_mode": "video",
     "hero_fallback_image": "assets/monaco-panorama.png",
+    "hero_fallback_image_focus": "Center",
     "hero_video_1": "",
     "hero_video_2": "",
     "hero_side_image": "assets/eden-tower.png",
+    "hero_side_image_focus": "Center",
     "intro_photo": "assets/gallery/living.png",
+    "intro_photo_focus": "Center",
     "gallery_featured": [
       "assets/aec82d30-de23-4ac0-bbe1-b838c72f5a58.png",
       "assets/gallery/terrace.png"

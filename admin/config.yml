@@ -53,11 +53,36 @@ collections:
         name: "media"
         widget: "object"
         fields:
-          - { label: "Hero Fallback Photo (shown until a video plays)", name: "hero_fallback_image", widget: "image" }
-          - { label: "Hero Video — Clip 1 (optional, .mp4)", name: "hero_video_1", widget: "file", required: false }
+          - label: "Hero Display"
+            name: "hero_mode"
+            widget: "select"
+            options:
+              - { label: "Video (plays over the fallback photo below)", value: "video" }
+              - { label: "Photo only (never plays a video, even if uploaded below)", value: "photo" }
+            default: "video"
+          - { label: "Hero Fallback / Photo-only Image", name: "hero_fallback_image", widget: "image" }
+          - label: "Hero Fallback Photo Focus (use Top/Bottom for a vertical photo, Left/Right for a wide horizontal one)"
+            name: "hero_fallback_image_focus"
+            widget: "select"
+            options: ["Center", "Top", "Bottom", "Left", "Right"]
+            default: "Center"
+            required: false
+          - { label: "Hero Video — Clip 1 (.mp4 — ignored if Hero Display is Photo only)", name: "hero_video_1", widget: "file", required: false }
           - { label: "Hero Video — Clip 2 (optional, .mp4)", name: "hero_video_2", widget: "file", required: false }
           - { label: "Hero Side Photo (building exterior)", name: "hero_side_image", widget: "image" }
+          - label: "Hero Side Photo Focus (use Top/Bottom for a vertical photo, Left/Right for a wide horizontal one)"
+            name: "hero_side_image_focus"
+            widget: "select"
+            options: ["Center", "Top", "Bottom", "Left", "Right"]
+            default: "Center"
+            required: false
           - { label: "Intro Photo (living room)", name: "intro_photo", widget: "image" }
+          - label: "Intro Photo Focus (use Top/Bottom for a vertical photo, Left/Right for a wide horizontal one)"
+            name: "intro_photo_focus"
+            widget: "select"
+            options: ["Center", "Top", "Bottom", "Left", "Right"]
+            default: "Center"
+            required: false
           - { label: "Gallery — Featured Photos (2 large previews)", name: "gallery_featured", widget: "list", field: { label: "Photo", name: "image", widget: "image" } }
           - { label: "Gallery — Locked Grid (blurred teaser photos)", name: "gallery_locked", widget: "list", field: { label: "Photo", name: "image", widget: "image" } }
 
@@ -218,3 +243,29 @@ collections:
             name: "order"
             widget: "list"
             field: { label: "Slug", name: "slug", widget: "string" }
+
+  # ---- SOLD PROPERTIES ----
+  # A single file with a list inside — in the CMS this gives you one screen
+  # where you can Add/Remove/Reorder/Duplicate each sold property directly,
+  # no separate files and no manual edits to properties-sold.html needed.
+  - name: "sold_properties"
+    label: "Sold Properties"
+    files:
+      - file: "content/sold-properties.json"
+        label: "Sold Properties"
+        name: "sold_properties"
+        fields:
+          - label: "Sold Properties"
+            name: "properties"
+            widget: "list"
+            label_singular: "Property"
+            summary: "{{fields.name}} — {{fields.location}} ({{fields.date_sold}})"
+            fields:
+              - { label: "Property Name", name: "name", widget: "string" }
+              - { label: "Location", name: "location", widget: "string" }
+              - { label: "Sale Price", name: "price", widget: "string" }
+              - { label: "Year / Date Sold", name: "date_sold", widget: "string" }
+              - { label: "Bedrooms", name: "bedrooms", widget: "number", required: false }
+              - { label: "Surface (e.g. 480m²)", name: "surface", widget: "string", required: false }
+              - { label: "Photo", name: "photo", widget: "image", required: false }
+              - { label: "Short Description", name: "description", widget: "text", required: false }

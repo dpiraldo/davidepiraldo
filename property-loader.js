@@ -38,13 +38,23 @@
       if (val !== undefined && val !== null && val !== '') el.textContent = val;
     });
 
-    // ---- background images ----
+    // ---- background images (with optional per-photo focus point, so a
+    // vertical or horizontal photo can be framed correctly without ever
+    // changing the box size or the page layout) ----
     document.querySelectorAll('[data-cms-bg]').forEach(el => {
       const key = el.getAttribute('data-cms-bg');
-      const val = getPath(p.media || {}, key);
+      const media = p.media || {};
+      const val = getPath(media, key);
       if (!val) return;
-      if (el.tagName === 'IMG') el.src = val;
-      else { el.style.backgroundImage = `url('${val}')`; el.style.backgroundSize = 'cover'; el.style.backgroundPosition = 'center'; }
+      const focus = (getPath(media, key + '_focus') || 'Center').toLowerCase();
+      if (el.tagName === 'IMG') {
+        el.src = val;
+        el.style.objectPosition = focus;
+      } else {
+        el.style.backgroundImage = `url('${val}')`;
+        el.style.backgroundSize = 'cover';
+        el.style.backgroundPosition = focus;
+      }
     });
 
     // poster attribute on <video> tags
@@ -78,6 +88,8 @@
         if (src.p3) window.i18n[lang]['ov.p3'] = src.p3;
         if (src.quote_text) window.i18n[lang]['quote.text'] = src.quote_text;
         if (src.quote_cite) window.i18n[lang]['quote.cite'] = src.quote_cite;
+        if (src.market_insight_title) window.i18n[lang]['market_insight_title'] = src.market_insight_title;
+        if (src.market_insight) window.i18n[lang]['market_insight'] = src.market_insight;
         (src.features || []).forEach((f, i) => {
           window.i18n[lang][`feat.f${i+1}t`] = f.title;
           window.i18n[lang][`feat.f${i+1}d`] = f.desc;
@@ -115,8 +127,11 @@
     // ---- market intelligence: 1 or 2 districts ----
     renderMarket(p, districts);
 
-    // ---- hero video: only start if a real video file is provided ----
-    if (p.media && p.media.hero_video_1) {
+    // ---- hero video: only start if "Hero Display" is set to Video AND a
+    // real video file is provided. Set it to "Photo only" in the CMS to
+    // always show the fallback photo instead, regardless of any video file. ----
+    const heroMode = (p.media && p.media.hero_mode) || 'video';
+    if (heroMode === 'video' && p.media && p.media.hero_video_1) {
       window.__PROPERTY_VIDEO_1__ = p.media.hero_video_1;
       window.__PROPERTY_VIDEO_2__ = p.media.hero_video_2 || '';
       if (typeof window.initHeroVideos === 'function') window.initHeroVideos();

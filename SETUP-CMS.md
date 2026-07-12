@@ -58,22 +58,33 @@ Riceverai una email — clicca il link, imposta una password. Fatto: hai il tuo 
 
 1. Vai su `[il-tuo-sito].netlify.app/admin/`
 2. Fai login con l'email e password create al passo 4
-3. Vedrai due sezioni:
-   - **Featured Property** — modifica nome, prezzo, camere, m², descrizione e foto
-     della proprietà in evidenza (quella su homepage e sulla pagina property)
-   - **Journal Article Photos** — sostituisci la foto di copertina di ciascuno
-     dei 10 articoli, uno per uno
+3. Vedrai quattro sezioni:
+   - **Properties** — crea/modifica le proprietà in vendita: nome, prezzo,
+     camere, m², amenities, foto, video, testi bilingue EN/FR
+   - **Sold Properties** — l'elenco delle proprietà vendute, come una lista:
+     puoi aggiungere, rimuovere, riordinare o duplicare ogni voce con i
+     pulsanti del CMS, senza toccare il codice
+   - **Homepage** — hero, statistiche di mercato, proprietà in evidenza,
+     sezione contatti, footer
+   - **Journal Articles** — i 10+ articoli del blog: titolo, categoria,
+     estratto, foto di copertina e testo completo dell'articolo
 4. Fai le modifiche, clicca **Publish**
 5. Il sito si aggiorna da solo in 30-60 secondi
 
 ---
 
-## Cosa il CMS NON gestisce (per ora)
+## Due passaggi manuali che il CMS non fa (per ora)
 
-Il testo lungo dei 10 articoli del Journal è già scritto dentro i file HTML — il
-CMS al momento gestisce solo le **foto** di copertina di ciascun articolo, non
-il testo. Se in futuro vuoi poter riscrivere anche i testi degli articoli dal
-CMS, è un'estensione che si può aggiungere: fammelo sapere.
+- **Nuova proprietà in vendita**: dopo averla creata dal CMS, va aggiunta
+  a mano una card in `properties-index.html` (istruzioni nel commento del
+  file). Le proprietà **vendute** non hanno questo problema — quella pagina
+  si aggiorna da sola.
+- **Nuovo articolo**: dopo averlo creato dal CMS, va aggiunto il suo slug
+  in "Journal — Article Order", altrimenti esiste ma non compare
+  nell'indice del Journal.
+
+Se in futuro vuoi rendere automatica anche la pagina delle proprietà in
+vendita (stesso meccanismo già usato per le vendute), fammelo sapere.
 
 ---
 

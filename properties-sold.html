@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Properties — Davide Piraldo</title>
+<title>Sold Properties — Davide Piraldo</title>
 
 <!--
-  This page lists every property in content/properties/*.json.
-  It's built by hand-listing the cards below (add one <a class="card"> per
-  property whenever you add a listing via the CMS) — there's no live folder
-  scan on static hosting, so this index needs one line added per property.
+  This page is fully dynamic — it reads content/sold-properties.json via
+  sold-properties-loader.js and builds one card per entry. To add or remove
+  a sold property, use the CMS ("Sold Properties" section): no HTML edits
+  needed here, unlike properties-index.html.
 -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,8 +34,11 @@
   .card .body{padding:28px 30px 32px;flex:1;display:flex;flex-direction:column;}
   .card .status{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);}
   .card h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:24px;line-height:1.3;margin:12px 0 8px;}
-  .card .loc{font-size:12px;color:var(--stone);margin-bottom:16px;}
-  .card .specs{font-size:12px;color:var(--body);display:flex;gap:14px;flex-wrap:wrap;margin-top:auto;padding-top:16px;border-top:1px solid var(--line);}
+  .card .loc{font-size:12px;color:var(--stone);margin-bottom:12px;}
+  .card .desc{font-size:13px;color:var(--body);line-height:1.6;margin:0 0 16px;}
+  .card .specs{font-size:12px;color:var(--body);display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:auto;padding-top:16px;border-top:1px solid var(--line);}
+  .card .specs .price{margin-left:auto;font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--gold);}
+  .empty{grid-column:1/-1;background:var(--ink);padding:48px 6%;color:var(--stone);font-size:14px;}
   @media (max-width:900px){.grid{grid-template-columns:1fr;}}
 </style>
 </head>
@@ -53,34 +56,12 @@
   </div>
 
   <section class="header">
-    <div class="eyebrow">Current Listings</div>
-    <h1>Properties</h1>
-    <p class="lead">Every listing below opens using the same page — only the details, photos and market data change.</p>
+    <div class="eyebrow">Track Record</div>
+    <h1>Sold Properties</h1>
+    <p class="lead">A selection of transactions closed on behalf of buyers and sellers across Monaco.</p>
   </section>
 
-  <section class="grid">
-
-    <a class="card" href="property-template.html?slug=eden-tower">
-      <div class="thumb" style="background-image:url('assets/eden-tower.png');"></div>
-      <div class="body">
-        <div class="status">For Sale · Sole Agent</div>
-        <h2>Eden Tower</h2>
-        <div class="loc">25 Boulevard de Belgique · Jardin Exotique / La Condamine</div>
-        <div class="specs"><span>4 Rooms</span><span>3 Bed</span><span>2 Bath</span><span>Sea &amp; Mountain View</span></div>
-      </div>
-    </a>
-
-    <!--
-      ADMIN — adding a new property:
-      1. In /admin, create the new entry under "Properties" — this generates
-         content/properties/<slug>.json
-      2. Copy the <a class="card">...</a> block above, change the href to
-         property-template.html?slug=<slug>, and update the text/thumbnail.
-      This step isn't automatic yet — it takes one manual copy-paste per
-      new listing. Say the word if you want this made fully automatic later.
-    -->
-
-  </section>
+  <section class="grid" id="sold-grid"></section>
 
   <footer style="padding:32px 6%;border-top:1px solid var(--line);text-align:center;font-size:10px;letter-spacing:.08em;color:var(--stone);text-transform:uppercase;">
     <a href="privacy-policy.html" style="color:var(--stone);">Privacy Policy</a> ·
@@ -88,5 +69,6 @@
     <a href="legal-disclaimer.html" style="color:var(--stone);">Termini &amp; Disclaimer</a>
   </footer>
 
+  <script src="sold-properties-loader.js"></script>
 </body>
 </html>
