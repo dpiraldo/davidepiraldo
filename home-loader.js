@@ -55,8 +55,8 @@
     setText('[data-home="footer.name"]', h.footer?.name);
     setText('[data-home="footer.role"]', h.footer?.role);
 
-    if (h.featured_property_slug) {
-      window.FEATURED_SLUG = h.featured_property_slug;
+    if (h.featured_property_slugs?.length) {
+      window.FEATURED_SLUGS = h.featured_property_slugs.map(x => typeof x === 'string' ? x : x.slug).filter(Boolean);
       if (typeof window.loadFeaturedProperty === 'function') window.loadFeaturedProperty();
     }
 

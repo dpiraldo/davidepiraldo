@@ -1,13 +1,14 @@
 {
   "properties": [
     {
-      "name": "CHÄTEAU PERIGORD ",
-      "location": "LA ROUSSE SAINT ROMAN ",
-      "price": "SECRET",
-      "date_sold": "2026",
-      "bedrooms": 1,
-      "surface": "65",
-      "photo": "/images/uploads/davidepiraldo-sold-1080x1080.png"
+      "name": "Villa Bellevue",
+      "location": "Larvotto, Monaco",
+      "price": "€24.5M",
+      "date_sold": "2024",
+      "bedrooms": 5,
+      "surface": "480m²",
+      "photo": "",
+      "description": "Full-floor residence in Monaco's most sought-after quarter, facing the Mediterranean with uninterrupted sea views from every principal room."
     }
   ]
 }

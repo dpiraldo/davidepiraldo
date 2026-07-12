@@ -79,9 +79,9 @@ Le sezioni disponibili sono:
   vedi `SETUP-CMS.md`).
 - **Sold Properties** — proprietà vendute, come una lista: pulsanti nativi
   per aggiungere, rimuovere, riordinare o duplicare ogni voce
-- **Homepage** — hero, statistiche, **proprietà in evidenza** (ora un menu a
-  tendina che cerca per nome, non più uno slug da scrivere a mano), contatti,
-  footer
+- **Homepage** — hero, statistiche, **proprietà in evidenza** (ora una lista:
+  aggiungi quante proprietà vuoi, cercandole per nome invece di scrivere lo
+  slug a mano), contatti, footer
 - **Journal Articles** — i 10+ articoli del blog, ora anch'essi in Inglese,
   Francese e Italiano con lo stesso bottone "🌐 Traduci"
 

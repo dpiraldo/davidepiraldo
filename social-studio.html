@@ -164,7 +164,7 @@
     <hr class="panel-divider">
 
     <label>Genera Posts</label>
-    <p class="gen-hint">Per le <strong style="color:var(--ivory);font-weight:500;">citazioni</strong>: clicca tab <strong style="color:var(--ivory);font-weight:500;">Citazioni</strong> (si apre Quote / Insight con la prima frase). Per le statistiche: tab Statistiche, Prezzi/m², ecc.</p>
+    <p class="gen-hint">Scegli un tema, poi clicca un post — si compila il formato <strong style="color:var(--ivory);font-weight:500;">Market Stat</strong> (dati dal sito) oppure <strong style="color:var(--ivory);font-weight:500;">Quote / Insight</strong> (frasi originali sul tuo brand). Modifica liberamente prima di scaricare.</p>
     <div class="gen-tabs" id="genTabs"></div>
     <div class="gen-list" id="genList"></div>
 
@@ -216,7 +216,7 @@ const FIELD_DEFS = {
     {k:'price', label:'Price', type:'text', v:'€24.5M'},
   ],
   quote: [
-    {k:'quote', label:'Quote', type:'textarea', v:''},
+    {k:'quote', label:'Quote', type:'textarea', v:'In Monaco, resale volume tells the real story — not the headline sale price.'},
     {k:'attribution', label:'Attribution', type:'text', v:'Davide Piraldo — Luxury Advisor'},
   ],
   listing: [
@@ -260,114 +260,59 @@ const FIELD_DEFS = {
 };
 
 const GENERATED_POSTS = {
-  citazioni: {
-    label: 'Citazioni',
-    format: 'quote',
-    posts: [
-      {
-        id: 'q-volume',
-        title: 'Volume vs prezzo headline',
-        preview: '«',
-        quote: 'In Monaco, resale volume tells the real story — not the headline sale price.',
-        attribution: 'Davide Piraldo — Luxury Advisor',
-      },
-      {
-        id: 'q-understand',
-        title: 'Capire il mercato',
-        preview: '«',
-        quote: 'The Principality does not need to sell itself. It needs to be understood.',
-        attribution: 'Davide Piraldo — Luxury Advisor',
-      },
-      {
-        id: 'q-liquidity',
-        title: 'Liquidità ultra-prime',
-        preview: '«',
-        quote: 'In ultra-prime markets, liquidity is the luxury — not the marble.',
-        attribution: 'Davide Piraldo — Luxury Advisor',
-      },
-      {
-        id: 'q-two-prices',
-        title: 'Due prezzi',
-        preview: '«',
-        quote: 'Every Monaco transaction has two prices: the one in the press release, and the one on the notarial deed.',
-        attribution: 'Davide Piraldo — Luxury Advisor',
-      },
-      {
-        id: 'q-data',
-        title: 'Dati prima degli aggettivi',
-        preview: '«',
-        quote: 'Data before adjectives. Always.',
-        attribution: 'Davide Piraldo — Luxury Advisor',
-      },
-      {
-        id: 'q-timing',
-        title: 'Timing dell\'acquirente',
-        preview: '«',
-        quote: 'The buyer who waits for permission to enter Monaco rarely enters at all.',
-        attribution: 'Davide Piraldo — Luxury Advisor',
-      },
-      {
-        id: 'q-montecarlo',
-        title: 'Monte-Carlo benchmark',
-        preview: '«',
-        quote: 'Monte-Carlo is not a district. It is a benchmark.',
-        attribution: 'Davide Piraldo — Luxury Advisor',
-      },
-      {
-        id: 'q-discretion',
-        title: 'Discrezione',
-        preview: '«',
-        quote: 'Discretion is not silence — it is precision.',
-        attribution: 'Davide Piraldo — Luxury Advisor',
-      },
-      {
-        id: 'q-fundamentals',
-        title: 'Stessa logica di mercato',
-        preview: '«',
-        quote: 'A €20M apartment and a €2M studio share the same market fundamentals. The figures differ. The logic does not.',
-        attribution: 'Davide Piraldo — Luxury Advisor',
-      },
-      {
-        id: 'q-newbuild',
-        title: 'Premium nuovo',
-        preview: '«',
-        quote: 'New-build premium in Monaco is not speculation — it is scarcity with a delivery date.',
-        attribution: 'Davide Piraldo — Luxury Advisor',
-      },
-      {
-        id: 'q-residency',
-        title: 'Residenza vs proprietà',
-        preview: '«',
-        quote: 'Residency and ownership are related. They are not the same conversation.',
-        attribution: 'Davide Piraldo — Luxury Advisor',
-      },
-      {
-        id: 'q-rare',
-        title: 'Rarità',
-        preview: '«',
-        quote: 'The right property in Monaco is rarely the one you saw first.',
-        attribution: 'Davide Piraldo — Luxury Advisor',
-      },
-      {
-        id: 'q-sqm',
-        title: 'Prezzo al m²',
-        preview: '«',
-        quote: 'Price per square metre is the only figure that travels honestly across districts.',
-        attribution: 'Davide Piraldo — Luxury Advisor',
-      },
-      {
-        id: 'q-mandate',
-        title: 'Mandato esclusivo',
-        preview: '«',
-        quote: 'An exclusive mandate is not a marketing choice — it is a signal of conviction.',
-        attribution: 'Davide Piraldo — Luxury Advisor',
-      },
-    ],
-  },
   statistiche: {
     label: 'Statistiche',
     format: 'stat',
-    posts: [],
+    posts: [
+      {
+        id: 'stat-yoy',
+        title: 'Crescita transazioni revente',
+        eyebrow: 'Monaco Real Estate Market — 2025',
+        number: '+17.5%',
+        desc: 'growth in resale transactions, year over year',
+        source: 'Source: IMSEE — Monaco Real Estate Observatory, 2025',
+      },
+      {
+        id: 'stat-volume',
+        title: 'Volume totale revente',
+        eyebrow: 'Monaco Real Estate Market — 2025',
+        number: '€3.2Bn',
+        desc: 'total resale volume in 2025\n+49.1% vs prior year',
+        source: 'Source: IMSEE — Monaco Real Estate Observatory, 2025',
+      },
+      {
+        id: 'stat-count',
+        title: 'Numero di revente',
+        eyebrow: 'Monaco Real Estate Market — 2025',
+        number: '429',
+        desc: 'resales recorded across\nthe eight districts in 2025',
+        source: 'Source: IMSEE — Monaco Real Estate Observatory, 2025',
+      },
+      {
+        id: 'stat-avg',
+        title: 'Prezzo medio revente',
+        eyebrow: 'Monaco Real Estate Market — 2025',
+        number: '€7.6M',
+        desc: 'average resale price,\nPrincipality-wide',
+        source: 'Source: IMSEE — Monaco Real Estate Observatory, 2025',
+      },
+      {
+        id: 'stat-mc',
+        title: 'Monte-Carlo supera €1B',
+        eyebrow: 'Monte-Carlo District — 2025',
+        number: '€1.1Bn',
+        desc: 'resale volume in Monte-Carlo\n164 transactions — first time above €1B',
+        source: 'Source: IMSEE — Monaco Real Estate Observatory, 2025',
+      },
+      {
+        id: 'stat-larvotto',
+        title: 'Record volume Larvotto',
+        eyebrow: 'Larvotto District — 2025',
+        number: '€851.9M',
+        desc: 'resale volume — 5× year over year\n13 transactions in the district',
+        source: 'Source: IMSEE — Monaco Real Estate Observatory, 2025',
+      },
+    ],
   },
   prezzi_mq: {
     label: 'Prezzi/m²',
@@ -390,50 +335,50 @@ const GENERATED_POSTS = {
     posts: [
       {
         id: 'tax-income',
-        title: 'Zero income tax',
-        eyebrow: 'Monaco Tax Framework — Private Individuals',
+        title: 'Zero imposta sul reddito',
+        eyebrow: 'Monaco Taxes — What You Pay',
         number: '0%',
-        desc: 'No personal income tax\nNo capital gains tax on private sales*\n\n*French nationals remain liable under the 1963 Franco-Monegasque convention',
+        desc: 'personal income tax\n& capital gains tax*\n\n*Excludes French nationals\nunder the 1963 convention',
         source: 'Sources: Direction des Services Fiscaux (Monaco)',
       },
       {
         id: 'tax-property',
-        title: 'Zero annual property tax',
-        eyebrow: 'Monaco Tax Framework — Homeownership',
+        title: 'Zero imposta immobiliare annua',
+        eyebrow: 'Monaco Taxes — What You Pay',
         number: '0%',
-        desc: 'No annual property tax\nNo council-tax equivalent\nA defining advantage for long-term owners',
+        desc: 'annual property tax\nno council tax equivalent\nfor homeowners in Monaco',
         source: 'Sources: Direction des Services Fiscaux (Monaco)',
       },
       {
         id: 'tax-registration',
-        title: 'Purchase registration duty',
-        eyebrow: 'Monaco Acquisition Costs — Resale Property',
+        title: 'Diritti di registrazione acquisto',
+        eyebrow: 'Monaco Taxes — Purchase',
         number: '4.75%',
-        desc: 'Registration duty on resale purchases\nApplies to individual buyers & SCI structures\nNew-build: 20% VAT regime instead',
+        desc: 'registration duty on purchase\nfor individual buyers & SCI',
         source: 'Sources: Direction des Services Fiscaux (Monaco)',
       },
       {
         id: 'tax-lease',
-        title: 'Leasehold duty',
-        eyebrow: 'Monaco Tax Framework — Renting',
+        title: 'Imposta locazione',
+        eyebrow: 'Monaco Taxes — Renting',
         number: '1%',
-        desc: 'Duty on total annual rent\nPaid by the tenant\nOften the first step before buying',
+        desc: 'leasehold duty on annual rent\npaid by the tenant',
         source: 'Sources: Direction des Services Fiscaux (Monaco)',
       },
       {
         id: 'tax-corporate',
-        title: 'Corporate tax — reduced rate',
-        eyebrow: 'Monaco Tax Framework — Companies',
+        title: 'Imposta società (aliquota ridotta)',
+        eyebrow: 'Monaco Taxes — Corporate',
         number: '25%',
-        desc: 'Corporate income tax since 2022\nApplies when >25% of revenue is from abroad\nRelevant for holding structures',
+        desc: 'corporate income tax\nreduced rate since 2022\n(if >25% revenue from abroad)',
         source: 'Sources: Law No. 1.548 (2023), Monaco',
       },
       {
         id: 'tax-inheritance',
-        title: 'Direct-line inheritance',
-        eyebrow: 'Monaco Tax Framework — Succession',
+        title: 'Successione in linea diretta',
+        eyebrow: 'Monaco Taxes — Inheritance',
         number: '0%',
-        desc: 'Inheritance & gift tax\nBetween direct-line heirs\nSibling transfers: 8% · non-relatives: 16%',
+        desc: 'inheritance & gift tax\nbetween direct-line heirs',
         source: 'Sources: Direction des Services Fiscaux (Monaco)',
       },
     ],
@@ -444,58 +389,124 @@ const GENERATED_POSTS = {
     posts: [
       {
         id: 'res-bank',
-        title: 'Bank deposit convention',
-        eyebrow: 'Monaco Residency — Financial Standing',
+        title: 'Deposito bancario tipico',
+        eyebrow: 'Monaco Residency — 2026',
         number: '~€500K',
-        desc: 'Typical deposit with a Monaco bank\nDemonstrates financial self-sufficiency\nNo fixed legal minimum — bank criteria apply',
+        desc: 'typical bank deposit convention\nto demonstrate financial\nself-sufficiency',
         source: 'Sources: Direction de la Sûreté Publique (Monaco)',
       },
       {
         id: 'res-timeline',
-        title: 'Application timeline',
-        eyebrow: 'Monaco Residency — Carte de Séjour',
+        title: 'Tempi della pratica',
+        eyebrow: 'Monaco Residency — 2026',
         number: '3–6',
-        desc: 'Months from complete application\nto Carte de Séjour issued\nNon-EU nationals: French Type-D visa first',
+        desc: 'months from application\nto Carte de Séjour',
         source: 'Sources: MonServicePublic.gouv.mc',
       },
       {
         id: 'res-tax-days',
-        title: 'Tax residency threshold',
-        eyebrow: 'Monaco Tax Residency — Separate Status',
+        title: 'Giorni per residenza fiscale',
+        eyebrow: 'Monaco Tax Residency',
         number: '183+',
-        desc: 'Days per year in the Principality\nRequired for tax residency certificate\nDistinct from administrative residency',
+        desc: 'days per year in Monaco\nfor tax residency certificate\n(separate from Carte de Séjour)',
         source: 'Sources: Direction des Services Fiscaux (Monaco)',
       },
       {
         id: 'res-lease',
-        title: 'Minimum lease term',
+        title: 'Affitto minimo per residenza',
         eyebrow: 'Monaco Residency — Accommodation',
         number: '12',
-        desc: 'Minimum months on a genuine lease\nOwned or rented · appropriately sized\nA hotel room does not qualify',
+        desc: 'minimum months on a lease\nto qualify as genuine\nMonaco accommodation',
         source: 'Sources: Direction de la Sûreté Publique (Monaco)',
       },
       {
         id: 'res-pillars',
-        title: 'The three requirements',
-        eyebrow: 'Monaco Residency — What Is Required',
+        title: 'I tre pilastri della residenza',
+        eyebrow: 'Monaco Residency — Requirements',
         number: '3',
-        desc: '- Genuine accommodation in Monaco\n- Proven financial self-sufficiency\n- Clean criminal record · apostilled',
+        desc: '- Genuine accommodation\n- Financial self-sufficiency\n- Clean criminal record',
         source: 'Sources: Direction de la Sûreté Publique (Monaco)',
       },
       {
         id: 'res-no-golden',
-        title: 'No golden visa route',
+        title: 'Nessun golden visa',
         eyebrow: 'Monaco Residency — 2026',
         number: '0',
-        desc: 'No residency-by-investment programme\nProof of self-sufficiency instead\nBuying property alone is not sufficient',
+        desc: 'residency-by-investment\nprogrammes in Monaco\nproof of self-sufficiency instead',
         source: 'Sources: MonServicePublic.gouv.mc',
+      },
+    ],
+  },
+  quotes: {
+    label: 'Quote & Insight',
+    format: 'quote',
+    posts: [
+      {
+        id: 'quote-success',
+        title: 'Il vero successo',
+        quote: 'The last mark of real success isn\'t visibility. It\'s the ability to disappear completely, whenever you choose.',
+        attribution: 'Davide Piraldo — Luxury Advisor',
+      },
+      {
+        id: 'quote-freedom',
+        title: 'Libertà e proprietà',
+        quote: 'A home in Monaco isn\'t an address. It\'s the freedom to choose how you live.',
+        attribution: 'Davide Piraldo — Luxury Advisor',
+      },
+      {
+        id: 'quote-life',
+        title: 'Vivere il presente',
+        quote: 'The years you spend deciding are years you don\'t get to live with the view.',
+        attribution: 'Davide Piraldo — Luxury Advisor',
+      },
+      {
+        id: 'quote-world',
+        title: 'Il mondo che conta',
+        quote: 'The world is large, but the places truly worth calling home are few.',
+        attribution: 'Davide Piraldo — Luxury Advisor',
+      },
+      {
+        id: 'quote-legacy',
+        title: 'Eredità',
+        quote: 'What you build in stone outlives what you build in words.',
+        attribution: 'Davide Piraldo — Luxury Advisor',
+      },
+      {
+        id: 'quote-patience',
+        title: 'Pazienza nel lusso',
+        quote: 'In the luxury market, patience isn\'t a weakness. It\'s a strategy.',
+        attribution: 'Davide Piraldo — Luxury Advisor',
+      },
+      {
+        id: 'quote-vision',
+        title: 'La visione giusta',
+        quote: 'Vision isn\'t predicting where the market goes. It\'s knowing which four walls will still matter to you in twenty years.',
+        attribution: 'Davide Piraldo — Luxury Advisor',
+      },
+      {
+        id: 'quote-monaco',
+        title: 'Perché Monaco',
+        quote: 'Some choose Monaco for the tax. The wisest choose it for the life.',
+        attribution: 'Davide Piraldo — Luxury Advisor',
+      },
+      {
+        id: 'quote-time',
+        title: 'Il tempo giusto',
+        quote: 'The right time to buy is rarely the loudest moment in the market — it\'s the quietest.',
+        attribution: 'Davide Piraldo — Luxury Advisor',
+      },
+      {
+        id: 'quote-home',
+        title: 'Più di un indirizzo',
+        quote: 'An address impresses people you\'ll never see again. A home holds the few who matter.',
+        attribution: 'Davide Piraldo — Luxury Advisor',
       },
     ],
   },
 };
 
-let current = 'quote';
-let genCategory = 'citazioni';
+let current = 'stat';
+let genCategory = 'statistiche';
 let activeGenPostId = null;
 
 const IMSEE_SOURCE = 'Source: IMSEE — Monaco Real Estate Observatory, 2025';
@@ -509,133 +520,6 @@ function formatEuroSqm(n) {
   return '€' + Number(n).toLocaleString('en-US') + '/m²';
 }
 
-function pctFmt(val, suffix = 'vs 2024') {
-  if (val == null || val === '') return '';
-  const sign = val > 0 ? '+' : '';
-  return `${sign}${val}% ${suffix}`;
-}
-
-function luxuryResaleDesc(d) {
-  const lines = [];
-  if (d.market_share_pct != null) lines.push(`${d.market_share_pct}% of Principality resales`);
-  if (d.resale_volume_2025) lines.push(`${d.resale_volume_2025} in transaction value`);
-  if (d.resales_change_pct != null) lines.push(pctFmt(d.resales_change_pct, 'transactions YoY'));
-  if (d.resale_volume_change_pct != null) lines.push(pctFmt(d.resale_volume_change_pct, 'volume YoY'));
-  if (d.price_sqm_2025) lines.push(`${formatEuroSqm(d.price_sqm_2025)} · IMSEE estimate per sqm`);
-  if (d.new_build_2020_29) lines.push(`${d.new_build_2020_29} · recent new-build pricing`);
-  if (d.resale_volume_note_en) lines.push(d.resale_volume_note_en);
-  return lines.join('\n');
-}
-
-function luxuryPriceDesc(d, isNewBuild) {
-  const lines = [];
-  if (isNewBuild) {
-    lines.push('Recently completed residences');
-    lines.push('Developments delivered 2020–2029');
-    if (d.new_build_change_pct != null) lines.push(pctFmt(d.new_build_change_pct, 'vs prior period'));
-  } else {
-    if (d.change_label_en) lines.push(d.change_label_en);
-    if (d.change_24_25_pct != null) lines.push(pctFmt(d.change_24_25_pct));
-    if (d.market_share_pct != null) lines.push(`${d.market_share_pct}% of Principality resales`);
-  }
-  return lines.filter(Boolean).join('\n');
-}
-
-function buildStatPosts(districts) {
-  const p = districts.principality;
-  if (!p) return;
-  GENERATED_POSTS.statistiche.posts = [
-    {
-      id: 'stat-overview',
-      title: 'Full market snapshot',
-      eyebrow: 'Monaco Private Residential Market — 2025',
-      number: String(p.total_transactions_2025 || 493),
-      desc: [
-        `${p.total_volume_2025 || '€5.9B'} · combined transaction value`,
-        pctFmt(p.total_transactions_change_pct, 'total transactions YoY'),
-        `${p.sales_2025} new-build sales · ${p.resales_2025} resales`,
-      ].join('\n'),
-      source: IMSEE_SOURCE,
-    },
-    {
-      id: 'stat-yoy',
-      title: 'Resale momentum',
-      eyebrow: 'Monaco Resale Market — 2025',
-      number: pctFmt(p.resales_change_pct).replace(' vs 2024', '') || '+17.5%',
-      desc: [
-        `${p.resales_2025} resales across eight districts`,
-        pctFmt(p.resale_volume_change_pct, 'volume YoY'),
-        p.resale_volume_note_en || 'Record resale year',
-      ].join('\n'),
-      source: IMSEE_SOURCE,
-    },
-    {
-      id: 'stat-volume',
-      title: 'Resale volume record',
-      eyebrow: 'Monaco Resale Market — 2025',
-      number: p.resale_volume_2025 || '€3.2B',
-      desc: [
-        'Highest resale value on record',
-        pctFmt(p.resale_volume_change_pct, 'vs 2024'),
-        `${p.resales_over_20m_2025 || 22} ultra-prime sales above €20M`,
-      ].join('\n'),
-      source: IMSEE_SOURCE,
-    },
-    {
-      id: 'stat-avg',
-      title: 'Mean resale price',
-      eyebrow: 'Monaco Resale Market — 2025',
-      number: p.mean_resale_price_2025 || '€7.6M',
-      desc: [
-        'Principality-wide average',
-        pctFmt(p.mean_resale_change_pct, 'mean price YoY'),
-        `Median: ${p.median_resale_price_2025 || '€4.0M'} · ${pctFmt(p.median_resale_change_pct, 'YoY')}`,
-      ].join('\n'),
-      source: IMSEE_SOURCE,
-    },
-    {
-      id: 'stat-sqm',
-      title: 'Price per sqm',
-      eyebrow: 'Monaco Transaction Price — 2025',
-      number: formatEuroSqm(p.price_sqm_2025) || '€57,569/m²',
-      desc: [
-        'IMSEE regression estimate',
-        pctFmt(p.change_24_25_pct),
-        'Sales & resales · all construction periods',
-      ].join('\n'),
-      source: IMSEE_SOURCE,
-    },
-    {
-      id: 'stat-mc',
-      title: 'Monte-Carlo · €1B+',
-      eyebrow: 'Monte-Carlo — Resale Market 2025',
-      number: districts['monte-carlo']?.resale_volume_2025 || '€1.1B',
-      desc: luxuryResaleDesc(districts['monte-carlo'] || {}),
-      source: IMSEE_SOURCE,
-    },
-    {
-      id: 'stat-larvotto',
-      title: 'Larvotto · ultra-prime',
-      eyebrow: 'Larvotto — Waterfront Resales 2025',
-      number: districts.larvotto?.resale_volume_2025 || '€851.9M',
-      desc: luxuryResaleDesc(districts.larvotto || {}),
-      source: IMSEE_SOURCE,
-    },
-    {
-      id: 'stat-newbuild-sales',
-      title: 'New-build sales value',
-      eyebrow: 'Monaco New-Build Market — 2025',
-      number: p.sales_volume_2025 || '€2.6B',
-      desc: [
-        `${p.sales_2025} first sales · buildings under 5 years`,
-        `Mean price: ${p.mean_sale_price_2025 || '€40.8M'}`,
-        pctFmt(p.sales_volume_change_pct, 'value vs 2024'),
-      ].join('\n'),
-      source: IMSEE_SOURCE,
-    },
-  ];
-}
-
 function buildDistrictGeneratedPosts(districts) {
   const pricePosts = [];
   const resalePosts = [];
@@ -647,7 +531,7 @@ function buildDistrictGeneratedPosts(districts) {
       title: 'Media Principato — revente',
       eyebrow: 'Principality — Resale Price 2025',
       number: formatEuroSqm(principality.price_sqm_2025),
-      desc: luxuryPriceDesc(principality, false),
+      desc: `${principality.change_24_25_pct}% vs 2024\nPrincipality-wide average`,
       source: IMSEE_SOURCE,
     });
   }
@@ -655,13 +539,9 @@ function buildDistrictGeneratedPosts(districts) {
     pricePosts.push({
       id: 'price-principality-new',
       title: 'Media Principato — nuovo',
-      eyebrow: 'Principality — New Build 2020–29',
+      eyebrow: 'Principality — New Build · Delivered 2020–2029',
       number: principality.new_build_2020_29,
-      desc: [
-        'Recently completed residences',
-        'Developments delivered 2020–2029',
-        'Principality-wide IMSEE estimate',
-      ].join('\n'),
+      desc: 'average price per sqm\nrecently completed residences',
       source: IMSEE_SOURCE,
     });
   }
@@ -671,11 +551,7 @@ function buildDistrictGeneratedPosts(districts) {
     title: 'Mareterra — prezzo ingresso',
     eyebrow: 'Mareterra · Larvotto — New District',
     number: '~€100K/m²',
-    desc: [
-      'Entry-level pricing · smaller residences',
-      'Waterfront extension · Anse du Portier',
-      'Penthouse sales reported above €130K/m²',
-    ].join('\n'),
+    desc: 'entry pricing, smaller units\nwaterfront extension · Anse du Portier',
     source: 'Sources: Mareterra Monaco, IMSEE',
   });
 
@@ -688,41 +564,70 @@ function buildDistrictGeneratedPosts(districts) {
     const name = d.name_en;
 
     if (d.price_sqm_2025) {
+      const sign = d.change_24_25_pct > 0 ? '+' : '';
       pricePosts.push({
         id: 'price-' + slug,
-        title: name + ' — price per sqm',
-        eyebrow: name + ' — Estimated Price 2025',
+        title: name + ' — revente',
+        eyebrow: name + ' — Resale Price 2025',
         number: formatEuroSqm(d.price_sqm_2025),
-        desc: luxuryPriceDesc(d, false),
+        desc: [
+          d.change_label_en,
+          d.change_24_25_pct != null ? `${sign}${d.change_24_25_pct}% vs 2024` : '',
+        ].filter(Boolean).join('\n') || 'resale price per sqm, 2025',
         source: IMSEE_SOURCE,
       });
-      priceBullets.push(`- ${name}: ${formatEuroSqm(d.price_sqm_2025)}${d.market_share_pct ? ` · ${d.market_share_pct}% share` : ''}`);
+      priceBullets.push(`- ${name}: ${formatEuroSqm(d.price_sqm_2025)}`);
     }
 
     if (d.new_build_2020_29) {
+      const nbDesc = ['average price per sqm', 'developments delivered 2020–2029'];
+      if (d.new_build_change_pct != null) {
+        const s = d.new_build_change_pct > 0 ? '+' : '';
+        nbDesc.push(`${s}${d.new_build_change_pct}% vs prior period`);
+      }
       pricePosts.push({
         id: 'price-new-' + slug,
-        title: name + ' — new-build pricing',
+        title: name + ' — nuovo',
         eyebrow: name + ' — New Build · Delivered 2020–2029',
         number: d.new_build_2020_29,
-        desc: luxuryPriceDesc(d, true),
+        desc: nbDesc.join('\n'),
         source: IMSEE_SOURCE,
       });
     }
 
     if (d.resales_2025 != null) {
+      const lines = [`resales in ${name}, 2025`];
+      if (d.resale_volume_2025) lines.push(`${d.resale_volume_2025} total volume`);
+      if (d.resales_change_pct != null) {
+        const s = d.resales_change_pct > 0 ? '+' : '';
+        lines.push(`${s}${d.resales_change_pct}% transactions YoY`);
+      }
+      if (d.resale_volume_change_pct != null) {
+        const s = d.resale_volume_change_pct > 0 ? '+' : '';
+        lines.push(`${s}${d.resale_volume_change_pct}% volume YoY`);
+      }
+      if (d.resale_volume_note_en) lines.push(d.resale_volume_note_en);
+
       resalePosts.push({
         id: 'resale-' + slug,
-        title: `${name} — ${d.resales_2025} resales`,
-        eyebrow: `${name} — Resale Market 2025`,
+        title: `${name} — ${d.resales_2025} revente`,
+        eyebrow: `${name} District — 2025`,
         number: String(d.resales_2025),
-        desc: luxuryResaleDesc(d),
+        desc: lines.join('\n'),
         source: IMSEE_SOURCE,
       });
 
       const vol = d.resale_volume_2025 ? ` · ${d.resale_volume_2025}` : '';
-      const share = d.market_share_pct != null ? ` · ${d.market_share_pct}%` : '';
-      resaleBullets.push(`- ${name}: ${d.resales_2025}${vol}${share}`);
+      resaleBullets.push(`- ${name}: ${d.resales_2025}${vol}`);
+    } else if (d.resale_volume_note_en) {
+      resalePosts.push({
+        id: 'resale-note-' + slug,
+        title: `${name} — andamento 2025`,
+        eyebrow: `${name} District — 2025`,
+        number: '↓',
+        desc: `${d.resale_volume_note_en}\n(resale count pending IMSEE update)`,
+        source: IMSEE_SOURCE,
+      });
     }
   });
 
@@ -732,11 +637,7 @@ function buildDistrictGeneratedPosts(districts) {
       title: 'Panoramica prezzi revente',
       eyebrow: 'Resale Price by District — 2025',
       number: formatEuroSqm(principality?.price_sqm_2025) || '—',
-      desc: [
-        `Principality average · ${pctFmt(principality?.change_24_25_pct)}`,
-        '',
-        ...priceBullets,
-      ].join('\n'),
+      desc: 'Principality average\n\n' + priceBullets.join('\n'),
       source: IMSEE_SOURCE,
     });
   }
@@ -747,12 +648,7 @@ function buildDistrictGeneratedPosts(districts) {
       title: 'Rivendite per quartiere',
       eyebrow: 'Monaco Resales by District — 2025',
       number: String(principality?.resales_2025 || 429),
-      desc: [
-        `${principality?.resales_2025 || 429} resales · eight districts`,
-        pctFmt(principality?.resales_change_pct, 'transactions YoY'),
-        '',
-        ...resaleBullets,
-      ].join('\n'),
+      desc: 'total resales, eight districts\n\n' + resaleBullets.join('\n'),
       source: IMSEE_SOURCE,
     });
   }
@@ -761,10 +657,10 @@ function buildDistrictGeneratedPosts(districts) {
     pricePosts.push({
       id: 'price-overview-new',
       title: 'Panoramica nuovo — per quartiere',
-      eyebrow: 'New Build Price by District — 2020–29',
+      eyebrow: 'New Build Price by District · Delivered 2020–2029',
       number: principality.new_build_2020_29,
       desc: [
-        'Principality average · recently completed residences',
+        'Principality average',
         '',
         ...DISTRICT_ORDER
           .filter(slug => districts[slug]?.new_build_2020_29)
@@ -774,7 +670,6 @@ function buildDistrictGeneratedPosts(districts) {
     });
   }
 
-  buildStatPosts(districts);
   GENERATED_POSTS.prezzi_mq.posts = pricePosts;
   GENERATED_POSTS.quartieri.posts = resalePosts;
   buildNuovoPosts(districts);
@@ -791,13 +686,13 @@ function buildNuovoPosts(districts) {
   if (p.total_transactions_2025 != null) {
     posts.push({
       id: 'nuovo-overview',
-      title: 'New-build vs resale',
-      eyebrow: 'Monaco Market Structure — 2025',
+      title: 'Nuovo vs revente — panoramica',
+      eyebrow: 'Sales vs Resales — Principality 2025',
       number: String(p.total_transactions_2025),
       desc: [
-        `- New-build first sales: ${p.sales_2025} · ${p.sales_volume_2025}`,
+        `- New-build sales (first sale): ${p.sales_2025} · ${p.sales_volume_2025}`,
         `- Resales: ${p.resales_2025} · ${p.resale_volume_2025}`,
-        `- Combined value: ${p.total_volume_2025} · ${pctFmt(p.total_transactions_change_pct, 'YoY')}`,
+        `- Combined market value: ${p.total_volume_2025}`,
       ].join('\n'),
       source: IMSEE_SOURCE,
     });
@@ -806,50 +701,34 @@ function buildNuovoPosts(districts) {
   if (p.sales_2025 != null) {
     posts.push({
       id: 'nuovo-sales-count',
-      title: 'New-build first sales',
-      eyebrow: 'Monaco New-Build Market — 2025',
+      title: 'Vendite sul nuovo — transazioni',
+      eyebrow: 'New Build Sales — First Sale 2025',
       number: String(p.sales_2025),
-      desc: [
-        'First sale on properties under 5 years',
-        pctFmt(p.sales_change_pct, 'transactions vs 2024'),
-        'Still above the 10-year average of 51 sales',
-      ].join('\n'),
+      desc: `new-build properties · first sale\n(completed within the last 5 years)\n${p.sales_change_pct}% vs 2024`,
       source: IMSEE_SOURCE,
     });
     posts.push({
       id: 'nuovo-sales-volume',
-      title: 'New-build sales value',
-      eyebrow: 'Monaco New-Build Market — 2025',
+      title: 'Vendite sul nuovo — valore',
+      eyebrow: 'New Build Sales — Total Value 2025',
       number: p.sales_volume_2025 || '€2.6B',
-      desc: [
-        'Total first-sale transaction value',
-        pctFmt(p.sales_volume_change_pct, 'value vs 2024'),
-        '2× the previous records set in 2022–23',
-      ].join('\n'),
+      desc: `total value · first sales on new-build properties\n${p.sales_volume_change_pct}% vs 2024\n2× the 2022–23 records`,
       source: IMSEE_SOURCE,
     });
     posts.push({
       id: 'nuovo-sales-mean',
-      title: 'Mean new-build price',
-      eyebrow: 'Monaco New-Build Market — 2025',
+      title: 'Prezzo medio vendite nuovo',
+      eyebrow: 'New Build Sales — Mean Price 2025',
       number: p.mean_sale_price_2025 || '€40.8M',
-      desc: [
-        'Record mean sale price',
-        'Ultra-prime new developments driving the average',
-        '+11.9% vs 2024',
-      ].join('\n'),
+      desc: 'mean sale price — record high\nfirst sale · new-build property\n+11.9% vs 2024',
       source: IMSEE_SOURCE,
     });
     posts.push({
       id: 'nuovo-sales-median',
-      title: 'Median new-build price',
-      eyebrow: 'Monaco New-Build Market — 2025',
+      title: 'Prezzo mediano vendite nuovo',
+      eyebrow: 'New Build Sales — Median Price 2025',
       number: p.median_sale_price_2025 || '€21.2M',
-      desc: [
-        'Half of all new-build sales above this level',
-        'Median: €21.2M · exceptionally elevated entry point',
-        '80%+ of sales: 4 bedrooms or larger',
-      ].join('\n'),
+      desc: 'median sale price\nhalf of all new sales\nabove this level',
       source: IMSEE_SOURCE,
     });
   }
@@ -857,14 +736,10 @@ function buildNuovoPosts(districts) {
   if (p.sales_over_20m_2025 != null) {
     posts.push({
       id: 'nuovo-sales-luxury',
-      title: 'Ultra-prime new-build sales',
-      eyebrow: 'Monaco New-Build Market — €20M+',
+      title: 'Vendite nuovo oltre €20M',
+      eyebrow: 'New Build Sales — Ultra-Prime 2025',
       number: String(p.sales_over_20m_2025),
-      desc: [
-        `Sales above €20 million · ${p.sales_over_20m_pct}% of all new-build transactions`,
-        '5 sales exceeded €100M in 2025',
-        'Bay House · Palais Ninetta · landmark deliveries',
-      ].join('\n'),
+      desc: `transactions above €20 million\n${p.sales_over_20m_pct}% of all new sales\n5 sales exceeded €100M`,
       source: IMSEE_SOURCE,
     });
   }
@@ -872,29 +747,22 @@ function buildNuovoPosts(districts) {
   if (p.new_deliveries_2025 != null) {
     posts.push({
       id: 'nuovo-deliveries',
-      title: 'New deliveries 2025',
-      eyebrow: 'Monaco New-Build Pipeline — 2025',
+      title: 'Consegne nuovo 2025',
+      eyebrow: 'New Dwellings Delivered — 2025',
       number: String(p.new_deliveries_2025),
-      desc: [
-        'Private-sector completions',
-        p.new_deliveries_districts_en || 'La Rousse & Les Moneghetti',
-        '103 residences · limited future land supply',
-      ].join('\n'),
+      desc: `private sector completions\n${p.new_deliveries_districts_en || 'La Rousse & Les Moneghetti'}`,
       source: IMSEE_SOURCE,
     });
   }
 
   if (p.resale_volume_change_pct != null) {
+    const s = p.resale_volume_change_pct > 0 ? '+' : '';
     posts.push({
       id: 'nuovo-resale-boost',
-      title: 'Recently delivered · resale market',
-      eyebrow: 'Monaco Resales — New Supply Effect',
-      number: '+' + p.resale_volume_change_pct + '%',
-      desc: [
-        'Recently completed residences entering resale',
-        `Record volume ${p.resale_volume_2025 || '€3.2B'}`,
-        'Larvotto & Mareterra reshaping price levels',
-      ].join('\n'),
+      title: 'Revente alimentate dal nuovo',
+      eyebrow: 'Resales — Recently Delivered Properties',
+      number: s + p.resale_volume_change_pct + '%',
+      desc: (p.resales_from_new_note_en || 'Recently delivered properties entering the resale market') + `\nrecord volume ${p.resale_volume_2025 || '€3.2B'}`,
       source: IMSEE_SOURCE,
     });
   }
@@ -903,14 +771,15 @@ function buildNuovoPosts(districts) {
   if (lv?.resales_2025 != null) {
     posts.push({
       id: 'nuovo-larvotto-resale',
-      title: 'Larvotto · post-delivery resales',
-      eyebrow: 'Larvotto — Recently Delivered Residences',
+      title: 'Larvotto — revente post-livraison',
+      eyebrow: 'Larvotto — Recently Delivered · Resale Market',
       number: String(lv.resales_2025),
       desc: [
-        `${lv.resale_volume_2025} · ${pctFmt(lv.resale_volume_change_pct, 'volume YoY')}`,
-        'Mareterra & Jardins d\'eau · waterfront',
-        '~€65.5M average · ultra-prime scarcity',
-      ].join('\n'),
+        `${lv.resale_volume_2025} total volume`,
+        'Mareterra & Jardins d\'eau deliveries',
+        '~€65.5M average per transaction',
+        lv.resale_volume_note_en || '',
+      ].filter(Boolean).join('\n'),
       source: IMSEE_SOURCE,
     });
   }
@@ -920,14 +789,10 @@ function buildNuovoPosts(districts) {
     if (!d?.new_deliveries_2025) return;
     posts.push({
       id: 'nuovo-delivery-' + slug,
-      title: `${d.name_en} · ${d.new_deliveries_2025} deliveries`,
-      eyebrow: `${d.name_en} — New Completion 2025`,
+      title: `${d.name_en} — consegne ${d.new_deliveries_2025}`,
+      eyebrow: `${d.name_en} — New Deliveries 2025`,
       number: String(d.new_deliveries_2025),
-      desc: [
-        d.new_deliveries_projects_en || 'New private residences completed',
-        d.price_sqm_2025 ? `${formatEuroSqm(d.price_sqm_2025)} · current estimate` : '',
-        'First sales and future resale supply',
-      ].filter(Boolean).join('\n'),
+      desc: d.new_deliveries_projects_en || 'new dwellings completed',
       source: IMSEE_SOURCE,
     });
   });
@@ -938,10 +803,10 @@ function buildNuovoPosts(districts) {
       .map(slug => `- ${districts[slug].name_en}: ${districts[slug].new_build_2020_29}`);
     posts.push({
       id: 'nuovo-price-overview',
-      title: 'New-build price · by district',
-      eyebrow: 'Monaco New-Build Pricing · 2020–2029',
+      title: 'Prezzo/m² nuovo per quartiere',
+      eyebrow: 'New Build Price · Delivered 2020–2029',
       number: p.new_build_2020_29,
-      desc: ['Principality average · recently completed residences', '', ...nbBullets].join('\n'),
+      desc: ['Principality average', '', ...nbBullets].join('\n'),
       source: IMSEE_SOURCE,
     });
   }
@@ -967,7 +832,7 @@ async function initDistrictPosts() {
         total_transactions_2025: 493, total_volume_2025: '€5.9B',
         new_deliveries_2025: 103, new_deliveries_districts_en: 'La Rousse & Les Moneghetti',
         sales_over_20m_2025: 35, sales_over_20m_pct: 54.7,
-        resales_from_new_note_en: 'Resale growth driven by recently completed properties entering the secondary market',
+        resales_from_new_note_en: 'Resale growth driven by recently delivered properties entering the resale market',
       },
       'jardin-exotique': { name_en: 'Jardin Exotique', price_sqm_2025: 45168, change_24_25_pct: -3.7, change_label_en: 'Slight correction', resales_2025: 41, resales_change_pct: 86.4, resale_volume_2025: '€246.7M', resale_volume_change_pct: 88.5, new_build_2020_29: '€47,800/m²', new_build_change_pct: 3.4 },
       'la-condamine': { name_en: 'La Condamine', price_sqm_2025: 52104, change_24_25_pct: -0.7, change_label_en: 'Stable', resales_2025: 44, resales_change_pct: 29.4, resale_volume_2025: '€244.1M', resale_volume_change_pct: 75.2, new_build_2020_29: '€59,523/m²', new_build_change_pct: 2.7 },
@@ -1189,27 +1054,23 @@ function t(k) {
   return formatText(getVal(k));
 }
 
-function setGeneratedPost(post, categoryId) {
-  const cat = GENERATED_POSTS[categoryId];
-  const formatId = cat?.format || 'stat';
+const GEN_FIELD_KEYS = {
+  stat: ['eyebrow', 'number', 'desc', 'source'],
+  quote: ['quote', 'attribution'],
+};
+
+function setGenFields(post, formatId) {
   if (current !== formatId) {
     current = formatId;
     renderFormatButtons();
     renderFields();
   }
-  if (formatId === 'quote') {
-    ['quote', 'attribution'].forEach(k => {
-      const el = document.querySelector(`#fields [data-k="${k}"]`);
-      if (el) el.value = post[k] || '';
-    });
-  } else {
-    ['eyebrow', 'number', 'desc', 'source'].forEach(k => {
-      const el = document.querySelector(`#fields [data-k="${k}"]`);
-      if (el) el.value = post[k] || '';
-    });
-  }
+  const keys = GEN_FIELD_KEYS[formatId] || [];
+  keys.forEach(k => {
+    const el = document.querySelector(`#fields [data-k="${k}"]`);
+    if (el) el.value = post[k] || '';
+  });
   renderCanvas();
-  renderGeneratorPanel();
 }
 
 function renderGeneratorPanel() {
@@ -1220,29 +1081,17 @@ function renderGeneratorPanel() {
   ).join('');
   tabs.querySelectorAll('button').forEach(btn => {
     btn.onclick = () => {
-      const newCat = btn.dataset.cat;
-      genCategory = newCat;
-      const cat = GENERATED_POSTS[newCat];
-      if (cat?.format === 'quote') {
-        const posts = cat.posts || [];
-        if (posts.length) {
-          const post = posts.find(p => p.id === activeGenPostId) || posts[0];
-          activeGenPostId = post.id;
-          setGeneratedPost(post, newCat);
-        }
-      } else {
-        activeGenPostId = null;
-      }
+      genCategory = btn.dataset.cat;
       renderGeneratorPanel();
     };
   });
 
   const posts = GENERATED_POSTS[genCategory].posts;
-  const isQuote = GENERATED_POSTS[genCategory].format === 'quote';
+  const formatId = GENERATED_POSTS[genCategory].format || 'stat';
   list.innerHTML = posts.map(p => `
     <button type="button" class="gen-post-btn ${p.id === activeGenPostId ? 'active' : ''}" data-id="${p.id}">
-      <div class="gen-num">${escapeHtml(p.preview || p.number || '«')}</div>
-      <div class="gen-title">${escapeHtml(isQuote ? (p.quote || p.title) : p.title)}</div>
+      <div class="gen-num">${escapeHtml(p.number || '\u201C')}</div>
+      <div class="gen-title">${escapeHtml(p.title)}</div>
     </button>
   `).join('');
   list.querySelectorAll('.gen-post-btn').forEach(btn => {
@@ -1250,7 +1099,7 @@ function renderGeneratorPanel() {
       const post = posts.find(p => p.id === btn.dataset.id);
       if (!post) return;
       activeGenPostId = post.id;
-      setGeneratedPost(post, genCategory);
+      setGenFields(post, formatId);
       renderGeneratorPanel();
     };
   });
@@ -1279,10 +1128,10 @@ function monacoBrandHTML(frameClass) {
       <div class="monaco-bg">${photoSlot('photo', 'background photograph', 'width:100%;height:100%;')}</div>
       <div class="monaco-frame"><span class="corner tl"></span><span class="corner tr"></span></div>
       <div class="monaco-top">
-        <div class="title">${g('title')}</div>
-        <div class="subtitle">${g('subtitle')}</div>
+        <div class="title">${t('title')}</div>
+        <div class="subtitle">${t('subtitle')}</div>
       </div>
-      <div class="monaco-foot">${g('footer')}</div>
+      <div class="monaco-foot">${t('footer')}</div>
     </div>`;
 }
 
@@ -1307,10 +1156,10 @@ function templateHTML(){
         ${photoSlot('photo', 'property photograph', 'flex:1;min-height:0;')}
         <div style="padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;">
           <div style="min-width:0;">
-            <div class="serif" style="font-size:16px;color:var(--ivory);line-height:1.2;">${g('name')}</div>
-            <div style="font-size:8px;letter-spacing:.1em;color:var(--stone);text-transform:uppercase;margin-top:2px;">${g('location')}</div>
+            <div class="serif" style="font-size:16px;color:var(--ivory);line-height:1.2;">${t('name')}</div>
+            <div style="font-size:8px;letter-spacing:.1em;color:var(--stone);text-transform:uppercase;margin-top:2px;">${t('location')}</div>
           </div>
-          <div class="serif" style="font-size:15px;color:var(--gold);flex-shrink:0;">${g('price')}</div>
+          <div class="serif" style="font-size:15px;color:var(--gold);flex-shrink:0;">${t('price')}</div>
         </div>
       </div>`;
 
@@ -1318,27 +1167,27 @@ function templateHTML(){
       <div class="frame post light" style="padding:28px;display:flex;flex-direction:column;">
         <div class="serif" style="font-size:54px;color:var(--gold);line-height:.5;">&ldquo;</div>
         <div style="flex:1;display:flex;align-items:center;padding:0 4px;">
-          <div class="serif" style="font-size:21px;line-height:1.35;color:var(--ink);">${g('quote')}</div>
+          <div class="serif" style="font-size:21px;line-height:1.35;color:var(--ink);">${t('quote')}</div>
         </div>
-        <div style="font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);">${g('attribution')}</div>
+        <div style="font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);">${t('attribution')}</div>
       </div>`;
 
     case 'listing': return `
       <div class="frame post" style="padding:18px;display:flex;flex-direction:column;">
-        <div class="eyebrow" style="font-size:9px;">${g('tag')}</div>
-        <div class="serif" style="font-size:20px;color:var(--ivory);margin-top:8px;line-height:1.2;">${g('name')}</div>
+        <div class="eyebrow" style="font-size:9px;">${t('tag')}</div>
+        <div class="serif" style="font-size:20px;color:var(--ivory);margin-top:8px;line-height:1.2;">${t('name')}</div>
         ${photoSlot('photo', 'property photograph', 'flex:1;margin-top:10px;min-height:0;')}
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);margin-top:10px;">
           <div style="background:var(--ink);padding:6px 4px;text-align:center;">
-            <div class="serif" style="font-size:13px;">${g('beds')}</div>
+            <div class="serif" style="font-size:13px;">${t('beds')}</div>
             <div style="font-size:7px;letter-spacing:.06em;color:var(--stone);text-transform:uppercase;margin-top:2px;">Bedrooms</div>
           </div>
           <div style="background:var(--ink);padding:6px 4px;text-align:center;">
-            <div class="serif" style="font-size:13px;">${g('surface')}</div>
+            <div class="serif" style="font-size:13px;">${t('surface')}</div>
             <div style="font-size:7px;letter-spacing:.06em;color:var(--stone);text-transform:uppercase;margin-top:2px;">Surface</div>
           </div>
           <div style="background:var(--ink);padding:6px 4px;text-align:center;">
-            <div class="serif" style="font-size:13px;color:var(--gold);">${g('price')}</div>
+            <div class="serif" style="font-size:13px;color:var(--gold);">${t('price')}</div>
             <div style="font-size:7px;letter-spacing:.06em;color:var(--stone);text-transform:uppercase;margin-top:2px;">Price</div>
           </div>
         </div>
@@ -1347,10 +1196,10 @@ function templateHTML(){
     case 'sold': return `
       <div class="frame post" style="padding:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid var(--gold);">
         <div class="eyebrow" style="font-size:9px;">Sold</div>
-        <div class="serif" style="font-size:26px;color:var(--ivory);margin-top:10px;line-height:1.15;">${g('name')}</div>
-        <div style="font-size:9px;color:var(--stone);margin-top:6px;letter-spacing:.05em;">${g('location')}</div>
+        <div class="serif" style="font-size:26px;color:var(--ivory);margin-top:10px;line-height:1.15;">${t('name')}</div>
+        <div style="font-size:9px;color:var(--stone);margin-top:6px;letter-spacing:.05em;">${t('location')}</div>
         <div style="width:24px;height:1px;background:var(--gold);margin:14px 0;"></div>
-        <div class="serif" style="font-size:13px;color:var(--ivory);line-height:1.45;max-width:240px;">${g('detail')}</div>
+        <div class="serif" style="font-size:13px;color:var(--ivory);line-height:1.45;max-width:240px;">${t('detail')}</div>
         <div style="font-size:8px;letter-spacing:.08em;color:var(--stone);text-transform:uppercase;margin-top:16px;">Davide Piraldo · Pastor &amp; Reiss</div>
       </div>`;
 
@@ -1363,8 +1212,8 @@ function templateHTML(){
         ${photoSlot('photo', 'background photograph', 'width:100%;height:100%;position:absolute;inset:0;')}
         <div style="position:absolute;inset:0;background:linear-gradient(to bottom, var(--overlay-10) 0%, var(--overlay-88) 82%);"></div>
         <div style="position:absolute;bottom:22px;left:18px;right:18px;text-align:center;z-index:1;">
-          <div style="font-size:8px;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;">${g('category')}</div>
-          <div class="serif" style="font-size:19px;color:var(--ivory);margin-top:8px;line-height:1.25;">${g('headline')}</div>
+          <div style="font-size:8px;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;">${t('category')}</div>
+          <div class="serif" style="font-size:19px;color:var(--ivory);margin-top:8px;line-height:1.25;">${t('headline')}</div>
         </div>
       </div>`;
 
@@ -1373,10 +1222,10 @@ function templateHTML(){
         ${photoSlot('photo', 'background photograph', 'width:100%;height:100%;position:absolute;inset:0;')}
         <div style="position:absolute;top:16px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:center;z-index:1;">
           <div style="width:20px;height:20px;border-radius:999px;background:var(--overlay-10);border:1px solid var(--ivory);opacity:.35;"></div>
-          <div style="font-size:8px;letter-spacing:.1em;color:var(--ivory);text-transform:uppercase;">${g('handle')}</div>
+          <div style="font-size:8px;letter-spacing:.1em;color:var(--ivory);text-transform:uppercase;">${t('handle')}</div>
         </div>
         <div style="position:absolute;left:16px;right:16px;top:42%;background:var(--overlay-82);padding:14px;border-left:2px solid var(--gold);z-index:1;">
-          <div class="serif" style="font-size:15px;color:var(--ivory);line-height:1.35;">${g('caption')}</div>
+          <div class="serif" style="font-size:15px;color:var(--ivory);line-height:1.35;">${t('caption')}</div>
         </div>
       </div>`;
 
@@ -1385,7 +1234,7 @@ function templateHTML(){
         <div class="serif" style="font-size:19px;color:var(--ivory);text-transform:uppercase;letter-spacing:.04em;">Davide Piraldo</div>
         <div style="font-size:8px;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;margin-top:6px;">Luxury Advisor</div>
         <div style="width:24px;height:1px;background:var(--gold);margin:16px 0;"></div>
-        <div style="font-size:10px;color:var(--body);line-height:1.5;">${g('message')}</div>
+        <div style="font-size:10px;color:var(--body);line-height:1.5;">${t('message')}</div>
         <div style="margin-top:16px;font-size:8px;letter-spacing:.1em;color:var(--stone);text-transform:uppercase;">Pastor &amp; Reiss Monte-Carlo</div>
       </div>`;
   }
@@ -1397,18 +1246,8 @@ function renderCanvas(){
 }
 
 function switchFormat(id) {
-  if (id === 'quote') {
-    genCategory = 'citazioni';
-    const posts = GENERATED_POSTS.citazioni?.posts || [];
-    if (posts.length) {
-      activeGenPostId = posts[0].id;
-      setGeneratedPost(posts[0], 'citazioni');
-      renderGeneratorPanel();
-      return;
-    }
-  }
   current = id;
-  if (id !== 'stat') activeGenPostId = null;
+  activeGenPostId = null;
   renderFormatButtons();
   renderFields();
   renderGeneratorPanel();
@@ -1449,23 +1288,12 @@ document.getElementById('downloadBtn').onclick = () => {
     });
 };
 
-function bootSocialStudio() {
-  renderBrandPanel();
-  applyBrandColors();
-  renderFormatButtons();
-  initDistrictPosts();
-  const firstQuote = GENERATED_POSTS.citazioni?.posts?.[0];
-  if (firstQuote) {
-    activeGenPostId = firstQuote.id;
-    setGeneratedPost(firstQuote, 'citazioni');
-  } else {
-    renderGeneratorPanel();
-    renderFields();
-    renderCanvas();
-  }
-}
-
-bootSocialStudio();
+renderBrandPanel();
+applyBrandColors();
+initDistrictPosts();
+renderFormatButtons();
+renderFields();
+renderCanvas();
 </script>
 
 </body>

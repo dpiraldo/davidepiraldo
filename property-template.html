@@ -851,6 +851,16 @@
     </div>
   </section>
 
+  <!-- FLOOR PLAN — hidden unless a floor plan image is uploaded for this property -->
+  <section id="floorplanSection" style="display:none;">
+    <div class="container">
+      <div class="section-eyebrow" data-i18n="fp.eyebrow">Floor Plan</div>
+      <h2 class="section-title" data-i18n="fp.title">The New Layout</h2>
+      <p class="section-lead" data-i18n="fp.lead">Indicative layout following the proposed renovation.</p>
+      <img data-cms-bg="floor_plan_image" alt="Floor plan" style="width:100%;height:auto;margin-top:2rem;border:1px solid var(--border,#e5e0d8);">
+    </div>
+  </section>
+
   <!-- ACCESS MODAL -->
   <div class="modal" id="accessModal">
     <div class="modal-box">
@@ -1022,6 +1032,7 @@
         'gal.lead': 'A curated selection. The full gallery is available upon private request.',
         'gal.locked': '+12 additional photographs, floor plans and a private viewing await you.',
         'gal.cta': 'Discover More',
+        'fp.eyebrow': 'Floor Plan', 'fp.title': 'The New Layout', 'fp.lead': 'Indicative layout following the proposed renovation.',
         'modal.eyebrow': 'Private Access', 'modal.title': 'Request Full Gallery',
         'modal.lead': 'Enter your email or send us a message to receive the complete photo gallery, floor plans and arrange a private viewing.',
         'modal.email': 'your@email.com', 'modal.message': 'Your message (optional)',
@@ -1087,6 +1098,7 @@
         'gal.lead': 'Une sélection soignée. La galerie complète est disponible sur demande privée.',
         'gal.locked': '+12 photographies supplémentaires, plans et visite privée vous attendent.',
         'gal.cta': 'Découvrir Plus',
+        'fp.eyebrow': 'Plan', 'fp.title': 'La Nouvelle Configuration', 'fp.lead': 'Configuration indicative après la rénovation proposée.',
         'modal.eyebrow': 'Accès Privé', 'modal.title': 'Demander la Galerie Complète',
         'modal.lead': 'Entrez votre email ou envoyez-nous un message pour recevoir la galerie complète, les plans et organiser une visite privée.',
         'modal.email': 'votre@email.com', 'modal.message': 'Votre message (optionnel)',
@@ -1152,6 +1164,7 @@
         'gal.lead': 'Una selezione curata. La galleria completa è disponibile su richiesta privata.',
         'gal.locked': '+12 fotografie aggiuntive, planimetrie e una visita privata ti aspettano.',
         'gal.cta': 'Scopri di Più',
+        'fp.eyebrow': 'Planimetria', 'fp.title': 'La Nuova Configurazione', 'fp.lead': 'Configurazione indicativa a seguito della ristrutturazione proposta.',
         'modal.eyebrow': 'Accesso Privato', 'modal.title': 'Richiedi la Galleria Completa',
         'modal.lead': 'Inserisci la tua email o inviaci un messaggio per ricevere la galleria fotografica completa, le planimetrie e organizzare una visita privata.',
         'modal.email': 'tua@email.com', 'modal.message': 'Il tuo messaggio (opzionale)',
@@ -1397,6 +1410,6 @@
       document.addEventListener('touchstart', () => { if (!running) startVideos(); }, { once: true, passive: true });
     };
   </script>
-  <script src="property-loader.js?v=20260713a"></script>
+  <script src="property-loader.js?v=20260713b"></script>
 </body>
 </html>

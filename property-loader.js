@@ -14,7 +14,7 @@
 (function () {
   const params = new URLSearchParams(window.location.search);
   const slug = params.get('slug') || 'eden-tower';
-  const cacheBust = '20260713a';
+  const cacheBust = '20260713b';
 
   Promise.all([
     fetch(`content/properties/${slug}.json?v=${cacheBust}`).then(r => {
@@ -144,10 +144,16 @@
       lockedWrap.innerHTML = locked.map(src => `<img src="${gallerySrc(src)}" alt="">`).join('');
     }
 
-    // ---- market intelligence: 1 or 2 districts ----
+    // ---- market intelligence: 1–3 districts ----
     window.__lastPropertyData = p;
     window.__lastDistrictsData = districts;
     renderMarket(p, districts);
+
+    // ---- floor plan (only shown if this property has one uploaded) ----
+    const floorplanSection = document.getElementById('floorplanSection');
+    if (floorplanSection) {
+      floorplanSection.style.display = (p.media && p.media.floor_plan_image) ? '' : 'none';
+    }
 
     // ---- hero video: only start if "Hero Display" is set to Video AND a
     // real video file is provided. Set it to "Photo only" in the CMS to

@@ -51,7 +51,10 @@
     ],
     "source": "Source: IMSEE — Monaco Real Estate Observatory, 2025"
   },
-  "featured_property_slug": "le-mirabeau",
+  "featured_property_slugs": [
+    "le-mirabeau",
+    "eden-tower"
+  ],
   "journal": {
     "label": "The Monaco Journal",
     "heading": "Market intelligence, guides & insight",

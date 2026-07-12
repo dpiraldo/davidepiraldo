@@ -1,25 +1,19 @@
-# Online (Netlify): git-gateway salva su GitHub.
-# In locale: decap-server su localhost only (non su Netlify).
-local_backend:
-  url: http://localhost:8081/api/v1
-  allowed_hosts: ['localhost', '127.0.0.1']
+# Online (Netlify): login diretto con GitHub via OAuth (vedi SETUP-CMS.md —
+# Git Gateway/Netlify Identity sono deprecati da Netlify per i siti nuovi,
+# quindi questo progetto NON li usa più).
+# In locale: local_backend attivo + `npx decap-server` — nessun login richiesto.
+local_backend: true
 
 backend:
-  name: git-gateway
+  name: github
+  repo: "dpiraldo/davidepiraldo"
   branch: main
-  commit_messages:
-    create: 'Create {{collection}} "{{slug}}"'
-    update: 'Update {{collection}} "{{slug}}"'
-    delete: 'Delete {{collection}} "{{slug}}"'
-    uploadMedia: 'Upload "{{path}}"'
-    deleteMedia: 'Delete "{{path}}"'
+  base_url: "https://dpiraldo.netlify.app"
+  auth_endpoint: ".netlify/functions/auth"
 
-# Una volta pubblicato online, si accede da tuosito.com/admin con Netlify Identity.
+# Una volta pubblicato online, si accede da tuosito.com/admin con il tuo account GitHub.
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
-
-# Git Gateway rifiuta upload oltre ~900 KB per file — comprimi le foto prima.
-# (max_file_size va sui singoli widget image/file, non a livello globale)
 
 collections:
 
@@ -92,6 +86,7 @@ collections:
           - { label: "Focus Foto Living", name: "intro_photo_focus", widget: "select", options: ["Center", "Top", "Bottom", "Left", "Right"], default: "Center", required: false }
           - { label: "Galleria — 2 Foto Grandi in evidenza", name: "gallery_featured", widget: "list", field: { label: "Foto", name: "image", widget: "image" } }
           - { label: "Galleria — Griglia Bloccata (foto sfocate teaser)", name: "gallery_locked", widget: "list", field: { label: "Foto", name: "image", widget: "image" } }
+          - { label: "Planimetria (opzionale — utile per immobili da ristrutturare)", name: "floor_plan_image", widget: "image", required: false }
 
       - { label: "Testo sotto la griglia bloccata", name: "gallery_locked_text", widget: "string", default: "+12 additional photographs, floor plans and a private viewing await you." }
 
@@ -110,7 +105,7 @@ collections:
         name: "features"
         widget: "list"
         max: 4
-        hint: "Es. Superficie Abitabile, Camere, Bagni, Vista. Puoi aggiungere una foto di copertina per ogni scheda. Testi solo in inglese per ora — se li lasci vuoti restano quelli già nella pagina."
+        hint: "Es. Superficie Abitabile, Camere, Bagni, Vista. Puoi aggiungere una foto di copertina per ogni scheda. Testi solo in inglese per ora."
         fields:
           - { label: "Titolo", name: "title", widget: "string" }
           - { label: "Descrizione", name: "desc", widget: "text" }
@@ -176,15 +171,18 @@ collections:
                   - { label: "Etichetta", name: "label", widget: "string" }
                   - { label: "Evidenzia in oro?", name: "highlight", widget: "boolean", default: false }
               - { label: "Riga fonte", name: "source", widget: "string" }
-          - label: "Proprietà in Evidenza (mostrata in homepage)"
-            name: "featured_property_slug"
-            widget: "relation"
-            collection: "properties"
-            search_fields: ["building_name"]
-            display_fields: ["building_name"]
-            value_field: "{{slug}}"
-            default: "eden-tower"
-            hint: "Cerca e scegli l'immobile da un menu — non serve più scrivere lo slug a mano."
+          - label: "Proprietà in Evidenza (mostrate in homepage, in ordine)"
+            name: "featured_property_slugs"
+            widget: "list"
+            hint: "Aggiungi quanti immobili vuoi mostrare in homepage — cercali per nome, nell'ordine in cui devono apparire."
+            field:
+              label: "Immobile"
+              name: "slug"
+              widget: "relation"
+              collection: "properties"
+              search_fields: ["building_name"]
+              display_fields: ["building_name"]
+              value_field: "{{slug}}"
           - label: "Anteprima Journal (homepage)"
             name: "journal"
             widget: "object"

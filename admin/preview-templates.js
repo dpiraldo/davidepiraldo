@@ -222,7 +222,9 @@
             h('div', { style: { fontSize: '12px', color: PALETTE.gold, marginTop: '10px' } }, g('contact.email', ''))
           ),
 
-          h('div', { style: { marginTop: '20px', fontSize: '11px', color: PALETTE.stone } }, '🏠 Proprietà in evidenza: ' + (g('featured_property_slug', '(nessuna)')))
+          h('div', { style: { marginTop: '20px', fontSize: '11px', color: PALETTE.stone } }, '🏠 Proprietà in evidenza: ' + (
+              g('featured_property_slugs', []).map(function (x) { return typeof x === 'string' ? x : x.slug; }).filter(Boolean).join(', ') || '(nessuna)'
+            ))
         )
       );
     },

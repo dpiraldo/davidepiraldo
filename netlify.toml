@@ -1,6 +1,7 @@
 # Configurazione di deploy per Netlify.
-# Necessaria perché Netlify sappia dove trovare la function di traduzione
-# usata dal bottone "Traduci" dentro /admin (netlify/functions/translate.js).
+# Functions:
+# - auth.js / callback.js → login GitHub del CMS (vedi SETUP-CMS.md)
+# - translate.js → bottone "Traduci" dentro /admin
 
 [build]
   functions = "netlify/functions"
@@ -17,9 +18,6 @@
     Cache-Control = "public, max-age=0, must-revalidate"
 
 [build.environment]
-  # Node 18+ ha fetch() integrato — necessario per netlify/functions/translate.js.
-  # Senza questo, Netlify potrebbe usare una versione più vecchia di Node e la
-  # function fallirebbe con "fetch is not defined".
   NODE_VERSION = "20"
 
 [functions]

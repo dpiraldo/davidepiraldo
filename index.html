@@ -153,43 +153,40 @@
     <div class="source" data-home="market.source">Source: IMSEE — Monaco Real Estate Observatory, 2025</div>
   </section>
 
-  <!-- FEATURED PROPERTY -->
+  <!-- FEATURED PROPERTIES -->
   <section>
-    <div class="label">Featured Property</div>
-    <div class="property-teaser" style="margin-top:36px;">
-      <div class="img-placeholder" data-cms-bg="hero_side_image">photograph — Eden Tower</div>
-      <div class="info">
-        <div class="label" data-cms="district_names">Jardin Exotique, Monaco</div>
-        <h2 data-cms="building_name">Eden Tower</h2>
-        <div class="specs">
-          <span><span data-cms="bedrooms">3</span> Bedrooms</span>
-          <span><span data-cms="rooms">4</span> Rooms</span>
-          <span data-cms="views_label">Sea &amp; Mountain View</span>
-        </div>
-        <a class="btn" href="property-template.html?slug=eden-tower" id="featured-property-btn">View the Property</a>
-      </div>
-    </div>
+    <div class="label">Featured Properties</div>
+    <div id="featuredPropertiesWrap"></div>
     <div style="margin-top:14px;"><a href="properties-index.html" style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);">See all properties →</a></div>
   </section>
 
   <script>
-  window.FEATURED_SLUG = 'eden-tower';
+  window.FEATURED_SLUGS = ['eden-tower'];
   window.loadFeaturedProperty = function() {
-    const slug = window.FEATURED_SLUG || 'eden-tower';
-    const btn = document.getElementById('featured-property-btn');
-    if (btn) btn.href = 'property-template.html?slug=' + slug;
-    fetch(`content/properties/${slug}.json`).then(r => r.json()).then(data => {
-      document.querySelectorAll('.property-teaser [data-cms]').forEach(el => {
-        const key = el.getAttribute('data-cms');
-        if (data[key] !== undefined && data[key] !== "") el.textContent = data[key];
-      });
-      const bgEl = document.querySelector('[data-cms-bg="hero_side_image"]');
-      if (bgEl && data.media && data.media.hero_side_image) {
-        bgEl.style.backgroundImage = `url('${data.media.hero_side_image}')`;
-        bgEl.style.backgroundSize = 'cover';
-        bgEl.style.backgroundPosition = 'center';
-        bgEl.textContent = '';
-      }
+    const wrap = document.getElementById('featuredPropertiesWrap');
+    if (!wrap) return;
+    const slugs = (window.FEATURED_SLUGS && window.FEATURED_SLUGS.length) ? window.FEATURED_SLUGS : ['eden-tower'];
+
+    Promise.all(slugs.map(slug =>
+      fetch(`content/properties/${slug}.json`).then(r => r.ok ? r.json() : null).then(data => ({ slug, data })).catch(() => null)
+    )).then(results => {
+      wrap.innerHTML = results.filter(r => r && r.data).map(({ slug, data }) => {
+        const photo = (data.media && data.media.hero_side_image) || 'assets/placeholder.svg';
+        return `
+          <div class="property-teaser" style="margin-top:36px;">
+            <div class="img-placeholder" style="background-image:url('${photo}');background-size:cover;background-position:center;"></div>
+            <div class="info">
+              <div class="label">${data.district_names || ''}</div>
+              <h2>${data.building_name || ''}</h2>
+              <div class="specs">
+                <span>${data.bedrooms ?? '–'} Bedrooms</span>
+                <span>${data.rooms ?? '–'} Rooms</span>
+                <span>${data.views_label || ''}</span>
+              </div>
+              <a class="btn" href="property-template.html?slug=${slug}">View the Property</a>
+            </div>
+          </div>`;
+      }).join('');
     }).catch(() => {});
   };
   window.loadFeaturedProperty();
@@ -241,18 +238,6 @@
 
   <script src="journal-loader.js"></script>
   <script src="home-loader.js"></script>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on('init', function (user) {
-        if (!user) {
-          window.netlifyIdentity.on('login', function () {
-            document.location.href = '/admin/';
-          });
-        }
-      });
-    }
-  </script>
 
 </body>
 </html>
