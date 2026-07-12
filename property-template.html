@@ -638,7 +638,9 @@
     }
     .quote-bg {
       position: absolute; inset: 0;
-      background: url('assets/placeholder.svg') center/cover;
+      background-color: var(--black);
+      background-size: cover;
+      background-position: center;
       filter: brightness(0.35);
     }
     .quote blockquote {
@@ -1004,7 +1006,7 @@
 
   <!-- QUOTE -->
   <section class="quote">
-    <div class="quote-bg"></div>
+    <div class="quote-bg" data-cms-bg="intro_photo"></div>
     <blockquote data-i18n="quote.text" data-cms-i18n="quote_text">« More than an apartment, this is a residence curated with the precision of an art collection where every detail reflects elegance, craftsmanship and the unmistakable prestige of Monaco. »</blockquote>
     <cite data-i18n="quote.cite" data-cms-i18n="quote_cite">Eden Tower · Ref. EDEN TOWER · Sole Agent</cite>
   </section>
