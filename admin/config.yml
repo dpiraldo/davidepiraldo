@@ -1,6 +1,8 @@
 # Online (Netlify): git-gateway saves via GitHub.
-# Local: set local_backend + run `npx decap-server` — no login needed.
-local_backend: true
+# Local: run `npx decap-server` on localhost only (not on Netlify).
+local_backend:
+  url: http://localhost:8081/api/v1
+  allowed_hosts: ['localhost', '127.0.0.1']
 
 backend:
   name: git-gateway
