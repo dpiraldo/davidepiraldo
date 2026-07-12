@@ -216,7 +216,7 @@ const FIELD_DEFS = {
     {k:'price', label:'Price', type:'text', v:'€24.5M'},
   ],
   quote: [
-    {k:'quote', label:'Quote', type:'textarea', v:'In Monaco, resale volume tells the real story — not the headline sale price.'},
+    {k:'quote', label:'Quote', type:'textarea', v:''},
     {k:'attribution', label:'Attribution', type:'text', v:'Davide Piraldo — Luxury Advisor'},
   ],
   listing: [
@@ -494,8 +494,8 @@ const GENERATED_POSTS = {
   },
 };
 
-let current = 'stat';
-let genCategory = 'statistiche';
+let current = 'quote';
+let genCategory = 'citazioni';
 let activeGenPostId = null;
 
 const IMSEE_SOURCE = 'Source: IMSEE — Monaco Real Estate Observatory, 2025';
@@ -1209,6 +1209,7 @@ function setGeneratedPost(post, categoryId) {
     });
   }
   renderCanvas();
+  renderGeneratorPanel();
 }
 
 function renderGeneratorPanel() {
@@ -1241,7 +1242,7 @@ function renderGeneratorPanel() {
   list.innerHTML = posts.map(p => `
     <button type="button" class="gen-post-btn ${p.id === activeGenPostId ? 'active' : ''}" data-id="${p.id}">
       <div class="gen-num">${escapeHtml(p.preview || p.number || '«')}</div>
-      <div class="gen-title">${escapeHtml(isQuote ? (p.title || p.quote) : p.title)}</div>
+      <div class="gen-title">${escapeHtml(isQuote ? (p.quote || p.title) : p.title)}</div>
     </button>
   `).join('');
   list.querySelectorAll('.gen-post-btn').forEach(btn => {
@@ -1448,13 +1449,23 @@ document.getElementById('downloadBtn').onclick = () => {
     });
 };
 
-renderBrandPanel();
-applyBrandColors();
-renderGeneratorPanel();
-initDistrictPosts();
-renderFormatButtons();
-renderFields();
-renderCanvas();
+function bootSocialStudio() {
+  renderBrandPanel();
+  applyBrandColors();
+  renderFormatButtons();
+  initDistrictPosts();
+  const firstQuote = GENERATED_POSTS.citazioni?.posts?.[0];
+  if (firstQuote) {
+    activeGenPostId = firstQuote.id;
+    setGeneratedPost(firstQuote, 'citazioni');
+  } else {
+    renderGeneratorPanel();
+    renderFields();
+    renderCanvas();
+  }
+}
+
+bootSocialStudio();
 </script>
 
 </body>
