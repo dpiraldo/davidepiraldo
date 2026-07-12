@@ -91,8 +91,6 @@
         if (src.p1) window.i18n[lang]['ov.p1'] = src.p1;
         if (src.p2) window.i18n[lang]['ov.p2'] = src.p2;
         if (src.p3) window.i18n[lang]['ov.p3'] = src.p3;
-        if (src.quote_text) window.i18n[lang]['quote.text'] = src.quote_text;
-        if (src.quote_cite) window.i18n[lang]['quote.cite'] = src.quote_cite;
         if (src.market_insight_title) window.i18n[lang]['market_insight_title'] = src.market_insight_title;
         if (src.market_insight) window.i18n[lang]['market_insight'] = src.market_insight;
         // NOTA: le "Schede Caratteristiche" (p.features) sono gestite più sotto,

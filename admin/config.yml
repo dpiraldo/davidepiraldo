@@ -88,7 +88,7 @@ collections:
           - { label: "Hero — Video 2 (opzionale, .mp4)", name: "hero_video_2", widget: "file", required: false }
           - { label: "Foto Edificio (esterno)", name: "hero_side_image", widget: "image" }
           - { label: "Focus Foto Edificio", name: "hero_side_image_focus", widget: "select", options: ["Center", "Top", "Bottom", "Left", "Right"], default: "Center", required: false }
-          - { label: "Foto Living / Interno (anche sfondo sezione citazione)", name: "intro_photo", widget: "image" }
+          - { label: "Foto Living / Interno", name: "intro_photo", widget: "image" }
           - { label: "Focus Foto Living", name: "intro_photo_focus", widget: "select", options: ["Center", "Top", "Bottom", "Left", "Right"], default: "Center", required: false }
           - { label: "Galleria — 2 Foto Grandi in evidenza", name: "gallery_featured", widget: "list", field: { label: "Foto", name: "image", widget: "image" } }
           - { label: "Galleria — Griglia Bloccata (foto sfocate teaser)", name: "gallery_locked", widget: "list", field: { label: "Foto", name: "image", widget: "image" } }
@@ -127,8 +127,6 @@ collections:
           - { name: "p1", label: "Paragrafo Descrizione 1", type: "text" }
           - { name: "p2", label: "Paragrafo Descrizione 2", type: "text" }
           - { name: "p3", label: "Paragrafo Descrizione 3", type: "text" }
-          - { name: "quote_text", label: "Citazione", type: "text" }
-          - { name: "quote_cite", label: "Attribuzione Citazione", type: "string" }
           - { name: "market_title", label: "Titolo Sezione Mercato (HTML — meglio lasciare vuoto: si genera da solo)", type: "string" }
           - { name: "market_insight_title", label: "Titolo Analisi di Mercato", type: "string" }
           - { name: "market_insight", label: "Testo Analisi di Mercato", type: "text" }

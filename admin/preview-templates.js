@@ -80,14 +80,6 @@
           i18nEn.p2 && h('p', { style: { fontSize: '14px', lineHeight: 1.75, color: '#d8d0c2', marginBottom: '14px' } }, i18nEn.p2),
           i18nEn.p3 && h('p', { style: { fontSize: '14px', lineHeight: 1.75, color: '#d8d0c2', marginBottom: '14px' } }, i18nEn.p3),
 
-          i18nEn.quote_text &&
-            h(
-              'div',
-              { style: { margin: '28px 0', paddingLeft: '18px', borderLeft: '2px solid ' + PALETTE.gold, fontSize: '18px', fontStyle: 'italic', color: PALETTE.ivory } },
-              i18nEn.quote_text,
-              h('div', { style: { fontSize: '11px', color: PALETTE.stone, marginTop: '8px', fontStyle: 'normal', textTransform: 'uppercase', letterSpacing: '.1em' } }, i18nEn.quote_cite || '')
-            ),
-
           features.length > 0 &&
             h(
               'div',
