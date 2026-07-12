@@ -777,11 +777,11 @@
     <div class="hero-video-col">
       <img class="hero-video-fallback" id="heroFallback" data-cms-bg="hero_fallback_image" src="assets/placeholder.svg" alt="Monaco">
       <video id="heroVid1" data-cms-poster="hero_fallback_image"
-        muted playsinline webkit-playsinline
+        muted playsinline webkit-playsinline loop
         preload="metadata"
         poster="assets/placeholder.svg"></video>
       <video id="heroVid2" data-cms-poster="hero_fallback_image"
-        muted playsinline webkit-playsinline
+        muted playsinline webkit-playsinline loop
         preload="none"
         poster="assets/placeholder.svg"></video>
       <button class="hero-play-hint" id="heroPlayHint" type="button" aria-label="Play video">
@@ -1340,42 +1340,40 @@
       if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
     });
 
-    // Hero videos — desktop only
+    // Hero videos — desktop only; loops continuously (single clip or alternates two)
     window.initHeroVideos = function initHeroVideos() {
       if (window.matchMedia('(max-width: 1024px)').matches) return;
-      // Video sources come from content/properties/<slug>.json (media.hero_video_1/2).
-      // If a property has no video yet, this function simply isn't called —
-      // the static fallback photo (hero_fallback_image) stays visible, exactly
-      // like before a video is uploaded.
       const v1 = window.__PROPERTY_VIDEO_1__;
       const v2 = window.__PROPERTY_VIDEO_2__;
       if (!v1) return;
-      const CLIP = 5;
       const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent)
         || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-      const isMobile = isIOS || window.matchMedia('(max-width: 768px)').matches;
-      const sources = isMobile
-        ? [v2 || v1, v2 || v1]
-        : [v1, v2 || v1];
+      const hasTwoClips = v2 && v2 !== v1;
+      const sources = hasTwoClips ? [v1, v2] : [v1];
 
       const vids = [document.getElementById('heroVid1'), document.getElementById('heroVid2')];
       const fallback = document.getElementById('heroFallback');
       const playHint = document.getElementById('heroPlayHint');
-      let idx = 0, timer, running = false;
+      let idx = 0, running = false;
 
       vids.forEach(v => {
         v.muted = true;
         v.defaultMuted = true;
+        v.loop = !hasTwoClips;
         v.playsInline = true;
         v.setAttribute('playsinline', '');
         v.setAttribute('webkit-playsinline', '');
+        if (!hasTwoClips) v.setAttribute('loop', '');
         v.addEventListener('playing', () => {
           v.classList.add('is-playing');
           playHint.classList.remove('show');
         });
-        v.addEventListener('timeupdate', () => {
-          if (v.currentTime >= CLIP) v.pause();
-        });
+        if (hasTwoClips) {
+          v.addEventListener('ended', () => {
+            idx = (idx + 1) % sources.length;
+            switchTo(idx);
+          });
+        }
       });
 
       function tryPlay(v) {
@@ -1384,7 +1382,6 @@
       }
 
       function switchTo(i) {
-        clearTimeout(timer);
         const active = vids[i];
         const next = vids[1 - i];
         next.classList.remove('is-playing');
@@ -1394,18 +1391,9 @@
         active.load();
         active.currentTime = 0;
 
-        const go = () => {
-          tryPlay(active).then(ok => {
-            if (ok) {
-              timer = setTimeout(() => {
-                idx = (i + 1) % 2;
-                switchTo(idx);
-              }, CLIP * 1000);
-            } else if (isIOS) {
-              playHint.classList.add('show');
-            }
-          });
-        };
+        const go = () => tryPlay(active).then(ok => {
+          if (!ok && isIOS) playHint.classList.add('show');
+        });
         if (active.readyState >= 2) go();
         else active.addEventListener('canplay', go, { once: true });
       }
@@ -1417,7 +1405,6 @@
         switchTo(0);
       }
 
-      // iOS: show tap hint, poster always visible until play
       if (isIOS) {
         playHint.classList.add('show');
         playHint.addEventListener('click', startVideos);
@@ -1425,7 +1412,6 @@
         return;
       }
 
-      // Desktop / Android: try autoplay, fallback to tap hint
       startVideos();
       tryPlay(vids[0]).catch(() => playHint.classList.add('show'));
       playHint.addEventListener('click', startVideos);
