@@ -164,7 +164,7 @@
     <hr class="panel-divider">
 
     <label>Genera Posts</label>
-    <p class="gen-hint">Scegli un tema, poi clicca un post — si compila automaticamente il formato giusto (<strong style="color:var(--ivory);font-weight:500;">Market Stat</strong> o <strong style="color:var(--ivory);font-weight:500;">Quote / Insight</strong>). Modifica liberamente prima di scaricare.</p>
+    <p class="gen-hint">Per le <strong style="color:var(--ivory);font-weight:500;">citazioni</strong>: clicca tab <strong style="color:var(--ivory);font-weight:500;">Citazioni</strong> (si apre Quote / Insight con la prima frase). Per le statistiche: tab Statistiche, Prezzi/m², ecc.</p>
     <div class="gen-tabs" id="genTabs"></div>
     <div class="gen-list" id="genList"></div>
 
@@ -1219,7 +1219,19 @@ function renderGeneratorPanel() {
   ).join('');
   tabs.querySelectorAll('button').forEach(btn => {
     btn.onclick = () => {
-      genCategory = btn.dataset.cat;
+      const newCat = btn.dataset.cat;
+      genCategory = newCat;
+      const cat = GENERATED_POSTS[newCat];
+      if (cat?.format === 'quote') {
+        const posts = cat.posts || [];
+        if (posts.length) {
+          const post = posts.find(p => p.id === activeGenPostId) || posts[0];
+          activeGenPostId = post.id;
+          setGeneratedPost(post, newCat);
+        }
+      } else {
+        activeGenPostId = null;
+      }
       renderGeneratorPanel();
     };
   });
@@ -1384,6 +1396,16 @@ function renderCanvas(){
 }
 
 function switchFormat(id) {
+  if (id === 'quote') {
+    genCategory = 'citazioni';
+    const posts = GENERATED_POSTS.citazioni?.posts || [];
+    if (posts.length) {
+      activeGenPostId = posts[0].id;
+      setGeneratedPost(posts[0], 'citazioni');
+      renderGeneratorPanel();
+      return;
+    }
+  }
   current = id;
   if (id !== 'stat') activeGenPostId = null;
   renderFormatButtons();
@@ -1428,6 +1450,7 @@ document.getElementById('downloadBtn').onclick = () => {
 
 renderBrandPanel();
 applyBrandColors();
+renderGeneratorPanel();
 initDistrictPosts();
 renderFormatButtons();
 renderFields();
