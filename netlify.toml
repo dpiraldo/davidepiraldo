@@ -4,6 +4,17 @@
 
 [build]
   functions = "netlify/functions"
+  publish = "."
+
+[[headers]]
+  for = "/content/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 [build.environment]
   # Node 18+ ha fetch() integrato — necessario per netlify/functions/translate.js.
