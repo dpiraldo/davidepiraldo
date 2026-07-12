@@ -203,6 +203,10 @@
     },
   };
 
+  function districtDisplayName(d, lang) {
+    return d[`name_${lang}`] || d.name_en || '';
+  }
+
   function districtCard(d, tagKey, tagLabel, lang) {
     if (!d) return '';
     const changeClass = (d.change_24_25_pct || 0) < 0 ? 'down' : 'up';
@@ -212,7 +216,7 @@
     return `
       <div class="market-card ${tagKey === 'featured' ? 'featured' : ''}">
         <div class="mc-tag">${tagLabel}</div>
-        <div class="mc-name">${d.name_en}</div>
+        <div class="mc-name">${districtDisplayName(d, lang)}</div>
         <div class="mc-price">${d.price_sqm_2025 ? '€' + d.price_sqm_2025.toLocaleString('en-US') : '—'}</div>
         <div class="mc-unit">${L.perSqm}</div>
         <div class="mc-stats">
@@ -239,19 +243,21 @@
     if (!cardsWrap) return;
 
     if (looked.length === 2) {
+      const names = looked.map(x => districtDisplayName(x.d, lang));
       // dual-district comparison, e.g. Eden Tower
       cardsWrap.innerHTML =
         districtCard(looked[0].d, 'featured', L.propertyDistrict, lang) +
         districtCard(looked[1].d, 'neighbour', L.neighbourDistrict, lang);
-      if (titleEl) titleEl.innerHTML = `${looked[0].d.name_en} <em>${L.vs}</em> ${looked[1].d.name_en}`;
+      if (titleEl) titleEl.innerHTML = `${names[0]} <em>${L.vs}</em> ${names[1]}`;
       if (leadEl) leadEl.textContent = L.leadCompare(p.building_name || 'this property');
-      if (tableEl) tableEl.innerHTML = marketTableHTML([looked[0].d, looked[1].d], principality, [looked[0].d.name_en, looked[1].d.name_en], lang);
+      if (tableEl) tableEl.innerHTML = marketTableHTML([looked[0].d, looked[1].d], principality, names, lang);
     } else if (looked.length === 1) {
+      const name = districtDisplayName(looked[0].d, lang);
       // single district, the common case
       cardsWrap.innerHTML = districtCard(looked[0].d, 'featured', L.propertyDistrict, lang);
-      if (titleEl) titleEl.innerHTML = looked[0].d.name_en;
+      if (titleEl) titleEl.innerHTML = name;
       if (leadEl) leadEl.textContent = L.leadSingle;
-      if (tableEl) tableEl.innerHTML = marketTableHTML([looked[0].d], principality, [looked[0].d.name_en], lang);
+      if (tableEl) tableEl.innerHTML = marketTableHTML([looked[0].d], principality, [name], lang);
     }
   }
 

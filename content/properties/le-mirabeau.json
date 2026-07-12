@@ -44,7 +44,10 @@
   "gallery_locked_text": "+8 additional photographs, the full renovation floor plan and a private viewing await you.",
   "districts": [
     {
-      "key": "monte-carlo"
+      "key": "carre-dor"
+    },
+    {
+      "key": "larvotto"
     }
   ],
   "features": [
@@ -75,7 +78,7 @@
       "quote_cite": "Le Mirabeau · Carré d'Or · Renovation Opportunity",
       "market_title": "",
       "market_insight_title": "Why Le Mirabeau represents a strategic opportunity",
-      "market_insight": "The 2025 Observatory places Monte-Carlo among the Principality's fastest-moving districts, with prices rising 4.8% over the past year and resale volume crossing €1 billion for the first time. Le Mirabeau sits at the centre of this momentum, on Avenue des Citronniers — also addressed as Avenue Princesse Grace — a two-minute walk from Casino Square. For a comparable entry point to Mareterra, Monaco's newest waterfront district, this position trades slightly less proximity to the sea for significantly greater proximity to everything else: shopping, dining, the Casino, and the daily life of the Principality."
+      "market_insight": "Le Mirabeau sits in the heart of the Carré d'Or — IMSEE's Monte-Carlo district recorded €54,009/m² in 2025 (+4.8%), with resale volume crossing €1 billion for the first time. Larvotto, Monaco's waterfront benchmark just minutes away on Avenue Princesse Grace, trades at €71,167/m² (+2.2%) with resale volume up 400% year-on-year as new-build stock enters the market. For Le Mirabeau, the comparison is instructive: Carré d'Or offers immediate proximity to Casino Square, luxury retail and the daily pulse of Monte-Carlo at a materially lower entry point than Larvotto's seafront premium — while a renovated apartment in the building already commands rents in the region of €30,000 per month."
     },
     "fr": {
       "hero_title": "Une Toile Rare<br>au Cœur du <em>Carré d'Or</em>",
@@ -86,7 +89,7 @@
       "quote_cite": "Le Mirabeau · Carré d'Or · Opportunité de Rénovation",
       "market_title": "",
       "market_insight_title": "Pourquoi Le Mirabeau représente une opportunité stratégique",
-      "market_insight": "L'Observatoire 2025 place Monte-Carlo parmi les quartiers les plus dynamiques de la Principauté, avec une hausse des prix de 4,8 % sur la dernière année et un volume de reventes dépassant pour la première fois le milliard d'euros. Le Mirabeau se trouve au cœur de cette dynamique, avenue des Citronniers — également desservi par l'avenue Princesse Grace — à deux minutes de la Place du Casino. Pour un point d'entrée comparable à celui de Mareterra, le tout nouveau quartier en bord de mer de Monaco, cette position échange une proximité légèrement moindre à la mer contre une proximité bien plus grande à tout le reste : commerces, restaurants, le Casino, et la vie quotidienne de la Principauté."
+      "market_insight": "Le Mirabeau se situe au cœur du Carré d'Or — le district Monte-Carlo enregistre 54 009 €/m² en 2025 (+4,8 %), avec un volume de reventes dépassant pour la première fois le milliard d'euros. Larvotto, référence balnéaire de la Principauté à quelques minutes sur l'avenue Princesse Grace, s'échange à 71 167 €/m² (+2,2 %), avec un volume de reventes multiplié par cinq sur un an. Pour Le Mirabeau, la comparaison est éclairante : le Carré d'Or offre la proximité immédiate de la Place du Casino, du luxe et du rythme de Monte-Carlo à un point d'entrée nettement inférieur au premium du front de mer — tandis qu'un appartement rénové dans l'immeuble se loue déjà aux alentours de 30 000 € par mois."
     },
     "it": {
       "hero_title": "Una Tela Rara<br>nel Cuore del <em>Carré d'Or</em>",
@@ -97,7 +100,7 @@
       "quote_cite": "Le Mirabeau · Carré d'Or · Opportunità di Ristrutturazione",
       "market_title": "",
       "market_insight_title": "Perché Le Mirabeau rappresenta un'opportunità strategica",
-      "market_insight": "L'Osservatorio 2025 colloca Monte-Carlo tra i quartieri più dinamici del Principato, con una crescita dei prezzi del 4,8% nell'ultimo anno e un volume di rivendite che ha superato per la prima volta il miliardo di euro. Le Mirabeau si trova al centro di questo slancio, su Avenue des Citronniers — indirizzo raggiungibile anche da Avenue Princesse Grace — a due minuti da Place du Casino. Per un punto di ingresso comparabile a Mareterra, il nuovissimo quartiere sul mare di Monaco, questa posizione scambia una prossimità leggermente minore al mare con una prossimità molto maggiore a tutto il resto: negozi, ristoranti, il Casinò, e la vita quotidiana del Principato."
+      "market_insight": "Le Mirabeau si trova nel cuore del Carré d'Or — il quartiere Monte-Carlo registra 54.009 €/m² nel 2025 (+4,8%), con un volume di rivendite che ha superato per la prima volta il miliardo di euro. Larvotto, riferimento sul mare a pochi minuti su Avenue Princesse Grace, si scambia a 71.167 €/m² (+2,2%), con un volume di rivendite quintuplicato su base annua. Per Le Mirabeau, il confronto è significativo: il Carré d'Or offre la vicinanza immediata a Place du Casino, al lusso e al ritmo di Monte-Carlo a un punto di ingresso nettamente inferiore al premium del fronte mare — mentre un appartamento ristrutturato nello stesso edificio viene già affittato intorno ai 30.000 € al mese."
     }
   }
 }
