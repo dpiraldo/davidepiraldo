@@ -2,6 +2,11 @@
 # Avvia il sito + admin CMS in locale (nessun setup Netlify richiesto).
 # Uso: ./start-local.sh
 # Poi apri: http://localhost:8000/admin/
+#
+# NOTA: il bottone "🌐 Traduci" (EN→FR/IT con DeepL) NON funziona con questo
+# script, perché è solo un server statico + decap-server, senza le Netlify
+# Functions. Per provarlo in locale serve `netlify dev` al suo posto — vedi
+# SETUP-CMS.md, sezione "Attivare il bottone Traduci".
 
 cd "$(dirname "$0")"
 

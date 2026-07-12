@@ -1,5 +1,5 @@
-# Online (Netlify): git-gateway saves via GitHub.
-# Local: run `npx decap-server` on localhost only (not on Netlify).
+# Online (Netlify): git-gateway salva su GitHub.
+# In locale: decap-server su localhost only (non su Netlify).
 local_backend:
   url: http://localhost:8081/api/v1
   allowed_hosts: ['localhost', '127.0.0.1']
@@ -14,276 +14,292 @@ backend:
     uploadMedia: 'Upload "{{path}}"'
     deleteMedia: 'Delete "{{path}}"'
 
-# After setup, editors log in at yoursite.com/admin using Netlify Identity.
+# Una volta pubblicato online, si accede da tuosito.com/admin con Netlify Identity.
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
-# Git Gateway rejects uploads over ~900 KB per file. Compress photos before upload.
+# Git Gateway rifiuta upload oltre ~900 KB per file — comprimi le foto prima.
 media_library:
   config:
     max_file_size: 900000
 
 collections:
 
-  # ---- PROPERTIES (the master template — one file per listing) ----
-  # Each property is a separate JSON file. The public page is always
-  # property-template.html?slug=<the-slug> — same design, different data.
+  # ---- PROPERTIES (il modello principale — un file per ogni immobile) ----
+  # Ogni proprietà è un file JSON separato. La pagina pubblica è sempre
+  # property-template.html?slug=<slug> — stesso design, dati diversi.
   - name: "properties"
-    label: "Properties"
+    label: "🏠 Immobili in Vendita"
+    label_singular: "Immobile"
     folder: "content/properties"
     create: true
     slug: "{{slug}}"
     extension: "json"
     format: "json"
     identifier_field: "building_name"
-    summary: "{{building_name}} · {{slug}}"
+    summary: "{{building_name}} — {{status_label}}"
     fields:
-      - { label: "Slug (used in the URL, e.g. eden-tower)", name: "slug", widget: "string" }
-      - { label: "Featured on homepage?", name: "featured", widget: "boolean", default: false }
-      - { label: "Reference", name: "reference", widget: "string" }
-      - { label: "Building Name", name: "building_name", widget: "string" }
-      - { label: "Address Line", name: "address_line", widget: "string" }
-      - { label: "Status (e.g. For Sale · Sole Agent)", name: "status_label", widget: "string" }
-      - { label: "Rooms", name: "rooms", widget: "number" }
-      - { label: "Bedrooms", name: "bedrooms", widget: "number" }
-      - { label: "Bathrooms", name: "bathrooms", widget: "number" }
-      - { label: "Type Line (e.g. Apartment · 4 Rooms)", name: "type_line", widget: "string" }
-      - { label: "Condition", name: "condition", widget: "string", default: "Renovated" }
-      - { label: "Views Label", name: "views_label", widget: "string" }
-      - { label: "Availability", name: "availability", widget: "string", default: "Immediately" }
-      - { label: "Mandate", name: "mandate", widget: "string", default: "Sole Agent" }
-      - { label: "District Name(s) shown on Details sheet", name: "district_names", widget: "string" }
-      - { label: "Contact Email", name: "contact_email", widget: "string" }
+      # ---- ESSENZIALI — quello che si modifica più spesso ----
+      - { label: "Nome edificio", name: "building_name", widget: "string" }
+      - { label: "Slug (per il link, es. eden-tower)", name: "slug", widget: "string", hint: "Solo minuscole e trattini, niente spazi." }
+      - { label: "Indirizzo", name: "address_line", widget: "string" }
+      - { label: "Stato annuncio (es. In vendita · Agente Unico)", name: "status_label", widget: "string" }
+      - { label: "Camere totali", name: "rooms", widget: "number" }
+      - { label: "Stanze da letto", name: "bedrooms", widget: "number" }
+      - { label: "Bagni", name: "bathrooms", widget: "number" }
+      - { label: "Vista (es. Mare & Montagna)", name: "views_label", widget: "string" }
+      - { label: "Email di contatto per questo immobile", name: "contact_email", widget: "string" }
 
-      - label: "Amenities (toggles which highlights appear)"
+      # ---- Meno frequenti — restano visibili ma più in basso ----
+      - { label: "Riferimento interno", name: "reference", widget: "string" }
+      - { label: "Tipo (es. Appartamento · 4 Locali)", name: "type_line", widget: "string" }
+      - { label: "Condizione", name: "condition", widget: "string", default: "Renovated" }
+      - { label: "Disponibilità", name: "availability", widget: "string", default: "Immediately" }
+      - { label: "Mandato", name: "mandate", widget: "string", default: "Sole Agent" }
+      - { label: "Nome quartiere/i (testo libero per la scheda dettagli)", name: "district_names", widget: "string" }
+
+      # ---- Gruppi chiusi di default — si aprono solo se servono ----
+      - label: "Comfort e Servizi (attiva/disattiva)"
         name: "amenities"
         widget: "object"
         fields:
           - { label: "Concierge", name: "concierge", widget: "boolean", default: false }
           - { label: "Chambre de Bonne", name: "chambre_bonne", widget: "boolean", default: false }
-          - { label: "Mixed Use Allowed", name: "mixed_use", widget: "boolean", default: false }
-          - { label: "Pool", name: "pool", widget: "boolean", default: false }
-          - { label: "Gym", name: "gym", widget: "boolean", default: false }
+          - { label: "Uso misto consentito", name: "mixed_use", widget: "boolean", default: false }
+          - { label: "Piscina", name: "pool", widget: "boolean", default: false }
+          - { label: "Palestra", name: "gym", widget: "boolean", default: false }
 
-      - label: "Media"
+      - label: "📷 Foto e Video"
         name: "media"
         widget: "object"
+        hint: "Foto principali dell'immobile. Le opzioni di inquadratura (Focus) servono solo se una foto è verticale o taglia male — lasciale su Center se va già bene così."
         fields:
-          - label: "Hero Display"
+          - label: "Hero: Video o Foto?"
             name: "hero_mode"
             widget: "select"
             options:
-              - { label: "Video (plays over the fallback photo below)", value: "video" }
-              - { label: "Photo only (never plays a video, even if uploaded below)", value: "photo" }
+              - { label: "Video (se caricato qui sotto)", value: "video" }
+              - { label: "Solo foto (ignora il video anche se presente)", value: "photo" }
             default: "video"
-          - { label: "Hero Fallback / Photo-only Image", name: "hero_fallback_image", widget: "image" }
-          - label: "Hero Fallback Photo Focus (use Top/Bottom for a vertical photo, Left/Right for a wide horizontal one)"
-            name: "hero_fallback_image_focus"
-            widget: "select"
-            options: ["Center", "Top", "Bottom", "Left", "Right"]
-            default: "Center"
+          - { label: "Hero — Foto (usata anche se scegli Solo Foto)", name: "hero_fallback_image", widget: "image" }
+          - { label: "Focus Foto Hero (Top/Bottom se verticale, Left/Right se molto larga)", name: "hero_fallback_image_focus", widget: "select", options: ["Center", "Top", "Bottom", "Left", "Right"], default: "Center", required: false }
+          - label: "Hero — Video 1 (.mp4, ignorato se hai scelto Solo Foto)"
+            name: "hero_video_1"
+            widget: "file"
             required: false
-          - { label: "Hero Video — Clip 1 (.mp4 — ignored if Hero Display is Photo only)", name: "hero_video_1", widget: "file", required: false }
-          - { label: "Hero Video — Clip 2 (optional, .mp4)", name: "hero_video_2", widget: "file", required: false }
-          - { label: "Hero Side Photo (building exterior)", name: "hero_side_image", widget: "image" }
-          - label: "Hero Side Photo Focus (use Top/Bottom for a vertical photo, Left/Right for a wide horizontal one)"
-            name: "hero_side_image_focus"
-            widget: "select"
-            options: ["Center", "Top", "Bottom", "Left", "Right"]
-            default: "Center"
-            required: false
-          - { label: "Intro Photo (living room)", name: "intro_photo", widget: "image" }
-          - label: "Intro Photo Focus (use Top/Bottom for a vertical photo, Left/Right for a wide horizontal one)"
-            name: "intro_photo_focus"
-            widget: "select"
-            options: ["Center", "Top", "Bottom", "Left", "Right"]
-            default: "Center"
-            required: false
-          - { label: "Gallery — Featured Photos (2 large previews)", name: "gallery_featured", widget: "list", field: { label: "Photo", name: "image", widget: "image" } }
-          - { label: "Gallery — Locked Grid (blurred teaser photos)", name: "gallery_locked", widget: "list", field: { label: "Photo", name: "image", widget: "image" } }
+          - { label: "Hero — Video 2 (opzionale, .mp4)", name: "hero_video_2", widget: "file", required: false }
+          - { label: "Foto Edificio (esterno)", name: "hero_side_image", widget: "image" }
+          - { label: "Focus Foto Edificio", name: "hero_side_image_focus", widget: "select", options: ["Center", "Top", "Bottom", "Left", "Right"], default: "Center", required: false }
+          - { label: "Foto Living / Interno", name: "intro_photo", widget: "image" }
+          - { label: "Focus Foto Living", name: "intro_photo_focus", widget: "select", options: ["Center", "Top", "Bottom", "Left", "Right"], default: "Center", required: false }
+          - { label: "Galleria — 2 Foto Grandi in evidenza", name: "gallery_featured", widget: "list", field: { label: "Foto", name: "image", widget: "image" } }
+          - { label: "Galleria — Griglia Bloccata (foto sfocate teaser)", name: "gallery_locked", widget: "list", field: { label: "Foto", name: "image", widget: "image" } }
 
-      - { label: "Gallery Locked Caption", name: "gallery_locked_text", widget: "string", default: "+12 additional photographs, floor plans and a private viewing await you." }
+      - { label: "Testo sotto la griglia bloccata", name: "gallery_locked_text", widget: "string", default: "+12 additional photographs, floor plans and a private viewing await you." }
 
-      - label: "Districts (1 = single district, 2 = comparison like Eden Tower)"
+      - label: "📊 Quartieri per Market Intelligence"
         name: "districts"
         widget: "list"
         max: 2
+        hint: "Scegli 1 quartiere (dati singoli) o 2 (confronto, come Eden Tower). I numeri della sezione Market Intelligence si aggiornano da soli in base alla scelta."
         fields:
-          - label: "District"
+          - label: "Quartiere"
             name: "key"
             widget: "select"
             options: ["monte-carlo", "jardin-exotique", "la-condamine", "larvotto", "la-rousse", "fontvieille", "moneghetti", "monaco-ville"]
 
-      - label: "Feature Cards 1–4 (always shown, e.g. Living Space, Bedrooms, Bathrooms, Views)"
+      - label: "🗂️ Schede Caratteristiche (max 4, sempre visibili)"
         name: "features"
         widget: "list"
         max: 4
+        hint: "Es. Superficie Abitabile, Camere, Bagni, Vista. ATTENZIONE: questi 4 testi sono solo in inglese per ora (non hanno ancora il bottone Traduci) — se li lasci vuoti restano quelli già scritti nella pagina."
         fields:
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Description", name: "desc", widget: "text" }
+          - { label: "Titolo", name: "title", widget: "string" }
+          - { label: "Descrizione", name: "desc", widget: "text" }
 
-      - label: "Bilingual Content"
+      - label: "✍️ Testi (Inglese, Francese, Italiano)"
         name: "i18n"
-        widget: "object"
-        fields:
-          - label: "English"
-            name: "en"
-            widget: "object"
-            fields:
-              - { label: "Hero Title (HTML, use <em> for italics)", name: "hero_title", widget: "string" }
-              - { label: "Description Paragraph 1", name: "p1", widget: "text" }
-              - { label: "Description Paragraph 2", name: "p2", widget: "text" }
-              - { label: "Description Paragraph 3", name: "p3", widget: "text" }
-              - { label: "Quote", name: "quote_text", widget: "text" }
-              - { label: "Quote Attribution", name: "quote_cite", widget: "string" }
-              - { label: "Market Section Title (HTML)", name: "market_title", widget: "string" }
-              - { label: "Market Insight Title", name: "market_insight_title", widget: "string" }
-              - { label: "Market Insight Text", name: "market_insight", widget: "text" }
-          - label: "Français"
-            name: "fr"
-            widget: "object"
-            fields:
-              - { label: "Titre Hero (HTML)", name: "hero_title", widget: "string" }
-              - { label: "Paragraphe 1", name: "p1", widget: "text" }
-              - { label: "Paragraphe 2", name: "p2", widget: "text" }
-              - { label: "Paragraphe 3", name: "p3", widget: "text" }
-              - { label: "Citation", name: "quote_text", widget: "text" }
-              - { label: "Attribution Citation", name: "quote_cite", widget: "string" }
-              - { label: "Titre Section Marché (HTML)", name: "market_title", widget: "string" }
-              - { label: "Titre Analyse Marché", name: "market_insight_title", widget: "string" }
-              - { label: "Texte Analyse Marché", name: "market_insight", widget: "text" }
+        widget: "multilingual-editor"
+        languages: ["en", "fr", "it"]
+        source_language: "en"
+        hint: "Scrivi in inglese, poi premi \"Traduci\" per generare francese e italiano con DeepL. Puoi sempre correggere a mano dopo."
+        text_fields:
+          - { name: "hero_title", label: "Titolo Hero (HTML, <em> per il corsivo)", type: "string" }
+          - { name: "p1", label: "Paragrafo Descrizione 1", type: "text" }
+          - { name: "p2", label: "Paragrafo Descrizione 2", type: "text" }
+          - { name: "p3", label: "Paragrafo Descrizione 3", type: "text" }
+          - { name: "quote_text", label: "Citazione", type: "text" }
+          - { name: "quote_cite", label: "Attribuzione Citazione", type: "string" }
+          - { name: "market_title", label: "Titolo Sezione Mercato (HTML — meglio lasciare vuoto: si genera da solo)", type: "string" }
+          - { name: "market_insight_title", label: "Titolo Analisi di Mercato", type: "string" }
+          - { name: "market_insight", label: "Testo Analisi di Mercato", type: "text" }
 
   # ---- HOMEPAGE ----
   - name: "homepage"
-    label: "Homepage"
+    label: "🏡 Homepage"
     files:
       - file: "content/homepage.json"
-        label: "Homepage Content"
+        label: "Contenuto Homepage"
         name: "homepage"
         fields:
-          - label: "Hero"
+          - label: "Hero (prima schermata)"
             name: "hero"
             widget: "object"
             fields:
-              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
-              - { label: "Title (your name)", name: "title", widget: "string" }
-              - { label: "Role", name: "role", widget: "string" }
-              - { label: "Affiliation", name: "affiliation", widget: "string" }
-              - { label: "Hero Background Photo", name: "hero_image", widget: "image", required: false }
-              - { label: "Scroll Label", name: "scroll_label", widget: "string", default: "Scroll" }
-          - label: "Positioning"
+              - { label: "Sopratitolo", name: "eyebrow", widget: "string" }
+              - { label: "Titolo (il tuo nome)", name: "title", widget: "string" }
+              - { label: "Ruolo", name: "role", widget: "string" }
+              - { label: "Affiliazione", name: "affiliation", widget: "string" }
+              - { label: "Foto di sfondo", name: "hero_image", widget: "image", required: false }
+              - { label: "Etichetta Scroll", name: "scroll_label", widget: "string", default: "Scroll" }
+          - label: "Posizionamento"
             name: "positioning"
             widget: "object"
             fields:
-              - { label: "Section Label", name: "label", widget: "string" }
-              - { label: "Main Statement", name: "statement", widget: "text" }
-              - label: "Three Pillars"
+              - { label: "Etichetta sezione", name: "label", widget: "string" }
+              - { label: "Frase principale", name: "statement", widget: "text" }
+              - label: "I tre pilastri"
                 name: "pillars"
                 widget: "list"
                 max: 3
                 fields:
-                  - { label: "Title", name: "title", widget: "string" }
-                  - { label: "Text", name: "text", widget: "text" }
-          - label: "Market Statistics Strip"
+                  - { label: "Titolo", name: "title", widget: "string" }
+                  - { label: "Testo", name: "text", widget: "text" }
+          - label: "Statistiche di Mercato (striscia numeri)"
             name: "market"
             widget: "object"
             fields:
-              - { label: "Section Label", name: "label", widget: "string" }
-              - label: "Stats (4 boxes)"
+              - { label: "Etichetta sezione", name: "label", widget: "string" }
+              - label: "Numeri (4 riquadri)"
                 name: "stats"
                 widget: "list"
                 max: 4
                 fields:
-                  - { label: "Value", name: "value", widget: "string" }
-                  - { label: "Label", name: "label", widget: "string" }
-                  - { label: "Highlight in gold?", name: "highlight", widget: "boolean", default: false }
-              - { label: "Source Line", name: "source", widget: "string" }
-          - { label: "Featured Property Slug (must match a property entry)", name: "featured_property_slug", widget: "string", default: "eden-tower" }
-          - label: "Journal Teaser (homepage)"
+                  - { label: "Valore", name: "value", widget: "string" }
+                  - { label: "Etichetta", name: "label", widget: "string" }
+                  - { label: "Evidenzia in oro?", name: "highlight", widget: "boolean", default: false }
+              - { label: "Riga fonte", name: "source", widget: "string" }
+          - label: "Proprietà in Evidenza (mostrata in homepage)"
+            name: "featured_property_slug"
+            widget: "relation"
+            collection: "properties"
+            search_fields: ["building_name"]
+            display_fields: ["building_name"]
+            value_field: "{{slug}}"
+            default: "eden-tower"
+            hint: "Cerca e scegli l'immobile da un menu — non serve più scrivere lo slug a mano."
+          - label: "Anteprima Journal (homepage)"
             name: "journal"
             widget: "object"
             fields:
-              - { label: "Section Label", name: "label", widget: "string" }
-              - { label: "Heading", name: "heading", widget: "string" }
-              - label: "Featured Article Slugs (3 cards, in order)"
+              - { label: "Etichetta sezione", name: "label", widget: "string" }
+              - { label: "Titolo", name: "heading", widget: "string" }
+              - label: "Slug articoli in evidenza (3 schede, in ordine)"
                 name: "featured_slugs"
                 widget: "list"
                 max: 3
-                field: { label: "Article slug", name: "slug", widget: "string" }
-          - label: "Contact Section"
+                field:
+                  label: "Articolo"
+                  name: "slug"
+                  widget: "relation"
+                  collection: "articles"
+                  search_fields: ["slug", "i18n.en.title"]
+                  display_fields: ["slug", "i18n.en.title"]
+                  value_field: "{{slug}}"
+                  hint: "Cerca per titolo o slug."
+          - label: "Sezione Contatti"
             name: "contact"
             widget: "object"
             fields:
-              - { label: "Label", name: "label", widget: "string" }
-              - { label: "Heading", name: "heading", widget: "string" }
-              - { label: "Text", name: "text", widget: "text" }
+              - { label: "Etichetta", name: "label", widget: "string" }
+              - { label: "Titolo", name: "heading", widget: "string" }
+              - { label: "Testo", name: "text", widget: "text" }
               - { label: "Email", name: "email", widget: "string" }
-              - { label: "Instagram URL", name: "instagram_url", widget: "string" }
-              - { label: "Instagram Button Label", name: "instagram_label", widget: "string" }
+              - { label: "URL Instagram", name: "instagram_url", widget: "string" }
+              - { label: "Etichetta bottone Instagram", name: "instagram_label", widget: "string" }
           - label: "Footer"
             name: "footer"
             widget: "object"
             fields:
-              - { label: "Name", name: "name", widget: "string" }
-              - { label: "Role Line", name: "role", widget: "string" }
+              - { label: "Nome", name: "name", widget: "string" }
+              - { label: "Riga ruolo", name: "role", widget: "string" }
 
   # ---- JOURNAL ARTICLES ----
   - name: "articles"
-    label: "Journal Articles"
+    label: "📰 Articoli Journal"
+    label_singular: "Articolo"
     folder: "content/articles"
     create: true
     slug: "{{slug}}"
     extension: "json"
     format: "json"
-    identifier_field: "title"
+    identifier_field: "slug"
+    summary: "{{fields.i18n.en.title}}"
     fields:
-      - { label: "Slug (URL id, e.g. 01-how-to-buy-property-in-monaco)", name: "slug", widget: "string" }
-      - { label: "Published?", name: "published", widget: "boolean", default: true }
-      - { label: "Category", name: "category", widget: "string" }
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Date shown", name: "date", widget: "string" }
-      - { label: "Read time", name: "read_time", widget: "string", default: "5 min read" }
-      - { label: "Excerpt (card summary)", name: "excerpt", widget: "text" }
-      - { label: "Hero Photo", name: "hero_image", widget: "image", required: false }
-      - { label: "Article Body (HTML — keep classes like lead, quote, stats, steps)", name: "body_html", widget: "text" }
-      - { label: "Sources Line", name: "sources", widget: "string", required: false }
-      - { label: "Disclaimer", name: "disclaimer", widget: "text", required: false }
-      - { label: "Featured Property Teaser Text", name: "featured_property_text", widget: "string", required: false }
+      - { label: "Slug (id URL, es. 01-how-to-buy-property-in-monaco)", name: "slug", widget: "string" }
+      - { label: "Pubblicato?", name: "published", widget: "boolean", default: true }
+      - { label: "Categoria", name: "category", widget: "string" }
+
+      - label: "✍️ Testi (Inglese, Francese, Italiano)"
+        name: "i18n"
+        widget: "multilingual-editor"
+        languages: ["en", "fr", "it"]
+        source_language: "en"
+        hint: "Scrivi l'articolo in inglese, poi premi \"Traduci\" per generare francese e italiano con DeepL. Rileggi sempre la traduzione prima di pubblicare, specialmente per articoli su tasse/compliance."
+        text_fields:
+          - { name: "title", label: "Titolo", type: "string" }
+          - { name: "excerpt", label: "Estratto (riassunto per la card)", type: "text" }
+          - { name: "body_html", label: "Testo completo (HTML — mantieni le classi come lead, quote, stats, steps)", type: "text" }
+          - { name: "disclaimer", label: "Disclaimer specifico dell'articolo", type: "text" }
+
+      - { label: "Data mostrata", name: "date", widget: "string" }
+      - { label: "Tempo di lettura", name: "read_time", widget: "string", default: "5 min read" }
+      - { label: "Foto di copertina", name: "hero_image", widget: "image", required: false }
+      - { label: "Riga fonti", name: "sources", widget: "string", required: false }
+      - { label: "Testo teaser proprietà in evidenza", name: "featured_property_text", widget: "string", required: false }
 
   - name: "articles_order"
-    label: "Journal — Article Order"
+    label: "🔢 Journal — Ordine Articoli"
     files:
       - file: "content/articles-order.json"
-        label: "Display Order on Journal Index"
+        label: "Ordine di visualizzazione nell'indice Journal"
         name: "articles_order"
         fields:
-          - label: "Article slugs in display order"
+          - label: "Articoli, in ordine di visualizzazione"
             name: "order"
             widget: "list"
-            field: { label: "Slug", name: "slug", widget: "string" }
+            field:
+              label: "Articolo"
+              name: "slug"
+              widget: "relation"
+              collection: "articles"
+              search_fields: ["slug", "i18n.en.title"]
+              display_fields: ["slug", "i18n.en.title"]
+              value_field: "{{slug}}"
+              hint: "Cerca per titolo o slug."
 
   # ---- SOLD PROPERTIES ----
-  # A single file with a list inside — in the CMS this gives you one screen
-  # where you can Add/Remove/Reorder/Duplicate each sold property directly,
-  # no separate files and no manual edits to properties-sold.html needed.
+  # Un unico file con una lista dentro — nel CMS ottieni una sola schermata
+  # dove Aggiungere/Rimuovere/Riordinare/Duplicare ogni immobile venduto,
+  # senza toccare properties-sold.html.
   - name: "sold_properties"
-    label: "Sold Properties"
+    label: "✅ Immobili Venduti"
     files:
       - file: "content/sold-properties.json"
-        label: "Sold Properties"
+        label: "Immobili Venduti"
         name: "sold_properties"
         fields:
-          - label: "Sold Properties"
+          - label: "Immobili Venduti"
             name: "properties"
             widget: "list"
-            label_singular: "Property"
+            label_singular: "Immobile"
             summary: "{{fields.name}} — {{fields.location}} ({{fields.date_sold}})"
             fields:
-              - { label: "Property Name", name: "name", widget: "string" }
-              - { label: "Location", name: "location", widget: "string" }
-              - { label: "Sale Price", name: "price", widget: "string" }
-              - { label: "Year / Date Sold", name: "date_sold", widget: "string" }
-              - { label: "Bedrooms", name: "bedrooms", widget: "number", required: false }
-              - { label: "Surface (e.g. 480m²)", name: "surface", widget: "string", required: false }
-              - { label: "Photo", name: "photo", widget: "image", required: false }
-              - { label: "Short Description", name: "description", widget: "text", required: false }
+              - { label: "Nome Immobile", name: "name", widget: "string" }
+              - { label: "Posizione", name: "location", widget: "string" }
+              - { label: "Prezzo di Vendita", name: "price", widget: "string" }
+              - { label: "Anno / Data Vendita", name: "date_sold", widget: "string" }
+              - { label: "Camere da letto", name: "bedrooms", widget: "number", required: false }
+              - { label: "Superficie (es. 480m²)", name: "surface", widget: "string", required: false }
+              - { label: "Foto", name: "photo", widget: "image", required: false }
+              - { label: "Descrizione breve", name: "description", widget: "text", required: false }

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <pattern id="diag" width="40" height="40" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+      <rect width="40" height="40" fill="#1c1712"/>
+      <rect width="20" height="40" fill="#221b15"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="800" fill="url(#diag)"/>
+  <g fill="none" stroke="#c9a86a" stroke-width="2" opacity="0.85">
+    <rect x="560" y="360" width="80" height="60" rx="4"/>
+    <circle cx="600" cy="392" r="16"/>
+    <path d="M560 372 l14 -14 h52 l14 14" />
+  </g>
+  <text x="600" y="460" font-family="Georgia, 'Times New Roman', serif" font-size="20" letter-spacing="3" fill="#a89a85" text-anchor="middle">PHOTOGRAPH NOT YET UPLOADED</text>
+</svg>

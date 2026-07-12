@@ -88,6 +88,30 @@ vendita (stesso meccanismo già usato per le vendute), fammelo sapere.
 
 ---
 
+## Attivare il bottone "Traduci" (EN → FR/IT con DeepL)
+
+Il CMS ha un bottone "🌐 Traduci" nella sezione Testi di ogni proprietà e
+articolo. Funziona solo quando il sito è pubblicato su Netlify (non con
+`start-local.sh`, che è solo un server statico senza le "functions"):
+
+1. Crea un account gratuito su [deepl.com/pro-api](https://www.deepl.com/pro-api)
+   (il piano Free basta per iniziare: 500.000 caratteri/mese gratis, poi si
+   passa a pagamento se serve di più).
+2. Copia la tua chiave API (finisce con `:fx` se hai preso il piano Free).
+3. Su Netlify: **Site settings → Environment variables** → aggiungi
+   `DEEPL_API_KEY` con la tua chiave.
+4. Rideploya il sito ("Clear cache and deploy") perché la variabile venga
+   letta.
+5. Da `/admin`, scrivi il testo in inglese, premi "🌐 Traduci da English" —
+   francese e italiano si compilano da soli. Rileggili sempre prima di
+   pubblicare, soprattutto per gli articoli su tasse e compliance.
+
+Per testare in locale prima di pubblicare, serve `netlify dev` (invece di
+`start-local.sh`) con la CLI di Netlify installata (`npm install -g netlify-cli`)
+e la stessa variabile `DEEPL_API_KEY` impostata in un file `.env` locale.
+
+---
+
 ## Se qualcosa non funziona
 
 Il problema più comune è dimenticare il Passo 4.5 (Git Gateway) — senza quello,

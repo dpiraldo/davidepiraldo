@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Sitemap statico — copre le pagine esistenti oggi. NON si aggiorna da solo:
+  quando aggiungi una nuova proprietà o un nuovo articolo dal CMS, andrebbe
+  aggiunta anche qui una riga <url> corrispondente. Se il sito cresce molto,
+  conviene generarlo automaticamente in fase di build invece di tenerlo a mano
+  — dillo a Claude quando succede.
+
+  IMPORTANTE: gli URL qui sotto sono relativi (es. /index.html). Le specifiche
+  dei sitemap richiedono URL assoluti — prima di pubblicare, sostituisci ogni
+  "/..." con "https://tuodominio.com/..." (trova-e-sostituisci in questo file).
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>/index.html</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>/properties-index.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>/properties-sold.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>/blog-index.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+
+  <url><loc>/property-template.html?slug=eden-tower</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+
+  <url><loc>/article-template.html?slug=01-how-to-buy-property-in-monaco</loc><priority>0.7</priority></url>
+  <url><loc>/article-template.html?slug=02-monaco-taxes-guide</loc><priority>0.7</priority></url>
+  <url><loc>/article-template.html?slug=03-monaco-residency-guide</loc><priority>0.7</priority></url>
+  <url><loc>/article-template.html?slug=04-why-invest-monaco-real-estate</loc><priority>0.7</priority></url>
+  <url><loc>/article-template.html?slug=05-monaco-districts-guide</loc><priority>0.7</priority></url>
+  <url><loc>/article-template.html?slug=06-mareterra-new-district</loc><priority>0.7</priority></url>
+  <url><loc>/article-template.html?slug=07-fatf-grey-list-explained</loc><priority>0.7</priority></url>
+  <url><loc>/article-template.html?slug=08-fatf-grey-list-2026-update</loc><priority>0.7</priority></url>
+  <url><loc>/article-template.html?slug=09-buy-vs-rent-monaco</loc><priority>0.7</priority></url>
+  <url><loc>/article-template.html?slug=10-bespoke-off-market-monaco</loc><priority>0.7</priority></url>
+
+  <url><loc>/privacy-policy.html</loc><priority>0.2</priority></url>
+  <url><loc>/cookie-policy.html</loc><priority>0.2</priority></url>
+  <url><loc>/legal-disclaimer.html</loc><priority>0.2</priority></url>
+</urlset>

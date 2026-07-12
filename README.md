@@ -62,7 +62,9 @@ per motivi di sicurezza: vedrai contenuto statico di fallback, non è un errore.
 
 ## Come modificare i contenuti
 
-Tutto passa dal CMS (`/admin`). Le sezioni disponibili sono:
+Tutto passa dal CMS (`/admin`) — ora con **etichette in italiano** e le
+sezioni meno usate chiuse di default, per essere più semplice da usare.
+Le sezioni disponibili sono:
 
 - **Properties** — proprietà in vendita (una scheda per immobile). Per ogni
   foto principale (hero, foto edificio, foto living) puoi scegliere se
@@ -71,11 +73,17 @@ Tutto passa dal CMS (`/admin`). Le sezioni disponibili sono:
   orizzontale venga inquadrata bene senza mai cambiare le dimensioni del
   riquadro o il layout della pagina. Puoi anche scegliere **1 o 2 quartieri**
   per ogni proprietà: la sezione "Market Intelligence" (numeri, tabella e
-  testo di analisi) si aggiorna automaticamente in base alla scelta.
+  testo di analisi) si aggiorna automaticamente in base alla scelta. I testi
+  sono ora **Inglese, Francese e Italiano** con un bottone "🌐 Traduci" che usa
+  DeepL per generare FR/IT a partire dall'inglese (richiede una chiave API,
+  vedi `SETUP-CMS.md`).
 - **Sold Properties** — proprietà vendute, come una lista: pulsanti nativi
   per aggiungere, rimuovere, riordinare o duplicare ogni voce
-- **Homepage** — hero, statistiche, proprietà in evidenza, contatti, footer
-- **Journal Articles** — i 10+ articoli del blog, testo incluso
+- **Homepage** — hero, statistiche, **proprietà in evidenza** (ora un menu a
+  tendina che cerca per nome, non più uno slug da scrivere a mano), contatti,
+  footer
+- **Journal Articles** — i 10+ articoli del blog, ora anch'essi in Inglese,
+  Francese e Italiano con lo stesso bottone "🌐 Traduci"
 
 **Uniche due eccezioni manuali** (non gestite dal CMS):
 1. **Aggiungere una nuova proprietà in vendita**: dopo averla creata dal CMS,
@@ -89,12 +97,24 @@ Tutto passa dal CMS (`/admin`). Le sezioni disponibili sono:
 
 ## Prossimi passi
 
-1. Sostituisci le immagini placeholder (i campi foto vuoti nel CMS)
+1. Sostituisci `assets/placeholder.svg` con le foto vere di Eden Tower —
+   caricale dal CMS (sezione Properties → 📷 Foto e Video), non serve
+   toccare i file a mano
 2. Aggiorna l'email di contatto e il link Instagram in `content/homepage.json`
    (dal CMS, sezione Homepage → Contact Section)
 3. Segui `SETUP-CMS.md` per mettere il sito online con il CMS collegato
 4. Se vuoi, usa `social-studio.html` in locale per generare grafiche Instagram —
    non richiede setup, apri il file e basta
+
+## Limiti noti (onestà prima di tutto)
+
+- Le "Schede Caratteristiche" (Living & Entertaining, ecc.) sono per ora solo
+  in inglese — non hanno ancora il bottone Traduci
+- Le pagine legali (Privacy/Cookie/Termini) sono solo in italiano, mentre il
+  resto del sito è EN/FR/IT — da valutare se tradurle anche loro
+- `content/districts.json` (i dati di mercato per quartiere) non è ancora
+  gestibile dal CMS — per aggiornarlo serve modificare il file a mano o
+  chiedere a Claude
 
 ## Stack tecnico
 

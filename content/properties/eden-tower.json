@@ -4,7 +4,7 @@
     "hero_fallback_image": "/images/uploads/chatgpt-image-5-lug-2026-12_52_32.png",
     "hero_video_1": "/images/uploads/eden.mp4",
     "hero_mode": "video",
-    "hero_video_2": "/images/uploads/chatgpt-image-29-giu-2026-15_30_00.png",
+    "hero_video_2": "",
     "hero_side_image_focus": "Center",
     "gallery_locked": [
       {
@@ -74,7 +74,24 @@
   "type_line": "Apartment · 4 Rooms",
   "condition": "Renovated",
   "availability": "Immediately",
-  "features": [],
+  "features": [
+    {
+      "title": "Living & Entertaining",
+      "desc": "Generous reception spaces designed for elegant hosting, with premium finishes and natural light throughout."
+    },
+    {
+      "title": "Three Bedrooms",
+      "desc": "Three beautifully appointed bedrooms with bespoke storage and refined detailing in every private quarter."
+    },
+    {
+      "title": "Two Bathrooms",
+      "desc": "Two luxurious bathrooms with impeccable finishes, completing the interior with flawless functionality."
+    },
+    {
+      "title": "Sea & Mountain Views",
+      "desc": "Panoramic views over the Mediterranean and the mountains — the iconic panorama that defines Monaco."
+    }
+  ],
   "contact_email": "dpiraldo@pastor-reiss.com",
   "i18n": {
     "en": {

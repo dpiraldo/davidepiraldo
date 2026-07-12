@@ -76,12 +76,17 @@
       el.style.display = amenities[key] ? '' : 'none';
     });
 
-    // ---- bilingual content: merge into the i18n object so language
-    // switching (EN/FR buttons) keeps working per-property ----
+    // ---- bilingual (now trilingual) content: merge into the i18n object so
+    // language switching (EN/FR/IT buttons) keeps working per-property ----
     if (window.i18n && p.i18n) {
-      ['en', 'fr'].forEach(lang => {
+      ['en', 'fr', 'it'].forEach(lang => {
         const src = p.i18n[lang];
         if (!src) return;
+        // Defensive: if a property/template doesn't define this language at
+        // all yet (e.g. IT not translated), start from an empty object
+        // instead of throwing — setLang() already falls back to English
+        // for any individual missing key.
+        window.i18n[lang] = window.i18n[lang] || {};
         if (src.hero_title) window.i18n[lang]['hero.title'] = src.hero_title;
         if (src.p1) window.i18n[lang]['ov.p1'] = src.p1;
         if (src.p2) window.i18n[lang]['ov.p2'] = src.p2;
@@ -90,10 +95,8 @@
         if (src.quote_cite) window.i18n[lang]['quote.cite'] = src.quote_cite;
         if (src.market_insight_title) window.i18n[lang]['market_insight_title'] = src.market_insight_title;
         if (src.market_insight) window.i18n[lang]['market_insight'] = src.market_insight;
-        (src.features || []).forEach((f, i) => {
-          window.i18n[lang][`feat.f${i+1}t`] = f.title;
-          window.i18n[lang][`feat.f${i+1}d`] = f.desc;
-        });
+        // NOTA: le "Schede Caratteristiche" (p.features) sono gestite più sotto,
+        // separatamente e solo in inglese — non fanno parte del sistema EN/FR/IT.
       });
       // Re-render whichever language is currently active so the merged
       // strings actually show up (setLang is defined in the template).
@@ -116,19 +119,21 @@
       return typeof item === 'string' ? item : (item.image || item.photo || '');
     }
     const featuredWrap = document.getElementById('galleryFeatured');
-    if (featuredWrap && p.media && p.media.gallery_featured) {
-      featuredWrap.innerHTML = p.media.gallery_featured.map(src =>
-        `<div class="gallery-featured"><img src="${gallerySrc(src)}" alt="${p.building_name || ''}"></div>`
-      ).join('');
+    if (featuredWrap) {
+      const featured = (p.media && p.media.gallery_featured) || [];
+      featuredWrap.innerHTML = featured.length
+        ? featured.map(src => `<div class="gallery-featured"><img src="${gallerySrc(src)}" alt="${p.building_name || ''}"></div>`).join('')
+        : `<div class="gallery-featured" style="display:flex;align-items:center;justify-content:center;color:#999;font-size:13px;letter-spacing:.05em;">Photographs coming soon</div>`;
     }
     const lockedWrap = document.getElementById('galleryLocked');
-    if (lockedWrap && p.media && p.media.gallery_locked) {
-      lockedWrap.innerHTML = p.media.gallery_locked.map(src =>
-        `<img src="${gallerySrc(src)}" alt="">`
-      ).join('');
+    if (lockedWrap) {
+      const locked = (p.media && p.media.gallery_locked) || [];
+      lockedWrap.innerHTML = locked.map(src => `<img src="${gallerySrc(src)}" alt="">`).join('');
     }
 
     // ---- market intelligence: 1 or 2 districts ----
+    window.__lastPropertyData = p;
+    window.__lastDistrictsData = districts;
     renderMarket(p, districts);
 
     // ---- hero video: only start if "Hero Display" is set to Video AND a
@@ -150,25 +155,69 @@
     return path.split('.').reduce((o, k) => (o && o[k] !== undefined ? o[k] : undefined), obj);
   }
 
-  function districtCard(d, tagKey, tagLabel) {
+  // ---- Market Intelligence translations — the district data itself
+  // (content/districts.json) only has _en/_fr descriptive text, so IT falls
+  // back to EN for those specific short labels (e.g. "Slight correction").
+  // District proper names (Jardin Exotique, La Condamine...) are French
+  // place names and stay identical in all 3 languages, same as on any
+  // official Monaco document. ----
+  const MARKET_LABELS = {
+    en: {
+      propertyDistrict: 'Property District', neighbourDistrict: 'Neighbouring District',
+      perSqm: 'per sqm · 2025', change: 'Change 24/25', resales: 'Resales 2025',
+      resaleVolume: 'Resale Volume', newBuild: 'New Build 2020–29',
+      leadCompare: (name) => `Official data from the Observatoire de l'Immobilier 2025 — IMSEE, Principality of Monaco. Comparative analysis of the two districts framing ${name}.`,
+      leadSingle: `Official data from the Observatoire de l'Immobilier 2025 — IMSEE, Principality of Monaco.`,
+      rowPriceSqm: 'Price per sqm (2025)', rowNewBuild: 'New build 2020–2029', rowResalesNum: 'Number of resales',
+      rowResaleVolume: 'Resale volume', rowMarketShare: 'Market share', rowSurface: 'Residential surface (k m²)',
+      rowBuildings: 'Buildings', colIndicator: 'Indicator', colPrincipality: 'Principality', vs: 'vs',
+    },
+    fr: {
+      propertyDistrict: 'Quartier du Bien', neighbourDistrict: 'Quartier Voisin',
+      perSqm: 'prix au m² · 2025', change: 'Variation 24/25', resales: 'Reventes 2025',
+      resaleVolume: 'Montant Reventes', newBuild: 'Neuf 2020–2029',
+      leadCompare: (name) => `Données officielles de l'Observatoire de l'Immobilier 2025 — IMSEE, Principauté de Monaco. Analyse comparative des deux quartiers encadrant ${name}.`,
+      leadSingle: `Données officielles de l'Observatoire de l'Immobilier 2025 — IMSEE, Principauté de Monaco.`,
+      rowPriceSqm: 'Prix au m² (2025)', rowNewBuild: 'Neuf 2020–2029', rowResalesNum: 'Nombre de reventes',
+      rowResaleVolume: 'Montant des reventes', rowMarketShare: 'Part de marché', rowSurface: 'Surface logements (k m²)',
+      rowBuildings: 'Immeubles', colIndicator: 'Indicateur', colPrincipality: 'Principauté', vs: 'vs',
+    },
+    it: {
+      propertyDistrict: 'Quartiere dell\'Immobile', neighbourDistrict: 'Quartiere Limitrofo',
+      perSqm: 'al m² · 2025', change: 'Variazione 24/25', resales: 'Rivendite 2025',
+      resaleVolume: 'Volume Rivendite', newBuild: 'Nuove Costruzioni 2020–29',
+      leadCompare: (name) => `Dati ufficiali dell'Observatoire de l'Immobilier 2025 — IMSEE, Principato di Monaco. Analisi comparativa dei due quartieri che circondano ${name}.`,
+      leadSingle: `Dati ufficiali dell'Observatoire de l'Immobilier 2025 — IMSEE, Principato di Monaco.`,
+      rowPriceSqm: 'Prezzo al m² (2025)', rowNewBuild: 'Nuove costruzioni 2020–2029', rowResalesNum: 'Numero di rivendite',
+      rowResaleVolume: 'Volume rivendite', rowMarketShare: 'Quota di mercato', rowSurface: 'Superficie residenziale (k m²)',
+      rowBuildings: 'Edifici', colIndicator: 'Indicatore', colPrincipality: 'Principato', vs: 'vs',
+    },
+  };
+
+  function districtCard(d, tagKey, tagLabel, lang) {
     if (!d) return '';
     const changeClass = (d.change_24_25_pct || 0) < 0 ? 'down' : 'up';
+    const changeLabel = d[`change_label_${lang}`] || d.change_label_en || '';
+    const resaleNote = d[`resale_volume_note_${lang}`] || d.resale_volume_note_en || '';
+    const L = MARKET_LABELS[lang] || MARKET_LABELS.en;
     return `
       <div class="market-card ${tagKey === 'featured' ? 'featured' : ''}">
         <div class="mc-tag">${tagLabel}</div>
         <div class="mc-name">${d.name_en}</div>
         <div class="mc-price">${d.price_sqm_2025 ? '€' + d.price_sqm_2025.toLocaleString('en-US') : '—'}</div>
-        <div class="mc-unit">per sqm · 2025</div>
+        <div class="mc-unit">${L.perSqm}</div>
         <div class="mc-stats">
-          <div class="mc-stat"><div class="ms-l">Change 24/25</div><div class="ms-v">${d.change_24_25_pct !== null ? fmtPct(d.change_24_25_pct) : '—'}</div><div class="ms-c ${changeClass}">${d.change_label_en || ''}</div></div>
-          <div class="mc-stat"><div class="ms-l">Resales 2025</div><div class="ms-v">${d.resales_2025 ?? '—'}</div><div class="ms-c up">${d.resales_change_pct ? fmtPct(d.resales_change_pct) : ''}</div></div>
-          <div class="mc-stat"><div class="ms-l">Resale Volume</div><div class="ms-v">${d.resale_volume_2025 || '—'}</div><div class="ms-c up">${d.resale_volume_change_pct ? fmtPct(d.resale_volume_change_pct) + (d.resale_volume_note_en ? ' · ' + d.resale_volume_note_en : '') : (d.resale_volume_note_en || '')}</div></div>
-          <div class="mc-stat"><div class="ms-l">New Build 2020–29</div><div class="ms-v">${d.new_build_2020_29 || '—'}</div><div class="ms-c up">${d.new_build_change_pct ? fmtPct(d.new_build_change_pct) : ''}</div></div>
+          <div class="mc-stat"><div class="ms-l">${L.change}</div><div class="ms-v">${d.change_24_25_pct !== null ? fmtPct(d.change_24_25_pct) : '—'}</div><div class="ms-c ${changeClass}">${changeLabel}</div></div>
+          <div class="mc-stat"><div class="ms-l">${L.resales}</div><div class="ms-v">${d.resales_2025 ?? '—'}</div><div class="ms-c up">${d.resales_change_pct ? fmtPct(d.resales_change_pct) : ''}</div></div>
+          <div class="mc-stat"><div class="ms-l">${L.resaleVolume}</div><div class="ms-v">${d.resale_volume_2025 || '—'}</div><div class="ms-c up">${d.resale_volume_change_pct ? fmtPct(d.resale_volume_change_pct) + (resaleNote ? ' · ' + resaleNote : '') : resaleNote}</div></div>
+          <div class="mc-stat"><div class="ms-l">${L.newBuild}</div><div class="ms-v">${d.new_build_2020_29 || '—'}</div><div class="ms-c up">${d.new_build_change_pct ? fmtPct(d.new_build_change_pct) : ''}</div></div>
         </div>
       </div>`;
   }
 
   function renderMarket(p, districts) {
+    const lang = window.lang || 'en';
+    const L = MARKET_LABELS[lang] || MARKET_LABELS.en;
     const refs = p.districts || [];
     const looked = refs.map(r => ({ ref: r, d: districts[r.key] })).filter(x => x.d);
     const principality = districts['principality'];
@@ -183,31 +232,32 @@
     if (looked.length === 2) {
       // dual-district comparison, e.g. Eden Tower
       cardsWrap.innerHTML =
-        districtCard(looked[0].d, 'featured', 'Property District') +
-        districtCard(looked[1].d, 'neighbour', 'Neighbouring District');
-      if (titleEl) titleEl.innerHTML = `${looked[0].d.name_en} <em>vs</em> ${looked[1].d.name_en}`;
-      if (leadEl) leadEl.textContent = `Official data from the Observatoire de l'Immobilier 2025 — IMSEE, Principality of Monaco. Comparative analysis of the two districts framing ${p.building_name || 'this property'}.`;
-      if (tableEl) tableEl.innerHTML = marketTableHTML([looked[0].d, looked[1].d], principality, [looked[0].d.name_en, looked[1].d.name_en]);
+        districtCard(looked[0].d, 'featured', L.propertyDistrict, lang) +
+        districtCard(looked[1].d, 'neighbour', L.neighbourDistrict, lang);
+      if (titleEl) titleEl.innerHTML = `${looked[0].d.name_en} <em>${L.vs}</em> ${looked[1].d.name_en}`;
+      if (leadEl) leadEl.textContent = L.leadCompare(p.building_name || 'this property');
+      if (tableEl) tableEl.innerHTML = marketTableHTML([looked[0].d, looked[1].d], principality, [looked[0].d.name_en, looked[1].d.name_en], lang);
     } else if (looked.length === 1) {
       // single district, the common case
-      cardsWrap.innerHTML = districtCard(looked[0].d, 'featured', 'Property District');
+      cardsWrap.innerHTML = districtCard(looked[0].d, 'featured', L.propertyDistrict, lang);
       if (titleEl) titleEl.innerHTML = looked[0].d.name_en;
-      if (leadEl) leadEl.textContent = `Official data from the Observatoire de l'Immobilier 2025 — IMSEE, Principality of Monaco.`;
-      if (tableEl) tableEl.innerHTML = marketTableHTML([looked[0].d], principality, [looked[0].d.name_en]);
+      if (leadEl) leadEl.textContent = L.leadSingle;
+      if (tableEl) tableEl.innerHTML = marketTableHTML([looked[0].d], principality, [looked[0].d.name_en], lang);
     }
   }
 
-  function marketTableHTML(districtList, principality, names) {
+  function marketTableHTML(districtList, principality, names, lang) {
+    const L = MARKET_LABELS[lang] || MARKET_LABELS.en;
     const rows = [
-      ['Price per sqm (2025)', d => d.price_sqm_2025 ? '€' + d.price_sqm_2025.toLocaleString('en-US') : '—'],
-      ['New build 2020–2029', d => d.new_build_2020_29 || '—'],
-      ['Number of resales', d => d.resales_2025 ?? '—'],
-      ['Resale volume', d => d.resale_volume_2025 || '—'],
-      ['Market share', d => d.market_share_pct ? d.market_share_pct + '%' : '—'],
-      ['Residential surface (k m²)', d => d.residential_surface_k_sqm ?? '—'],
-      ['Buildings', d => d.buildings ?? '—'],
+      [L.rowPriceSqm, d => d.price_sqm_2025 ? '€' + d.price_sqm_2025.toLocaleString('en-US') : '—'],
+      [L.rowNewBuild, d => d.new_build_2020_29 || '—'],
+      [L.rowResalesNum, d => d.resales_2025 ?? '—'],
+      [L.rowResaleVolume, d => d.resale_volume_2025 || '—'],
+      [L.rowMarketShare, d => d.market_share_pct ? d.market_share_pct + '%' : '—'],
+      [L.rowSurface, d => d.residential_surface_k_sqm ?? '—'],
+      [L.rowBuildings, d => d.buildings ?? '—'],
     ];
-    const head = `<thead><tr><th>Indicator</th>${names.map(n => `<th>${n}</th>`).join('')}<th>Principality</th></tr></thead>`;
+    const head = `<thead><tr><th>${L.colIndicator}</th>${names.map(n => `<th>${n}</th>`).join('')}<th>${L.colPrincipality}</th></tr></thead>`;
     const body = rows.map(([label, fn], i) => {
       const cells = districtList.map(d => `<td>${fn(d)}</td>`).join('');
       const pCell = `<td>${fn(principality)}</td>`;
@@ -215,4 +265,13 @@
     }).join('');
     return head + `<tbody>${body}</tbody>`;
   }
+
+  // Exposed so the language-switch buttons (setLang, in property-template.html)
+  // can re-render this section in the newly selected language — otherwise it
+  // would stay frozen in whatever language was active on first page load.
+  window.__rerenderMarket = function () {
+    if (window.__lastPropertyData && window.__lastDistrictsData) {
+      renderMarket(window.__lastPropertyData, window.__lastDistrictsData);
+    }
+  };
 })();

@@ -625,7 +625,7 @@
     }
     .quote-bg {
       position: absolute; inset: 0;
-      background: url('assets/monaco-panorama.png') center/cover;
+      background: url('assets/placeholder.svg') center/cover;
       filter: brightness(0.35);
     }
     .quote blockquote {
@@ -775,34 +775,34 @@
   <!-- HERO: desktop = video + building | mobile = 2 static photos -->
   <section class="hero-split hero-desktop" id="top">
     <div class="hero-video-col">
-      <img class="hero-video-fallback" id="heroFallback" data-cms-bg="hero_fallback_image" src="assets/monaco-panorama.png" alt="Monaco">
+      <img class="hero-video-fallback" id="heroFallback" data-cms-bg="hero_fallback_image" src="assets/placeholder.svg" alt="Monaco">
       <video id="heroVid1" data-cms-poster="hero_fallback_image"
         muted playsinline webkit-playsinline
         preload="metadata"
-        poster="assets/monaco-panorama.png"></video>
+        poster="assets/placeholder.svg"></video>
       <video id="heroVid2" data-cms-poster="hero_fallback_image"
         muted playsinline webkit-playsinline
         preload="none"
-        poster="assets/monaco-panorama.png"></video>
+        poster="assets/placeholder.svg"></video>
       <button class="hero-play-hint" id="heroPlayHint" type="button" aria-label="Play video">
         <span>▶</span>
         <span data-i18n="hero.tapPlay">Tap to play</span>
       </button>
     </div>
     <div class="hero-image-col">
-      <img data-cms-bg="hero_side_image" data-cms-alt="building_name" src="assets/eden-tower.png" alt="Eden Tower, Monaco">
+      <img data-cms-bg="hero_side_image" data-cms-alt="building_name" src="assets/placeholder.svg" alt="Eden Tower, Monaco">
     </div>
   </section>
 
   <section class="hero-mobile-only" id="top-mobile">
-    <img data-cms-bg="hero_fallback_image" src="assets/monaco-panorama.png" alt="Panorama Monaco">
-    <img data-cms-bg="hero_side_image" src="assets/eden-tower.png" alt="Building">
+    <img data-cms-bg="hero_fallback_image" src="assets/placeholder.svg" alt="Panorama Monaco">
+    <img data-cms-bg="hero_side_image" src="assets/placeholder.svg" alt="Building">
   </section>
 
   <!-- INTRO: living photo + title + description -->
   <section class="hero-intro" id="residence">
     <div class="hero-intro-photo">
-      <img data-cms-bg="intro_photo" src="assets/gallery/living.png" alt="Living room">
+      <img data-cms-bg="intro_photo" src="assets/placeholder.svg" alt="Living room">
     </div>
     <div class="hero-intro-content">
       <span class="hero-status" data-cms="status_label">For Sale · Sole Agent</span>
@@ -830,7 +830,7 @@
         <div class="highlight-item"><span class="h-val">3</span><span class="h-lbl" data-i18n="hl.beds">Bedrooms</span></div>
         <div class="highlight-item"><span class="h-val">2</span><span class="h-lbl" data-i18n="hl.baths">Bathrooms</span></div>
         <div class="highlight-item"><span class="h-val">✦</span><span class="h-lbl" data-i18n="hl.renovated">Renovated</span></div>
-        <div class="highlight-item"><span class="h-val">Ref.</span><span class="h-lbl" data-cms="reference">EDEN TOWER</span></div>
+        <div class="highlight-item"><span class="h-val" data-i18n="hl.ref">Ref.</span><span class="h-lbl" data-cms="reference">EDEN TOWER</span></div>
         <div class="highlight-item"><span class="h-val">→</span><span class="h-lbl" data-i18n="hl.available">Available Now</span></div>
       </div>
     </div>
@@ -902,8 +902,8 @@
         <div class="detail-row"><span class="dk" data-i18n="det.views">Views</span><span class="dv" data-cms="views_label" data-i18n="det.viewsVal">Sea · Mountain</span></div>
         <div class="detail-row" data-amenity="chambre_bonne"><span class="dk" data-i18n="det.bonne">Chambre de Bonne</span><span class="dv" data-i18n="det.bonneVal">Available in building (optional)</span></div>
         <div class="detail-row" data-amenity="concierge"><span class="dk" data-i18n="det.concierge">Concierge</span><span class="dv" data-i18n="det.yes">Yes</span></div>
-        <div class="detail-row" data-amenity="pool"><span class="dk">Pool</span><span class="dv" data-i18n="det.yes">Yes</span></div>
-        <div class="detail-row" data-amenity="gym"><span class="dk">Gym</span><span class="dv" data-i18n="det.yes">Yes</span></div>
+        <div class="detail-row" data-amenity="pool"><span class="dk" data-i18n="det.pool">Pool</span><span class="dv" data-i18n="det.yes">Yes</span></div>
+        <div class="detail-row" data-amenity="gym"><span class="dk" data-i18n="det.gym">Gym</span><span class="dv" data-i18n="det.yes">Yes</span></div>
         <div class="detail-row"><span class="dk" data-i18n="det.availability">Availability</span><span class="dv" data-cms="availability" data-i18n="det.now">Immediately</span></div>
         <div class="detail-row"><span class="dk" data-i18n="det.mandate">Mandate</span><span class="dv" data-cms="mandate" data-i18n="det.sole">Sole Agent</span></div>
       </div>
@@ -948,13 +948,13 @@
         </div>
         <div class="feature-card" data-amenity="pool">
           <div class="feature-num">07</div>
-          <h3>Swimming Pool</h3>
-          <p>A private or shared pool — a rare and sought-after amenity in central Monaco.</p>
+          <h3 data-i18n="feat.f7t">Swimming Pool</h3>
+          <p data-i18n="feat.f7d">A private or shared pool — a rare and sought-after amenity in central Monaco.</p>
         </div>
         <div class="feature-card" data-amenity="gym">
           <div class="feature-num">08</div>
-          <h3>Fitness Centre</h3>
-          <p>A dedicated fitness centre on site, available to residents.</p>
+          <h3 data-i18n="feat.f8t">Fitness Centre</h3>
+          <p data-i18n="feat.f8d">A dedicated fitness centre on site, available to residents.</p>
         </div>
       </div>
     </div>
@@ -978,8 +978,8 @@
       </div>
 
       <div class="market-insight">
-        <h4 id="marketInsightTitle" data-cms-i18n="market_insight_title">Why this property represents a strategic opportunity</h4>
-        <p id="marketInsightText" data-cms-i18n="market_insight">Market analysis goes here.</p>
+        <h4 id="marketInsightTitle" data-i18n="market_insight_title" data-cms-i18n="market_insight_title">Why this property represents a strategic opportunity</h4>
+        <p id="marketInsightText" data-i18n="market_insight" data-cms-i18n="market_insight">Market analysis goes here.</p>
         <p class="market-source" data-i18n="mkt.source">Source: IMSEE — Observatoire de l'Immobilier, February 2026 · 2025 Data</p>
       </div>
     </div>
@@ -1003,17 +1003,17 @@
         <div class="contact-item"><div class="ci-l" data-i18n="con.ref">Reference</div><div class="ci-v" data-cms="reference">EDEN TOWER</div></div>
         <div class="contact-item"><div class="ci-l" data-i18n="con.avail">Availability</div><div class="ci-v" data-cms="availability" data-i18n="con.now">Immediately</div></div>
       </div>
-      <a href="mailto:hello@example.com" class="btn-primary" data-i18n="con.cta" id="contactCta">Request Information</a>
+      <a href="mailto:dpiraldo@pastor-reiss.com" class="btn-primary" data-i18n="con.cta" id="contactCta">Request Information</a>
     </div>
   </section>
 
   <footer>
     <p data-i18n="foot.copy" id="footerCopy">© 2026 · Monaco · Market data: IMSEE Observatoire de l'Immobilier 2025</p>
     <span class="ref" data-cms="reference">REF. EDEN TOWER</span>
-    <div style="margin-top:12px;font-size:10px;letter-spacing:.08em;color:var(--warm-gray);text-transform:uppercase;">
-      <a href="privacy-policy.html">Privacy Policy</a> ·
-      <a href="cookie-policy.html">Cookie Policy</a> ·
-      <a href="legal-disclaimer.html">Terms &amp; Disclaimer</a>
+    <div style="width:100%;margin-top:16px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;opacity:0.6;">
+      <a href="/privacy-policy.html">Privacy Policy</a> ·
+      <a href="/cookie-policy.html">Cookie Policy</a> ·
+      <a href="/legal-disclaimer.html">Terms &amp; Disclaimer</a>
     </div>
   </footer>
 
@@ -1026,7 +1026,7 @@
         'hero.title': 'A Living <em>Masterpiece</em><br>in the Heart of Monaco',
         'hero.rooms': 'Rooms', 'hero.beds': 'Bedrooms', 'hero.baths': 'Bathrooms', 'hero.views': 'Sea & Mountain Views',
         'hero.tapPlay': 'Tap to play',
-        'hl.rooms': 'Rooms', 'hl.beds': 'Bedrooms', 'hl.baths': 'Bathrooms', 'hl.renovated': 'Renovated', 'hl.available': 'Available Now',
+        'hl.rooms': 'Rooms', 'hl.beds': 'Bedrooms', 'hl.baths': 'Bathrooms', 'hl.renovated': 'Renovated', 'hl.available': 'Available Now', 'hl.ref': 'Ref.',
         'ov.eyebrow': 'The Residence',
         'ov.title': 'Eden Tower,<br><em>25 Boulevard de Belgique</em>',
         'ov.p1': 'Designed for both elegant entertaining and everyday living, this renovated 4-room apartment offers three beautifully appointed bedrooms and two luxurious bathrooms within the prestigious Eden Tower.',
@@ -1056,6 +1056,7 @@
         'det.views': 'Views', 'det.viewsVal': 'Sea · Mountain',
         'det.bonne': 'Chambre de Bonne', 'det.bonneVal': 'Available in building (optional)',
         'det.concierge': 'Concierge', 'det.availability': 'Availability', 'det.now': 'Immediately',
+        'det.pool': 'Pool', 'det.gym': 'Gym',
         'det.mandate': 'Mandate', 'det.sole': 'Sole Agent',
         'feat.eyebrow': 'Highlights', 'feat.title': 'The Art of Living',
         'feat.f1t': 'Living & Entertaining', 'feat.f1d': 'Generous reception spaces designed for elegant hosting, with premium finishes and natural light throughout.',
@@ -1064,6 +1065,8 @@
         'feat.f4t': 'Sea & Mountain Views', 'feat.f4d': 'Panoramic views over the Mediterranean and the mountains — the iconic panorama that defines Monaco.',
         'feat.f5t': 'Concierge Services', 'feat.f5d': 'Dedicated concierge for residents — comfort, discretion and peace of mind, every day.',
         'feat.f6t': 'Chambre de Bonne', 'feat.f6d': 'Optional service room available in the same building — staff, guests, home office or additional storage.',
+        'feat.f7t': 'Swimming Pool', 'feat.f7d': 'A private or shared pool — a rare and sought-after amenity in central Monaco.',
+        'feat.f8t': 'Fitness Centre', 'feat.f8d': 'A dedicated fitness centre on site, available to residents.',
         'mkt.eyebrow': 'Market Intelligence', 'mkt.title': 'Jardin Exotique <em>vs</em> La Condamine',
         'mkt.lead': 'Official data from the Observatoire de l\'Immobilier 2025 — IMSEE, Principality of Monaco. Comparative analysis of the two districts framing Eden Tower.',
         'mkt.tag1': 'Property District', 'mkt.tag2': 'Neighbouring District', 'mkt.perSqm': 'per sqm · 2025',
@@ -1085,131 +1088,137 @@
       },
       fr: {
         'nav.residence': 'Résidence', 'nav.gallery': 'Galerie', 'nav.details': 'Détails',
-        'nav.market': 'Marché', 'nav.contact': 'Contact', 'nav.cta': 'Nous Consulter',
+        'nav.market': 'Marché', 'nav.contact': 'Contact', 'nav.cta': 'Demander',
         'hero.status': 'À Vendre · Agent Exclusif',
         'hero.title': 'Un Chef-d\'Œuvre<br><em>Habitable</em> au Cœur de Monaco',
-        'hero.rooms': 'Pièces', 'hero.beds': 'Chambres', 'hero.baths': 'Salles de Bain', 'hero.views': 'Vue Mer & Montagne',
+        'hero.rooms': 'Pièces', 'hero.beds': 'Chambres', 'hero.baths': 'Salles de bain', 'hero.views': 'Vue Mer & Montagne',
         'hero.tapPlay': 'Toucher pour lire',
-        'hl.rooms': 'Pièces', 'hl.beds': 'Chambres', 'hl.baths': 'Salles de Bain', 'hl.renovated': 'Rénové', 'hl.available': 'Disponible Immédiatement',
+        'hl.rooms': 'Pièces', 'hl.beds': 'Chambres', 'hl.baths': 'Salles de bain', 'hl.renovated': 'Rénové', 'hl.available': 'Disponible', 'hl.ref': 'Réf.',
         'ov.eyebrow': 'La Résidence',
         'ov.title': 'Eden Tower,<br><em>25 Boulevard de Belgique</em>',
-        'ov.p1': 'Conçu tant pour recevoir avec élégance que pour le confort du quotidien, cet appartement rénové de quatre pièces réunit trois chambres somptueusement agencées et deux salles de bain d\'un raffinement absolu, au sein du prestigieux Eden Tower.',
-        'ov.p2': 'De vastes volumes, des rangements sur mesure et des finitions d\'une rare élégance façonnent un intérieur d\'une fonctionnalité irréprochable. Les vues panoramiques sur la Méditerranée et l\'arrière-pays incarnent le prestige indiscutable de la Principauté.',
-        'ov.p3': 'Les résidents bénéficient d\'une conciergerie dédiée, garante d\'un confort, d\'une discrétion et d\'une sérénité de chaque instant. Bien plus qu\'un appartement — une résidence pensée avec l\'exigence d\'une collection d\'art.',
+        'ov.p1': 'Conçu pour recevoir avec élégance autant que pour le quotidien, cet appartement rénové de 4 pièces offre trois chambres superbement aménagées et deux salles de bain luxueuses au sein du prestigieux Eden Tower.',
+        'ov.p2': 'Des espaces de vie généreux, des rangements sur mesure et des finitions raffinées composent un intérieur d\'une fonctionnalité impeccable. Les vues panoramiques sur la Méditerranée et les montagnes incarnent le prestige incomparable de Monaco.',
+        'ov.p3': 'Les résidents bénéficient des services de conciergerie, garantissant confort, discrétion et sérénité au quotidien. Plus qu\'un appartement, une résidence pensée avec la précision d\'une collection d\'art.',
         'gal.eyebrow': 'Aperçu Exclusif',
-        'gal.title': 'Un Aperçu <em>Intimiste</em>',
-        'gal.lead': 'Une sélection soigneusement choisie. La galerie complète est réservée à une demande privée.',
-        'gal.locked': '12 photographies supplémentaires, les plans et une visite privée vous attendent.',
-        'gal.cta': 'En Découvrir Davantage',
+        'gal.title': 'Un Aperçu <em>Privé</em>',
+        'gal.lead': 'Une sélection soignée. La galerie complète est disponible sur demande privée.',
+        'gal.locked': '+12 photographies supplémentaires, plans et visite privée vous attendent.',
+        'gal.cta': 'Découvrir Plus',
         'modal.eyebrow': 'Accès Privé', 'modal.title': 'Demander la Galerie Complète',
-        'modal.lead': 'Indiquez votre email ou adressez-nous un message pour recevoir la galerie complète, les plans, et organiser une visite privée.',
-        'modal.email': 'votre@email.com', 'modal.message': 'Votre message (facultatif)',
+        'modal.lead': 'Entrez votre email ou envoyez-nous un message pour recevoir la galerie complète, les plans et organiser une visite privée.',
+        'modal.email': 'votre@email.com', 'modal.message': 'Votre message (optionnel)',
         'modal.submit': 'Envoyer la Demande', 'modal.or': 'ou',
-        'modal.dm': 'Nous Écrire sur Instagram',
-        'modal.thanks': 'Merci.', 'modal.confirm': 'Nous reviendrons vers vous sous peu avec l\'accès complet.',
-        'vid.eyebrow': 'Visite Filmée', 'vid.title': 'Découvrir Eden Tower',
-        'vid.lead': 'Une visite cinématographique de cette résidence d\'exception au cœur de Monaco.',
-        'bonne.badge': 'En Option · Même Immeuble',
+        'modal.dm': 'Envoyer un DM sur Instagram',
+        'modal.thanks': 'Merci.', 'modal.confirm': 'Nous vous contacterons sous peu avec l\'accès complet.',
+        'vid.eyebrow': 'Visite Vidéo', 'vid.title': 'Découvrir Eden Tower',
+        'vid.lead': 'Une visite cinématographique de cette résidence exceptionnelle au cœur de Monaco.',
+        'bonne.badge': 'Optionnel · Même Immeuble',
         'bonne.title': 'Chambre de <em>Bonne</em>',
-        'bonne.lead': 'Une chambre de service supplémentaire peut être disponible dans le même immeuble — offrant une flexibilité précieuse pour le personnel, des invités, un bureau privé ou un espace de rangement.',
-        'bonne.note': 'Sous réserve de disponibilité et de négociation distincte. Contactez-nous pour plus de détails sur cette opportunité unique au sein de l\'Eden Tower.',
+        'bonne.lead': 'Une chambre de service supplémentaire peut être disponible dans le même immeuble — offrant une flexibilité exceptionnelle pour le personnel, les invités, un bureau privé ou un espace de stockage.',
+        'bonne.note': 'Sous réserve de disponibilité et de négociation séparée. Contactez-nous pour plus de détails sur cette opportunité unique au sein de l\'Eden Tower.',
         'det.eyebrow': 'Fiche du Bien', 'det.title': 'Détails de l\'Annonce',
         'det.ref': 'Référence', 'det.address': 'Adresse', 'det.building': 'Immeuble', 'det.district': 'Quartier',
-        'det.type': 'Type', 'det.typeVal': 'Appartement · 4 Pièces', 'det.beds': 'Chambres', 'det.baths': 'Salles de Bain',
+        'det.type': 'Type', 'det.typeVal': 'Appartement · 4 Pièces', 'det.beds': 'Chambres', 'det.baths': 'Salles de bain',
         'det.condition': 'État', 'det.renovated': 'Rénové', 'det.mixed': 'Usage Mixte', 'det.yes': 'Oui',
         'det.views': 'Vues', 'det.viewsVal': 'Mer · Montagne',
-        'det.bonne': 'Chambre de Bonne', 'det.bonneVal': 'Disponible dans l\'immeuble (en option)',
+        'det.bonne': 'Chambre de Bonne', 'det.bonneVal': 'Disponible dans l\'immeuble (optionnel)',
         'det.concierge': 'Conciergerie', 'det.availability': 'Disponibilité', 'det.now': 'Immédiate',
+        'det.pool': 'Piscine', 'det.gym': 'Salle de Sport',
         'det.mandate': 'Mandat', 'det.sole': 'Agent Exclusif',
         'feat.eyebrow': 'Points Forts', 'feat.title': 'L\'Art de Vivre',
-        'feat.f1t': 'Réception & Vie Quotidienne', 'feat.f1d': 'De généreux espaces de réception conçus pour recevoir avec élégance, rehaussés de finitions premium et d\'une lumière naturelle abondante.',
-        'feat.f2t': 'Trois Chambres', 'feat.f2d': 'Trois chambres somptueusement agencées, dotées de rangements sur mesure et de finitions d\'un raffinement exquis.',
-        'feat.f3t': 'Deux Salles de Bain', 'feat.f3d': 'Deux salles de bain d\'un luxe discret, aux finitions impeccables, pour une fonctionnalité sans compromis.',
-        'feat.f4t': 'Vue Mer & Montagne', 'feat.f4d': 'Des vues panoramiques sur la Méditerranée et l\'arrière-pays — le panorama emblématique qui définit Monaco.',
-        'feat.f5t': 'Conciergerie', 'feat.f5d': 'Une conciergerie dédiée aux résidents — confort, discrétion et tranquillité, chaque jour.',
-        'feat.f6t': 'Chambre de Bonne', 'feat.f6d': 'Une chambre de service en option, disponible dans le même immeuble — pour le personnel, des invités, un bureau ou un espace de rangement supplémentaire.',
-        'mkt.eyebrow': 'Intelligence de Marché', 'mkt.title': 'Jardin Exotique <em>vs</em> La Condamine',
-        'mkt.lead': 'Données officielles de l\'Observatoire de l\'Immobilier 2025 — IMSEE, Principauté de Monaco. Analyse comparative des deux quartiers qui encadrent l\'Eden Tower.',
-        'mkt.tag1': 'Quartier du Bien', 'mkt.tag2': 'Quartier Voisin', 'mkt.perSqm': 'au m² · 2025',
+        'feat.f1t': 'Réception & Vie Quotidienne', 'feat.f1d': 'Des espaces de réception généreux pour recevoir avec élégance, finitions premium et lumière naturelle.',
+        'feat.f2t': 'Trois Chambres', 'feat.f2d': 'Trois chambres superbement aménagées avec rangements sur mesure et finitions raffinées.',
+        'feat.f3t': 'Deux Salles de Bain', 'feat.f3d': 'Deux salles de bain luxueuses aux finitions impeccables, pour une fonctionnalité sans compromis.',
+        'feat.f4t': 'Vue Mer & Montagne', 'feat.f4d': 'Vues panoramiques sur la Méditerranée et les montagnes — le panorama emblématique de Monaco.',
+        'feat.f5t': 'Conciergerie', 'feat.f5d': 'Service de conciergerie dédié aux résidents — confort, discrétion et tranquillité au quotidien.',
+        'feat.f6t': 'Chambre de Bonne', 'feat.f6d': 'Chambre de service optionnelle dans le même immeuble — personnel, invités, bureau ou stockage.',
+        'feat.f7t': 'Piscine', 'feat.f7d': 'Une piscine privée ou partagée — un équipement rare et très recherché au cœur de Monaco.',
+        'feat.f8t': 'Salle de Sport', 'feat.f8d': 'Une salle de sport dédiée sur place, à la disposition des résidents.',
+        'mkt.eyebrow': 'Intelligence Marché', 'mkt.title': 'Jardin Exotique <em>vs</em> La Condamine',
+        'mkt.lead': 'Données officielles de l\'Observatoire de l\'Immobilier 2025 — IMSEE, Principauté de Monaco. Analyse comparative des deux quartiers encadrant l\'Eden Tower.',
+        'mkt.tag1': 'Quartier du Bien', 'mkt.tag2': 'Quartier Voisin', 'mkt.perSqm': 'prix au m² · 2025',
         'mkt.change': 'Variation 24/25', 'mkt.correction': 'Légère correction', 'mkt.stable': 'Stable',
-        'mkt.resales': 'Reventes 2025', 'mkt.volume': 'Montant des Reventes', 'mkt.record': '+88,5 % · Record historique',
+        'mkt.resales': 'Reventes 2025', 'mkt.volume': 'Montant Reventes', 'mkt.record': '+88,5% · Record historique',
         'mkt.newBuild': 'Neuf 2020–2029',
         'mkt.col1': 'Indicateur', 'mkt.col4': 'Principauté',
         'mkt.r1': 'Prix au m² (2025)', 'mkt.r2': 'Neuf 2020–2029', 'mkt.r3': 'Nombre de reventes',
-        'mkt.r4': 'Montant des reventes', 'mkt.r5': 'Part de marché', 'mkt.r6': 'Surface résidentielle (milliers de m²)', 'mkt.r7': 'Immeubles',
-        'mkt.insightTitle': 'Pourquoi Eden Tower constitue une opportunité stratégique',
-        'mkt.insight': 'L\'Observatoire 2025 situe le Jardin Exotique au troisième niveau de prix de la Principauté (45 168 €/m²), avec un record historique de 246,7 M€ de reventes (+88,5 %) — signal manifeste d\'une demande et d\'une liquidité soutenues. La Condamine, à quelques instants à pied, se situe à un niveau intermédiaire de 52 104 €/m². L\'Eden Tower, au 25 Boulevard de Belgique, occupe une position privilégiée entre les deux quartiers : un accès immédiat au port et à la Condamine, conjugué à l\'exclusivité résidentielle du Jardin Exotique et à des vues panoramiques sur la mer et la montagne.',
+        'mkt.r4': 'Montant des reventes', 'mkt.r5': 'Part de marché', 'mkt.r6': 'Surface logements (k m²)', 'mkt.r7': 'Immeubles',
+        'mkt.insightTitle': 'Pourquoi Eden Tower représente une opportunité stratégique',
+        'mkt.insight': 'L\'Observatoire 2025 classe le Jardin Exotique au troisième niveau de prix de la Principauté (45 168 €/m²), avec un record historique de 246,7 M€ de reventes (+88,5%) — signal fort de demande et de liquidité. La Condamine, à quelques minutes, se situe au niveau intermédiaire à 52 104 €/m². L\'Eden Tower, au 25 Boulevard de Belgique, occupe une position privilégiée entre les deux quartiers : accès immédiat au port et à la Condamine, avec l\'exclusivité résidentielle du Jardin Exotique et des vues panoramiques mer et montagne.',
         'mkt.source': 'Source : IMSEE — Observatoire de l\'Immobilier, Février 2026 · Données 2025',
-        'quote.text': '« Bien plus qu\'un appartement, une résidence pensée avec la précision d\'une collection d\'art, où chaque détail reflète l\'élégance, le savoir-faire et le prestige incomparable de Monaco. »',
+        'quote.text': '« Plus qu\'un appartement, une résidence pensée avec la précision d\'une collection d\'art, où chaque détail reflète l\'élégance, le savoir-faire et le prestige incomparable de Monaco. »',
         'quote.cite': 'Eden Tower · Réf. EDEN TOWER · Agent Exclusif',
-        'con.eyebrow': 'Contact', 'con.title': 'Organiser une <em>Visite Privée</em>',
+        'con.eyebrow': 'Contact', 'con.title': 'Planifier une <em>Visite Privée</em>',
         'con.address': 'Adresse', 'con.building': 'Immeuble', 'con.ref': 'Référence', 'con.avail': 'Disponibilité',
         'con.now': 'Immédiate', 'con.cta': 'Demander des Informations',
-        'foot.copy': '© 2026 Eden Tower · Monaco · Données de marché : IMSEE, Observatoire de l\'Immobilier 2025'
+        'foot.copy': '© 2026 Eden Tower · Monaco · Données marché : IMSEE Observatoire de l\'Immobilier 2025'
       },
       it: {
         'nav.residence': 'Residenza', 'nav.gallery': 'Galleria', 'nav.details': 'Dettagli',
-        'nav.market': 'Mercato', 'nav.contact': 'Contatto', 'nav.cta': 'Richiedi Informazioni',
-        'hero.status': 'In Vendita · Agente Esclusivo',
+        'nav.market': 'Mercato', 'nav.contact': 'Contatti', 'nav.cta': 'Richiedi',
+        'hero.status': 'In Vendita · Agente Unico',
         'hero.title': 'Un Capolavoro <em>Abitabile</em><br>nel Cuore di Monaco',
         'hero.rooms': 'Locali', 'hero.beds': 'Camere', 'hero.baths': 'Bagni', 'hero.views': 'Vista Mare & Montagna',
         'hero.tapPlay': 'Tocca per riprodurre',
-        'hl.rooms': 'Locali', 'hl.beds': 'Camere', 'hl.baths': 'Bagni', 'hl.renovated': 'Ristrutturato', 'hl.available': 'Disponibile Subito',
+        'hl.rooms': 'Locali', 'hl.beds': 'Camere', 'hl.baths': 'Bagni', 'hl.renovated': 'Ristrutturato', 'hl.available': 'Disponibile Ora', 'hl.ref': 'Rif.',
         'ov.eyebrow': 'La Residenza',
         'ov.title': 'Eden Tower,<br><em>25 Boulevard de Belgique</em>',
-        'ov.p1': 'Pensato tanto per accogliere con eleganza quanto per il vivere quotidiano, questo appartamento ristrutturato di 4 locali offre tre camere magistralmente arredate e due bagni di raffinato lusso, all\'interno del prestigioso Eden Tower.',
-        'ov.p2': 'Ampi spazi abitativi, soluzioni d\'arredo su misura e finiture ricercate compongono un interno dalla funzionalità impeccabile. Le viste panoramiche sul Mediterraneo e sulle montagne definiscono l\'inconfondibile prestigio di Monaco.',
-        'ov.p3': 'I residenti beneficiano di un servizio di concierge dedicato, garanzia di comfort, discrezione e serenità in ogni momento. Più che un appartamento, una residenza concepita con la precisione di una collezione d\'arte.',
+        'ov.p1': 'Pensato sia per un\'accoglienza elegante che per la vita quotidiana, questo appartamento ristrutturato di 4 locali offre tre camere da letto splendidamente arredate e due bagni di lusso all\'interno del prestigioso Eden Tower.',
+        'ov.p2': 'Ampi spazi abitativi, soluzioni di storage su misura e finiture raffinate creano un interno dalla funzionalità impeccabile. Le viste panoramiche sul Mediterraneo e sulle montagne definiscono l\'inconfondibile prestigio di Monaco.',
+        'ov.p3': 'I residenti beneficiano di servizi di concierge, garantendo comfort, discrezione e serenità ogni giorno. Più di un appartamento, una residenza curata con la precisione di una collezione d\'arte.',
         'gal.eyebrow': 'Anteprima Esclusiva',
-        'gal.title': 'Uno Sguardo <em>Riservato</em>',
-        'gal.lead': 'Una selezione curata. La galleria completa è disponibile solo su richiesta privata.',
-        'gal.locked': 'Altre 12 fotografie, le planimetrie e una visita privata vi attendono.',
+        'gal.title': 'Uno Sguardo <em>all\'Interno</em>',
+        'gal.lead': 'Una selezione curata. La galleria completa è disponibile su richiesta privata.',
+        'gal.locked': '+12 fotografie aggiuntive, planimetrie e una visita privata ti aspettano.',
         'gal.cta': 'Scopri di Più',
         'modal.eyebrow': 'Accesso Privato', 'modal.title': 'Richiedi la Galleria Completa',
-        'modal.lead': 'Lascia la tua email o inviaci un messaggio per ricevere la galleria fotografica completa, le planimetrie e organizzare una visita privata.',
+        'modal.lead': 'Inserisci la tua email o inviaci un messaggio per ricevere la galleria fotografica completa, le planimetrie e organizzare una visita privata.',
         'modal.email': 'tua@email.com', 'modal.message': 'Il tuo messaggio (opzionale)',
         'modal.submit': 'Invia Richiesta', 'modal.or': 'oppure',
-        'modal.dm': 'Scrivici in DM su Instagram',
+        'modal.dm': 'Invia un DM su Instagram',
         'modal.thanks': 'Grazie.', 'modal.confirm': 'Ti contatteremo a breve con l\'accesso completo.',
         'vid.eyebrow': 'Video Tour', 'vid.title': 'Scopri Eden Tower',
-        'vid.lead': 'Un percorso cinematografico all\'interno di questa residenza d\'eccezione nel cuore di Monaco.',
+        'vid.lead': 'Un percorso cinematografico attraverso questa residenza eccezionale nel cuore di Monaco.',
         'bonne.badge': 'Opzionale · Stesso Edificio',
         'bonne.title': 'Chambre de <em>Bonne</em>',
-        'bonne.lead': 'Una camera di servizio aggiuntiva può essere disponibile all\'interno dello stesso edificio — un\'opportunità preziosa per personale, ospiti, un ufficio privato o spazio di archiviazione supplementare.',
-        'bonne.note': 'Soggetta a disponibilità e a trattativa separata. Contattaci per maggiori dettagli su questa opportunità unica all\'interno dell\'Eden Tower.',
+        'bonne.lead': 'Una camera di servizio aggiuntiva potrebbe essere disponibile nello stesso edificio — offrendo eccezionale flessibilità per personale, ospiti, un ufficio privato o spazio di deposito supplementare.',
+        'bonne.note': 'Soggetta a disponibilità e a trattativa separata. Contattaci per maggiori dettagli su questa opportunità unica all\'interno di Eden Tower.',
         'det.eyebrow': 'Scheda Immobile', 'det.title': 'Dettagli dell\'Annuncio',
         'det.ref': 'Riferimento', 'det.address': 'Indirizzo', 'det.building': 'Edificio', 'det.district': 'Quartiere',
-        'det.type': 'Tipologia', 'det.typeVal': 'Appartamento · 4 Locali', 'det.beds': 'Camere', 'det.baths': 'Bagni',
+        'det.type': 'Tipo', 'det.typeVal': 'Appartamento · 4 Locali', 'det.beds': 'Camere', 'det.baths': 'Bagni',
         'det.condition': 'Condizione', 'det.renovated': 'Ristrutturato', 'det.mixed': 'Uso Misto', 'det.yes': 'Sì',
         'det.views': 'Vista', 'det.viewsVal': 'Mare · Montagna',
         'det.bonne': 'Chambre de Bonne', 'det.bonneVal': 'Disponibile nell\'edificio (opzionale)',
         'det.concierge': 'Concierge', 'det.availability': 'Disponibilità', 'det.now': 'Immediata',
-        'det.mandate': 'Mandato', 'det.sole': 'Agente Esclusivo',
-        'feat.eyebrow': 'I Punti di Forza', 'feat.title': 'L\'Arte di Vivere',
-        'feat.f1t': 'Ricevimento & Vita Quotidiana', 'feat.f1d': 'Ampi spazi di ricevimento pensati per accogliere con eleganza, con finiture pregiate e luce naturale in ogni ambiente.',
-        'feat.f2t': 'Tre Camere', 'feat.f2d': 'Tre camere magistralmente arredate, con soluzioni d\'arredo su misura e finiture di raffinata cura.',
-        'feat.f3t': 'Due Bagni', 'feat.f3d': 'Due bagni dal lusso discreto, dalle finiture impeccabili, per una funzionalità senza compromessi.',
+        'det.pool': 'Piscina', 'det.gym': 'Palestra',
+        'det.mandate': 'Mandato', 'det.sole': 'Agente Unico',
+        'feat.eyebrow': 'Punti di Forza', 'feat.title': 'L\'Arte di Vivere',
+        'feat.f1t': 'Vita e Ospitalità', 'feat.f1d': 'Ampi spazi di ricevimento pensati per un\'accoglienza elegante, con finiture premium e luce naturale in ogni ambiente.',
+        'feat.f2t': 'Tre Camere da Letto', 'feat.f2d': 'Tre camere da letto splendidamente arredate con soluzioni di storage su misura e dettagli raffinati in ogni ambiente privato.',
+        'feat.f3t': 'Due Bagni', 'feat.f3d': 'Due bagni di lusso con finiture impeccabili, a completare un interno dalla funzionalità impeccabile.',
         'feat.f4t': 'Vista Mare & Montagna', 'feat.f4d': 'Viste panoramiche sul Mediterraneo e sulle montagne — il panorama iconico che definisce Monaco.',
-        'feat.f5t': 'Servizio di Concierge', 'feat.f5d': 'Un concierge dedicato ai residenti — comfort, discrezione e serenità, ogni giorno.',
-        'feat.f6t': 'Chambre de Bonne', 'feat.f6d': 'Una camera di servizio opzionale nello stesso edificio — per personale, ospiti, ufficio privato o spazio aggiuntivo.',
-        'mkt.eyebrow': 'Analisi di Mercato', 'mkt.title': 'Jardin Exotique <em>vs</em> La Condamine',
-        'mkt.lead': 'Dati ufficiali dell\'Observatoire de l\'Immobilier 2025 — IMSEE, Principato di Monaco. Analisi comparativa dei due quartieri che incorniciano l\'Eden Tower.',
+        'feat.f5t': 'Servizi di Concierge', 'feat.f5d': 'Concierge dedicato ai residenti — comfort, discrezione e serenità, ogni giorno.',
+        'feat.f6t': 'Chambre de Bonne', 'feat.f6d': 'Camera di servizio opzionale disponibile nello stesso edificio — personale, ospiti, ufficio o deposito aggiuntivo.',
+        'feat.f7t': 'Piscina', 'feat.f7d': 'Una piscina privata o condivisa — un comfort raro e molto ricercato nel cuore di Monaco.',
+        'feat.f8t': 'Palestra', 'feat.f8d': 'Una palestra dedicata in loco, a disposizione dei residenti.',
+        'mkt.eyebrow': 'Market Intelligence', 'mkt.title': 'Jardin Exotique <em>vs</em> La Condamine',
+        'mkt.lead': 'Dati ufficiali dell\'Observatoire de l\'Immobilier 2025 — IMSEE, Principato di Monaco. Analisi comparativa dei due quartieri che circondano Eden Tower.',
         'mkt.tag1': 'Quartiere dell\'Immobile', 'mkt.tag2': 'Quartiere Limitrofo', 'mkt.perSqm': 'al m² · 2025',
         'mkt.change': 'Variazione 24/25', 'mkt.correction': 'Lieve correzione', 'mkt.stable': 'Stabile',
         'mkt.resales': 'Rivendite 2025', 'mkt.volume': 'Volume Rivendite', 'mkt.record': '+88,5% · Record storico',
         'mkt.newBuild': 'Nuove Costruzioni 2020–29',
         'mkt.col1': 'Indicatore', 'mkt.col4': 'Principato',
         'mkt.r1': 'Prezzo al m² (2025)', 'mkt.r2': 'Nuove costruzioni 2020–2029', 'mkt.r3': 'Numero di rivendite',
-        'mkt.r4': 'Volume rivendite', 'mkt.r5': 'Quota di mercato', 'mkt.r6': 'Superficie residenziale (migliaia di m²)', 'mkt.r7': 'Edifici',
+        'mkt.r4': 'Volume rivendite', 'mkt.r5': 'Quota di mercato', 'mkt.r6': 'Superficie residenziale (k m²)', 'mkt.r7': 'Edifici',
         'mkt.insightTitle': 'Perché Eden Tower rappresenta un\'opportunità strategica',
-        'mkt.insight': 'L\'Observatoire 2025 colloca il Jardin Exotique al terzo livello di prezzo del Principato (45.168 €/m²), con un record storico di 246,7 milioni di euro in rivendite (+88,5%) — segnale evidente di domanda e liquidità sostenute. La Condamine, a pochi passi, si colloca a un livello intermedio di 52.104 €/m². L\'Eden Tower, al 25 Boulevard de Belgique, occupa una posizione privilegiata tra i due quartieri: accesso immediato al porto e alla Condamine, unito all\'esclusività residenziale del Jardin Exotique e a viste panoramiche su mare e montagna.',
+        'mkt.insight': 'L\'Osservatorio 2025 colloca Jardin Exotique nella terza fascia di prezzo del Principato (45.168 €/m²), con un record storico di 246,7 milioni di € in rivendite (+88,5%) — un forte segnale di domanda e liquidità. La Condamine, a pochi minuti, si colloca nella fascia intermedia a 52.104 €/m². Eden Tower, al 25 Boulevard de Belgique, occupa una posizione privilegiata tra i due quartieri: accesso immediato al porto e alla Condamine, con l\'esclusività residenziale di Jardin Exotique e viste panoramiche su mare e montagna.',
         'mkt.source': 'Fonte: IMSEE — Observatoire de l\'Immobilier, Febbraio 2026 · Dati 2025',
-        'quote.text': '« Più che un appartamento, una residenza concepita con la precisione di una collezione d\'arte, dove ogni dettaglio riflette l\'eleganza, la maestria e l\'incomparabile prestigio di Monaco. »',
-        'quote.cite': 'Eden Tower · Rif. EDEN TOWER · Agente Esclusivo',
-        'con.eyebrow': 'Contatto', 'con.title': 'Organizza una <em>Visita Privata</em>',
+        'quote.text': '« Più di un appartamento, una residenza curata con la precisione di una collezione d\'arte, dove ogni dettaglio riflette eleganza, maestria artigianale e l\'inconfondibile prestigio di Monaco. »',
+        'quote.cite': 'Eden Tower · Rif. EDEN TOWER · Agente Unico',
+        'con.eyebrow': 'Contatti', 'con.title': 'Prenota una <em>Visita Privata</em>',
         'con.address': 'Indirizzo', 'con.building': 'Edificio', 'con.ref': 'Riferimento', 'con.avail': 'Disponibilità',
         'con.now': 'Immediata', 'con.cta': 'Richiedi Informazioni',
-        'foot.copy': '© 2026 Eden Tower · Monaco · Dati di mercato: IMSEE, Observatoire de l\'Immobilier 2025'
+        'foot.copy': '© 2026 Eden Tower · Monaco · Dati di mercato: IMSEE Observatoire de l\'Immobilier 2025'
       }
     };
 
@@ -1217,21 +1226,36 @@
 
     function setLang(l) {
       lang = l;
+      window.lang = l;
+      const dict = i18n[l] || i18n.en;
       document.documentElement.lang = l;
       document.querySelectorAll('.lang-switch button').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.dataset.i18n;
-        if (i18n[l][key]) el.textContent = i18n[l][key];
+        const val = dict[key] || i18n.en[key];
+        if (val) el.textContent = val;
       });
       document.querySelectorAll('[data-i18n-html]').forEach(el => {
         const key = el.dataset.i18nHtml;
-        if (i18n[l][key]) el.innerHTML = i18n[l][key];
+        const val = dict[key] || i18n.en[key];
+        if (val) el.innerHTML = val;
       });
       document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
         const key = el.dataset.i18nPlaceholder;
-        if (i18n[l][key]) el.placeholder = i18n[l][key];
+        const val = dict[key] || i18n.en[key];
+        if (val) el.placeholder = val;
       });
-      document.title = l === 'fr' ? 'Eden Tower | Chef-d\'Œuvre Habitable — Monaco' : 'Eden Tower | A Living Masterpiece — Monaco';
+      const titles = {
+        fr: 'Eden Tower | Chef-d\'Œuvre Habitable — Monaco',
+        it: 'Eden Tower | Un Capolavoro Abitabile — Monaco',
+      };
+      document.title = titles[l] || 'Eden Tower | A Living Masterpiece — Monaco';
+
+      // Market Intelligence (cards/table/title) is generated by
+      // property-loader.js from raw district data, not from this i18n
+      // dictionary — it needs an explicit nudge to re-render in the newly
+      // selected language.
+      if (typeof window.__rerenderMarket === 'function') window.__rerenderMarket();
     }
 
     document.querySelectorAll('.lang-switch button').forEach(b => {
@@ -1285,6 +1309,26 @@
 
     accessForm.addEventListener('submit', e => {
       e.preventDefault();
+
+      // Build a real mailto: so the request actually reaches someone —
+      // previously this just showed a fake "Thank you" and sent nothing.
+      // Uses whichever address property-loader.js set on #contactCta
+      // (falls back to the default agency inbox if that's not ready yet).
+      const toEmail = (document.getElementById('contactCta')?.getAttribute('href') || 'mailto:dpiraldo@pastor-reiss.com')
+        .replace(/^mailto:/, '');
+      const propertyName = (document.title.split('—')[0] || '').trim() || 'Monaco Property';
+      const emailVal = accessForm.querySelector('input[name="email"]')?.value || '';
+      const messageVal = accessForm.querySelector('textarea[name="message"]')?.value || '';
+
+      const subject = `Richiesta galleria completa — ${propertyName}`;
+      const body = [
+        `Email di contatto del richiedente: ${emailVal}`,
+        '',
+        messageVal || '(nessun messaggio aggiuntivo)',
+      ].join('\n');
+
+      window.location.href = `mailto:${toEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
       accessForm.classList.add('hidden');
       modal.querySelector('.modal-divider').style.display = 'none';
       modal.querySelector('.modal-dm').style.display = 'none';
