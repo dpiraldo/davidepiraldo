@@ -14,10 +14,17 @@
 (function () {
   const params = new URLSearchParams(window.location.search);
   const slug = params.get('slug') || 'eden-tower';
+  const cacheBust = '20260713a';
 
   Promise.all([
-    fetch(`content/properties/${slug}.json`).then(r => r.json()),
-    fetch('content/districts.json').then(r => r.json())
+    fetch(`content/properties/${slug}.json?v=${cacheBust}`).then(r => {
+      if (!r.ok) throw new Error(`Property JSON ${r.status}`);
+      return r.json();
+    }),
+    fetch(`content/districts.json?v=${cacheBust}`).then(r => {
+      if (!r.ok) throw new Error(`Districts JSON ${r.status}`);
+      return r.json();
+    })
   ]).then(([property, districts]) => {
     applyProperty(property, districts);
   }).catch(err => {
@@ -96,9 +103,6 @@
         // NOTA: le "Schede Caratteristiche" (p.features) sono gestite più sotto,
         // separatamente e solo in inglese — non fanno parte del sistema EN/FR/IT.
       });
-      // Re-render whichever language is currently active so the merged
-      // strings actually show up (setLang is defined in the template).
-      if (typeof setLang === 'function') setLang(window.lang || 'en');
     }
 
     function gallerySrc(item) {
@@ -158,6 +162,8 @@
     // ---- contact mailto ----
     const cta = document.getElementById('contactCta');
     if (cta && p.contact_email) cta.href = `mailto:${p.contact_email}`;
+
+    if (typeof setLang === 'function') setLang(window.lang || 'en');
   }
 
   function getPath(obj, path) {
